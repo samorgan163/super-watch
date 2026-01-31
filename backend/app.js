@@ -1,11 +1,15 @@
 const express = require('express');
-const app = express();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
+const app = express();
 app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 
 // controllers
 const userController = require('./controllers/user-controller.js');
@@ -28,25 +32,25 @@ app.post('/register', userController.registerUser);
 // Authenticate user
 app.post('/login', userController.login);
 
-app.get('/dashboard', authenticateToken, (req, res) => {
-    res.json(`hello, ${req.user.username}`);
-});
+// Example protected route
+app.get('/dashboard', authenticateToken, userController.getDashboard);
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    // get access token 
+    const token = req.cookies.accessToken;
     
     if (!token) {
-        return res.status(401).json('No token.');
+        return res.status(401).json('Not authenticated.');
     }
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403).json('Token has expired.');
-        }
-        req.user = user;
+    try {
+        const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        req.user = { id: payload.userId };
         next();
-    });
+    }
+    catch (error) {
+        res.status(401).json({ nessage: 'Invalid or expired token.' });
+    }
 } 
 
 // server startup
