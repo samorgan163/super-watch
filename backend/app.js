@@ -20,6 +20,7 @@ app.use(cookieParser());
 // controllers
 const authController = require('./controllers/auth-controller.js');
 const userController = require('./controllers/user-controller.js');
+const filmController = require('./controllers/film-controller.js');
 
 // middleware
 const { authenticateUser } = require('./middleware/auth.js');
@@ -36,6 +37,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 // --- ROUTES ---
 
+// --- AUTH ROUTES --- //
 // check if user has auth
 app.get('/auth/me', authenticateUser, authController.authMe);
 // register new user
@@ -45,10 +47,13 @@ app.post('/auth/login', authController.login);
 // user logout
 app.post('/auth/logout', authController.logout);
 
+// --- USER ROUTES --- //
 // Example protected route
 app.get('/dashboard', authenticateUser, authController.getDashboard);
-
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
+
+// --- FILM ROUTES --- //
+app.get('/film/:tmdbId', authenticateUser, filmController.getFilmByTmdbId);
 
 // server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
