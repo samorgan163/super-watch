@@ -7,8 +7,16 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
+
+// Allow requests from your frontend
+app.use(
+  cors({
+    origin: "http://192.168.0.77:5173",
+    credentials: true, // only if using cookies/auth
+  })
+);
+
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
 
 // controllers
@@ -26,6 +34,11 @@ mongoose.connect(process.env.MONGO_URL)
 
 // --- ROUTES ---
 
+// check if user has auth
+app.get('/auth/me', authenticateUser, (req, res) => {
+    return res.status(200).json({ user_id: req.user.id });
+});
+
 // Register a new user
 app.post('/register', userController.registerUser);
 
@@ -33,9 +46,9 @@ app.post('/register', userController.registerUser);
 app.post('/login', userController.login);
 
 // Example protected route
-app.get('/dashboard', authenticateToken, userController.getDashboard);
+app.get('/dashboard', authenticateUser, userController.getDashboard);
 
-function authenticateToken(req, res, next) {
+function authenticateUser(req, res, next) {
     // get access token 
     const token = req.cookies.accessToken;
     
