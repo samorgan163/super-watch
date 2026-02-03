@@ -19,6 +19,9 @@ app.use(cookieParser());
 
 // controllers
 const authController = require('./controllers/auth-controller.js');
+const userController = require('./controllers/user-controller.js');
+
+// middleware
 const { authenticateUser } = require('./middleware/auth.js');
 
 // connect to database
@@ -41,8 +44,11 @@ app.post('/auth/register', authController.registerUser);
 app.post('/auth/login', authController.login);
 // user logout
 app.post('/auth/logout', authController.logout);
+
 // Example protected route
 app.get('/dashboard', authenticateUser, authController.getDashboard);
+
+app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
 // server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
