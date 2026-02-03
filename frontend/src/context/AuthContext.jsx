@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     const login = async (username, password) => {
-        const res = await fetch('http://192.168.0.77:3000/login', {
+        const res = await fetch('http://192.168.0.77:3000/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
