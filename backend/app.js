@@ -39,11 +39,14 @@ app.get('/auth/me', authenticateUser, (req, res) => {
     return res.status(200).json({ user_id: req.user.id });
 });
 
-// Register a new user
+// register new user
 app.post('/register', userController.registerUser);
 
-// Authenticate user
+// user login
 app.post('/login', userController.login);
+
+// user logout
+app.post('/auth/logout', userController.logout);
 
 // Example protected route
 app.get('/dashboard', authenticateUser, userController.getDashboard);

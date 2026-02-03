@@ -86,6 +86,13 @@ exports.login = async (req, res) => {
     }
 }
 
+// Logout
+exports.logout = (req, res) => {
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    res.json({ message: 'Logged out' });
+};
+
 /*
 exports.refreshToken = (req, res) => {
     const token = req.cookies.refreshToken;
@@ -95,6 +102,8 @@ exports.refreshToken = (req, res) => {
 }
 
 */
+
+
 
 exports.getDashboard = async (req, res) => {
     try {
