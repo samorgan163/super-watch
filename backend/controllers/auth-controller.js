@@ -18,6 +18,11 @@ const generateRefreshToken = (user) => {
     )
 };
 
+// frontend can use this to verify auth status
+exports.authMe = (req, res) => {
+    return res.status(200).json({ user_id: req.user.id });
+}
+
 // Register new user
 exports.registerUser = async (req, res) => {
     try {
