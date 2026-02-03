@@ -8,6 +8,7 @@ const navItems = [
 	{ label: 'Cinema', href: '/', icon: watchlistIcon },
 	{ label: 'Add', href: '/', icon: watchlistIcon },
 	{ label: 'Watchlist', href: '/', icon: watchlistIcon },
+	{ label: 'Profile', href: '/profile', icon: watchlistIcon },
 ];
 
 function BottomNavbar() {
