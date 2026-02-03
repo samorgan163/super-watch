@@ -1,4 +1,4 @@
-div {
+.loginContainer {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -6,7 +6,7 @@ div {
     align-items: center;
 }
 
-form {
+.loginForm {
     display: flex;
     flex-direction: column;
     border: 1px solid red;
@@ -14,14 +14,14 @@ form {
     padding: 0 20px;
 }
 
-h2 {
+.loginForm h2 {
     font-size: 64px;
     color: white;
     align-self: center;
     margin-bottom: 32px;
 }
 
-input {
+.loginForm input {
     margin-bottom: 12px;
     height: auto;
     font-size: 20px;
@@ -29,7 +29,7 @@ input {
     border-radius: 6px;
 }
 
-button[type="submit"] {
+.loginForm button[type="submit"] {
     background-color: rgb(26, 42, 96);
     color: white;
     font-size: 20px;

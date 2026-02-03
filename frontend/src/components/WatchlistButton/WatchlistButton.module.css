@@ -1,0 +1,21 @@
+.watchlistBtn {
+    border-radius: 50%;
+    background-color: #0C1821;
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgb(161, 161, 161);
+}
+
+.watchlistBtn.liked circle {
+    fill: rgb(61, 214, 61);
+}
+.watchlistBtn.liked path {
+    stroke: rgb(61, 214, 61);
+}
+
+.watchlistBtn.superLiked circle {
+    fill: orange;
+}
+.watchlistBtn.superLiked path {
+    stroke: orange;
+}
