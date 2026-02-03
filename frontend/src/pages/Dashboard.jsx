@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
 
@@ -7,6 +8,7 @@ function Dashboard() {
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     useEffect(() => {
         const getUser = async () => {
@@ -33,8 +35,21 @@ function Dashboard() {
         getUser();
     }, []);
 
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
+
     return (
-        <h1>Hello, {username}! Welcome to your dashboard.</h1>
+        <>
+            <h1>Hello, {username}! Welcome to your dashboard.</h1>
+            <button onClick={handleLogout}>Logout</button>
+        </>
+        
     )
 
 }

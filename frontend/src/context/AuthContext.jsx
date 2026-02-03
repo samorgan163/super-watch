@@ -19,10 +19,11 @@ export function AuthProvider({ children }) {
                 if (!res.ok) {
                     setUser(null);
                 }
+                else {
+                    const data = await res.json();
+                    setUser({ id: data.user_id });
+                }
 
-                const data = await res.json();
-                setUser({ id: data.user_id });
-                
             } catch (err) {
                 console.error('Auth check failed', err);
                 setUser(null);
@@ -45,11 +46,11 @@ export function AuthProvider({ children }) {
         if (!res.ok) throw new Error('Invalid credentials');
 
         const data = await res.json(); // optional: backend can return username
-        setUser({ id: data.user_id, username: data.username });
+        setUser({ id: data.user_id });
     };
 
     const logout = async () => {
-        await fetch('http://192.168.0.77:3000/logout', {
+        await fetch('http://192.168.0.77:3000/auth/logout', {
             method: 'POST',
             credentials: 'include',
         });
