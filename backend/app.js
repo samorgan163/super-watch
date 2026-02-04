@@ -53,6 +53,7 @@ app.get('/dashboard', authenticateUser, authController.getDashboard);
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
 // --- FILM ROUTES --- //
+app.get('/film/search', authenticateUser, filmController.findFilmsByTitle);
 app.get('/film/:tmdbId', authenticateUser, filmController.getFilmByTmdbId);
 
 // server startup

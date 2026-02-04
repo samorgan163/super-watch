@@ -14,3 +14,15 @@ exports.getFilmByTmdbId = async (req, res) => {
         return res.status(500).json({ message: 'Server error.' });
     }
 };
+
+// find films by title
+exports.findFilmsByTitle = async (req, res) => {
+    const { title, page } = req.query;
+    try {
+        const results = await tmdbApi.searchForFilm(title, page);
+        return res.status(200).json(results);
+    }
+    catch (error) {
+        return res.status(500).json({ message: 'Server error.' });
+    }
+};

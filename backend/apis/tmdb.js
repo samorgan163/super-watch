@@ -147,7 +147,12 @@ exports.searchForFilm = async (searchString, page) => {
     const searchReults = await _withRetry(async () => {
         console.log('tmdb api pull request');
         try {
-            const response = await tmdb.get(`/search/movie?query=${searchString}&page=${page}`);
+            const response = await tmdb.get(`/search/movie`, {
+                params: {
+                    query: searchString,
+                    page: page || 1, // default to page 1 if not provided
+                }
+            });
             const searchReults = response.data;
             return searchReults;
         }
