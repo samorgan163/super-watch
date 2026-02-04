@@ -20,7 +20,8 @@ app.use(cookieParser());
 // controllers
 const authController = require('./controllers/auth-controller.js');
 const userController = require('./controllers/user-controller.js');
-const filmController = require('./controllers/film-controller.js');
+const tmdbController = require('./controllers/tmdb-controller.js');
+const watchlistController = require('./controllers/watchlist-controller.js');
 
 // middleware
 const { authenticateUser } = require('./middleware/auth.js');
@@ -53,8 +54,11 @@ app.get('/dashboard', authenticateUser, authController.getDashboard);
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
 // --- FILM ROUTES --- //
-app.get('/film/search', authenticateUser, filmController.findFilmsByTitle);
-app.get('/film/:tmdbId', authenticateUser, filmController.getFilmByTmdbId);
+app.get('/film/search', authenticateUser, tmdbController.findFilmsByTitle);
+app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
+
+// --- WATCHLIST ROUTES --- //
+app.post('/watchlist/add', authenticateUser, watchlistController.addFilmToWatchlist);
 
 // server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
