@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./AppLayout";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Film from "./pages/Film/Film";
+import Search from "./pages/Search/Search";
 
 export default function App() {
 	return (
@@ -13,7 +14,8 @@ export default function App() {
             <Route path="/login" element={<Login /> } />
             <Route path="/" element={<ProtectedRoute><AppLayout><Dashboard /></AppLayout></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><AppLayout><UserProfile /></AppLayout></ProtectedRoute>} />
-            <Route path="/film/:tmdbId" element={<AppLayout><Film /></AppLayout>} />
+            <Route path="/film/:tmdbId" element={<ProtectedRoute><AppLayout><Film /></AppLayout></ProtectedRoute>} />
+            <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
         </Routes>
 	)
 }

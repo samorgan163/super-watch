@@ -1,0 +1,83 @@
+.SearchResultsWrapper {
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.noFilmsWrapper {
+    width: 100%;
+    height: calc(100vh - 50px - 30px - 56px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noFilmsWrapper p {
+    color: white;
+    opacity: 0.6;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.film {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    border-bottom-left-radius: 10px;
+}
+
+.filmPosterWrapper {
+    height: 120px;
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.filmPosterWrapper img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+}
+
+.filmMetadataWrapper {
+    padding: 0 12px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filmMetadataWrapper h3 {
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.filmMetadataWrapper .releaseYear {
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.filmMetadataWrapper .director {
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    margin-top: 4px;
+}
