@@ -58,7 +58,8 @@ app.get('/film/search', authenticateUser, tmdbController.findFilmsByTitle);
 app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
 
 // --- WATCHLIST ROUTES --- //
-app.post('/watchlist/add', authenticateUser, watchlistController.addFilmToWatchlist);
+app.post('/watchlist', authenticateUser, watchlistController.addFilmToWatchlist);
+app.delete('/watchlist/:tmdbid', authenticateUser, watchlistController.removeFilmFromWatchlist);
 
 // server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
