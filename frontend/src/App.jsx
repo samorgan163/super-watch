@@ -7,6 +7,7 @@ import AppLayout from "./AppLayout";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Film from "./pages/Film/Film";
 import Search from "./pages/Search/Search";
+import Watchlist from "./pages/Watchlist/Watchlist";
 
 export default function App() {
 	return (
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/profile" element={<ProtectedRoute><AppLayout><UserProfile /></AppLayout></ProtectedRoute>} />
             <Route path="/film/:tmdbId" element={<ProtectedRoute><AppLayout><Film /></AppLayout></ProtectedRoute>} />
             <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
+            <Route path='/watchlist' element={<ProtectedRoute><AppLayout><Watchlist /></AppLayout></ProtectedRoute>} />
         </Routes>
 	)
 }
