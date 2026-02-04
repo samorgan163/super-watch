@@ -54,7 +54,7 @@ app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
 
 // --- WATCHLIST ROUTES --- //
 app.get('/watchlist', authenticateUser, watchlistController.getWatchlist);
-app.post('/watchlist', authenticateUser, watchlistController.addFilmToWatchlist);
+app.post('/watchlist/:tmdbid', authenticateUser, watchlistController.addFilmToWatchlist);
 app.delete('/watchlist/:tmdbid', authenticateUser, watchlistController.removeFilmFromWatchlist);
 app.get('/watchlist/check/:tmdbid', authenticateUser, watchlistController.filmInWatchlist);
 

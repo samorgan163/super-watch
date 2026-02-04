@@ -5,7 +5,6 @@ import watchlistIcon from '../../assets/icons/watchlist.png';
 
 const navItems = [
 	{ label: 'Dashboard', href: '/', icon: watchlistIcon },
-	{ label: 'Cinema', href: '/', icon: watchlistIcon },
 	{ label: 'Add', href: '/search', icon: watchlistIcon },
 	{ label: 'Watchlist', href: '/watchlist', icon: watchlistIcon },
 	{ label: 'Profile', href: '/profile', icon: watchlistIcon },

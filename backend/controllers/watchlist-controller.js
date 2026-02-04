@@ -33,7 +33,7 @@ async function createFilmObject(tmdbid) {
  */
 exports.addFilmToWatchlist = async (req, res) => {
     const userId = req.user.id;
-    const { tmdbid } = req.body;
+    const tmdbid = req.params.tmdbid;
 
     try {
         // find or create film for local collection
