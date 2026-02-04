@@ -93,3 +93,17 @@ exports.removeFilmFromWatchlist = async (req, res) => {
         return res.status(500).json({ message: 'Error removing film from watchlist: ' + error.message });
     }
 };
+
+exports.getWatchlist = async (req, res) => {
+    const userId = req.user.id
+    try {
+        const user = await User.findById(userId).populate('watchlist.film').lean();
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        return res.status(200).json({ watchlist: user.watchlist });
+    }
+    catch (error) {
+        return res.status(500).json({ message: 'Error fetching watchlist: ' + error.message });
+    }
+};

@@ -39,17 +39,12 @@ mongoose.connect(process.env.MONGO_URL)
 // --- ROUTES ---
 
 // --- AUTH ROUTES --- //
-// check if user has auth
-app.get('/auth/me', authenticateUser, authController.authMe);
-// register new user
+app.get('/auth/me', authenticateUser, authController.authMe); // check if user is authenticated for frontend
 app.post('/auth/register', authController.registerUser);
-// user login
 app.post('/auth/login', authController.login);
-// user logout
 app.post('/auth/logout', authController.logout);
 
 // --- USER ROUTES --- //
-// Example protected route
 app.get('/dashboard', authenticateUser, authController.getDashboard);
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
@@ -58,6 +53,7 @@ app.get('/film/search', authenticateUser, tmdbController.findFilmsByTitle);
 app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
 
 // --- WATCHLIST ROUTES --- //
+app.get('/watchlist', authenticateUser, watchlistController.getWatchlist);
 app.post('/watchlist', authenticateUser, watchlistController.addFilmToWatchlist);
 app.delete('/watchlist/:tmdbid', authenticateUser, watchlistController.removeFilmFromWatchlist);
 
