@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import styles from './WatchlistButton.module.css';
 
+import { useWatchlist } from '../../hooks/useWatchlist';
+
 function WatchlistButton({ tmdbId }) {
 
-    
+    const { inWatchlist } = useWatchlist(tmdbId);
 
     return (
         <button 
-              
+            className={`${styles.watchlistBtn} ${inWatchlist ? styles.liked : ""}`} 
         >
             <svg width="34" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="15" cy="17" r="4" fill="white" fill-opacity="0.8"/>

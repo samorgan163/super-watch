@@ -56,6 +56,7 @@ app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
 app.get('/watchlist', authenticateUser, watchlistController.getWatchlist);
 app.post('/watchlist', authenticateUser, watchlistController.addFilmToWatchlist);
 app.delete('/watchlist/:tmdbid', authenticateUser, watchlistController.removeFilmFromWatchlist);
+app.get('/watchlist/check/:tmdbid', authenticateUser, watchlistController.filmInWatchlist);
 
 // server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {

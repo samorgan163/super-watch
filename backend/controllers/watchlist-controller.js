@@ -94,6 +94,13 @@ exports.removeFilmFromWatchlist = async (req, res) => {
     }
 };
 
+/**
+ * Retrieves the user's watchlist with populated film details.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 exports.getWatchlist = async (req, res) => {
     const userId = req.user.id
     try {
@@ -107,3 +114,29 @@ exports.getWatchlist = async (req, res) => {
         return res.status(500).json({ message: 'Error fetching watchlist: ' + error.message });
     }
 };
+
+// return boolean whether a film is in the user's watchlist
+// frontend can indicate to the user
+// TODO: I dont think this is a good implementation
+exports.filmInWatchlist = async (req, res) => {
+    const userId = req.user.id;
+    const tmdbid = parseInt(req.params.tmdbid, 10);
+    
+    try {
+        
+        const film = await Film.findOne({ tmdbid: tmdbid });
+        
+        if (!film) {
+            return res.status(200).json({ in_watchlist: false });
+        }
+        
+        const filmInWatchlist = await User.exists(
+            { _id: userId, 'watchlist.film': film._id }
+        );
+    
+        return res.status(200).json({ in_watchlist: !!(filmInWatchlist) });
+    }
+    catch (error) {
+        return res.status(500).json({ message: 'Error checking watchlist: ' + error.message });
+    }
+}
