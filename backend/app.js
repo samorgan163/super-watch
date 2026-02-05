@@ -45,7 +45,7 @@ app.post('/auth/login', authController.login);
 app.post('/auth/logout', authController.logout);
 
 // --- USER ROUTES --- //
-app.get('/dashboard', authenticateUser, authController.getDashboard);
+app.get('/dashboard', authenticateUser, watchlistController.getStreamingWatchlist);
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
 // --- FILM ROUTES --- //

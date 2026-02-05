@@ -140,3 +140,24 @@ exports.filmInWatchlist = async (req, res) => {
         return res.status(500).json({ message: 'Error checking watchlist: ' + error.message });
     }
 }
+
+// get all films currently streaming in the user's watchlist
+exports.getStreamingWatchlist = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const user = await User.findById(userId)
+            .populate({ 
+                path: 'watchlist.film',
+                match: { streaming: { $exists: true, $ne: [] } },
+                select: 'tmdbid streaming' // only return necessary fields
+            })
+            .lean();
+
+        const streamingFilms = user.watchlist.filter(item => item.film);
+
+        return res.status(200).json({ streaming_watchlist: streamingFilms });
+    }
+    catch (error) {
+        return res.status(500).json({ message: 'Error fetching streaming watchlist: ' + error.message });
+    }
+};

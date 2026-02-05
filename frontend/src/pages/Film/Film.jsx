@@ -17,8 +17,6 @@ export default function Film() {
     const [results, setResults] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const [cinemaData, setCinemaData] = useState({});
-
     const { tmdbId } = useParams();
 
     useEffect(() => {
