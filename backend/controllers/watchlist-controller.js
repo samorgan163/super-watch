@@ -149,7 +149,7 @@ exports.getStreamingWatchlist = async (req, res) => {
             .populate({ 
                 path: 'watchlist.film',
                 match: { streaming: { $exists: true, $ne: [] } },
-                select: 'tmdbid streaming' // only return necessary fields
+                select: 'tmdbid title poster streaming' // only return necessary fields
             })
             .lean();
 
