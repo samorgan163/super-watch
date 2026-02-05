@@ -10,11 +10,12 @@ import { useParams } from 'react-router-dom';
 
 import WatchlistButton from '../../components/WatchlistButton/WatchlistButton';
 import ServiceIcon from '../../components/ServiceIcon/ServiceIcon'
+import PageLoading from '../../components/PageLoading/PageLoading';
 
 export default function Film() {
 
     const [results, setResults] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [cinemaData, setCinemaData] = useState({});
 
@@ -38,10 +39,15 @@ export default function Film() {
             } catch {
                 console.log('Network Error');
             }
+            finally {
+                setLoading(false);
+            }
         }
 
         getResults();
     }, []);
+
+    if (loading) return <PageLoading />;
 
     return (
         <>

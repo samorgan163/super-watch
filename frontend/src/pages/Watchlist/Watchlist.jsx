@@ -1,11 +1,12 @@
 import styles from "./Watchlist.module.css";
 import FilmsGrid from "../../components/FilmsGrid/FilmsGrid";
+import PageLoading from "../../components/PageLoading/PageLoading";
 
 import { useState, useEffect } from "react";
 
 function Watchlist() {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     
     const [watchlist, setWatchlist] = useState([]);
 
@@ -35,7 +36,7 @@ function Watchlist() {
         getWatchlist();
     }, []);
 
-    if (loading) return <p>Loading...</p>
+    if (loading) return <PageLoading />;
 
     return (
         <div className="page-wrapper">

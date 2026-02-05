@@ -35,10 +35,10 @@ export function useWatchlist(tmdbId) {
 
     const toggleWatchlist = async () => {
         if (loading) return;
-        setLoading(true);
-
+        
         // if in watchlist, remove from watchlist
         if (inWatchlist) {
+            setLoading(true);
             setInWatchlist(false); // optimistic update UI
             try {
                 const res = await fetch(`http://192.168.0.77:3000/watchlist/${encodeURIComponent(tmdbId)}`, {
@@ -59,6 +59,7 @@ export function useWatchlist(tmdbId) {
         }
         // if not in watchlist, add to watchlist
         else {
+            setLoading(true);
             setInWatchlist(true); // optimistic update UI
             try {
                 const res = await fetch(`http://192.168.0.77:3000/watchlist/${encodeURIComponent(tmdbId)}`, {
