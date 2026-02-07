@@ -8,7 +8,8 @@ function Watchlist() {
 
     const [loading, setLoading] = useState(true);
     
-    const [watchlist, setWatchlist] = useState([]);
+    const [watchlistStreaming, setWatchlistStreaming] = useState([]);
+    const [watchlistUnavailable, setWatchlistUnavailable] = useState([]);
 
     useEffect(() => {
         const getWatchlist = async () => {
@@ -21,8 +22,8 @@ function Watchlist() {
 
                 if (response.ok) {
                     const result = await response.json();
-                    setWatchlist(result.watchlist);
-                    console.log(result.watchlist[0].film.title); // remove this later
+                    setWatchlistStreaming(result.streaming);
+                    setWatchlistUnavailable(result.unavailable);
                 }
 
             } catch (error) {
@@ -40,8 +41,10 @@ function Watchlist() {
 
     return (
         <div className="page-wrapper">
-            <h1>Watchlist</h1>
-            <FilmsGrid films={watchlist || []}/>
+            <h1>Currently Streaming</h1>
+            <FilmsGrid films={watchlistStreaming || []}/>
+            <h1>Not Available</h1>
+            <FilmsGrid films={watchlistUnavailable || []} fadeOpacity={true} />
         </div>
     );
 }

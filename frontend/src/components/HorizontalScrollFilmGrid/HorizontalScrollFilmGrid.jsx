@@ -12,15 +12,15 @@ function HorizontalScrollFilmGrid({ films }) {
                 
                 {films.map((film) => (
                     <div className={styles.film}>
-                        <Link key={film.film.tmdbid} aria-label={film.film.title} to={`/film/${film.film.tmdbid}`}>
+                        <Link key={film.tmdbid} aria-label={film.title} to={`/film/${film.tmdbid}`}>
                             <div className={styles.filmImageWrapper}>
                                 <div className={styles.serviceWrapper}>
-                                    <ServiceIcon className={styles.service} service={film.film.streaming[0]} />
+                                    <ServiceIcon className={styles.service} service={film.streaming[0]} />
                                 </div>
-                                <img loading="lazy" src={film.film.poster} alt="" />
+                                <img loading="lazy" src={film.poster} alt="" />
                             </div>
                         </Link>
-                        <p>{film.film.title}</p>
+                        <p>{film.title}</p>
                     </div>
                 ))}
                 

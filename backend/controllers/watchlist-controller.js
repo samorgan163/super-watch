@@ -1,6 +1,9 @@
 const Film = require('../models/film.js');
 const User = require('../models/user.js');
 const tmdbApi = require('../apis/tmdb.js');
+const watchlistService = require('../services/watchlistService.js');
+
+const { NotFoundError, ConflictError } = require('../errors/customErrors.js');
 
 // once database grows, this can be negated by calling 'getFilmById' directly.
 // only storing a subset of data locally to reduce db size, for now.
@@ -31,7 +34,7 @@ async function createFilmObject(tmdbid) {
  * @param {*} res 
  * @returns 
  */
-exports.addFilmToWatchlist = async (req, res) => {
+exports.addFilmToWatchlist = async (req, res, next) => {
     const userId = req.user.id;
     const tmdbid = req.params.tmdbid;
 
@@ -53,13 +56,13 @@ exports.addFilmToWatchlist = async (req, res) => {
 
         // if no documents were modified, film was already in watchlist
         if (result.modifiedCount === 0) {
-            return res.status(200).json({ message: 'Film already in watchlist' });
+            throw new ConflictError('Film already in watchlist');
         }
 
         return res.status(200).json({ message: 'Film added to watchlist' });
     }
-    catch (error) {
-        return res.status(500).json({ message: 'Error adding film to watchlist: ' + error.message });
+    catch (err) {
+        next(err);
     }
 };
 
@@ -71,7 +74,7 @@ exports.addFilmToWatchlist = async (req, res) => {
  * @param {*} res 
  * @returns 
  */
-exports.removeFilmFromWatchlist = async (req, res) => {
+exports.removeFilmFromWatchlist = async (req, res, next) => {
     const userId = req.user.id;
     const tmdbid = req.params.tmdbid;
 
@@ -79,7 +82,7 @@ exports.removeFilmFromWatchlist = async (req, res) => {
         // find the film from local database, to get the internal _id
         const film = await Film.findOne({ tmdbid: tmdbid });
         if (!film) {
-            return res.status(404).json({ message: 'Film not found' });
+            throw new NotFoundError('Film not found in local database');
         }
 
         // remove from user's watchlist
@@ -87,31 +90,11 @@ exports.removeFilmFromWatchlist = async (req, res) => {
             { _id: userId },
             { $pull: { watchlist: { film: film._id } } }
         );
+
         return res.status(200).json({ message: 'Film removed from watchlist' });
     }
     catch (error) {
-        return res.status(500).json({ message: 'Error removing film from watchlist: ' + error.message });
-    }
-};
-
-/**
- * Retrieves the user's watchlist with populated film details.
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
- */
-exports.getWatchlist = async (req, res) => {
-    const userId = req.user.id
-    try {
-        const user = await User.findById(userId).populate('watchlist.film').lean();
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        return res.status(200).json({ watchlist: user.watchlist });
-    }
-    catch (error) {
-        return res.status(500).json({ message: 'Error fetching watchlist: ' + error.message });
+        next(error);
     }
 };
 
@@ -142,23 +125,22 @@ exports.filmInWatchlist = async (req, res) => {
     }
 }
 
-// get all films currently streaming in the user's watchlist
-exports.getStreamingWatchlist = async (req, res) => {
-    const userId = req.user.id;
+/**
+ * Retrieves the user's watchlist with populated film details.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+exports.getWatchlist = async (req, res, next) => {
+    const userID = req.user.id
     try {
-        const user = await User.findById(userId)
-            .populate({ 
-                path: 'watchlist.film',
-                match: { streaming: { $exists: true, $ne: [] } },
-                select: 'tmdbid title poster streaming' // only return necessary fields
-            })
-            .lean();
+        const filmsStreaming = await watchlistService.getFilmsStreamingInWatchlist(userID);
+        const filmsUnavailable = await watchlistService.getFilmsUnavailableInWatchlist(userID);
 
-        const streamingFilms = user.watchlist.filter(item => item.film);
-
-        return res.status(200).json({ streaming_watchlist: streamingFilms });
+        return res.status(200).json({ streaming: filmsStreaming, unavailable: filmsUnavailable });
     }
     catch (error) {
-        return res.status(500).json({ message: 'Error fetching streaming watchlist: ' + error.message });
+        next(error);
     }
 };
