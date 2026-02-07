@@ -1,10 +1,10 @@
-const tmdbApi = require('../apis/tmdb.js');
+const tmdbService = require('../services/tmdbService');
 
 // get film by tmdb id
 exports.getFilmByTmdbId = async (req, res) => {
     const tmdbId = req.params.tmdbId;
     try {
-        const film = await tmdbApi.getFilmById(tmdbId);
+        const film = await tmdbService.getFilmById(tmdbId);
         return res.status(200).json(film);
     }
     catch (error) {
@@ -19,7 +19,7 @@ exports.getFilmByTmdbId = async (req, res) => {
 exports.findFilmsByTitle = async (req, res) => {
     const { title, page } = req.query;
     try {
-        const results = await tmdbApi.searchForFilm(title, page);
+        const results = await tmdbService.searchForFilm(title, page);
         return res.status(200).json(results);
     }
     catch (error) {

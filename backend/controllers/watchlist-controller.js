@@ -1,6 +1,6 @@
 const Film = require('../models/film.js');
 const User = require('../models/user.js');
-const tmdbApi = require('../apis/tmdb.js');
+const tmdbService = require('../services/tmdbService.js');
 const watchlistService = require('../services/watchlistService.js');
 
 const { NotFoundError, ConflictError } = require('../errors/customErrors.js');
@@ -9,7 +9,7 @@ const { NotFoundError, ConflictError } = require('../errors/customErrors.js');
 // only storing a subset of data locally to reduce db size, for now.
 async function createFilmObject(tmdbid) {
     try {
-        const tmdbRes = await tmdbApi.getFilmById(tmdbid);
+        const tmdbRes = await tmdbService.getFilmById(tmdbid);
 
         const newFilm = {
             tmdbid: tmdbRes.tmdbid,
