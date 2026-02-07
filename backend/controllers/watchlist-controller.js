@@ -124,17 +124,18 @@ exports.filmInWatchlist = async (req, res) => {
     
     try {
         
-        const film = await Film.findOne({ tmdbid: tmdbid });
+        const film = await Film.findOne({ tmdbid: tmdbid }).select('_id');
         
         if (!film) {
             return res.status(200).json({ in_watchlist: false });
         }
-        
-        const filmInWatchlist = await User.exists(
-            { _id: userId, 'watchlist.film': film._id }
-        );
-    
-        return res.status(200).json({ in_watchlist: !!(filmInWatchlist) });
+
+        const exists = await User.exists({
+            _id: userId,
+            'watchlist.film': film._id
+        });
+
+        return res.status(200).json({ in_watchlist: Boolean(exists) });
     }
     catch (error) {
         return res.status(500).json({ message: 'Error checking watchlist: ' + error.message });
