@@ -8,6 +8,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     
     const [watchlistStreaming, setWatchlistStreaming] = useState([]);
+    const [popularFilms, setPopularFilms] = useState([]);
 
     useEffect(() => {
         const getDashboardData = async () => {
@@ -21,6 +22,7 @@ export default function Dashboard() {
                 if (response.ok) {
                     const result = await response.json();
                     setWatchlistStreaming(result.streaming_watchlist);
+                    setPopularFilms(result.popular_films.results);
                 }
 
             } catch {
@@ -38,7 +40,8 @@ export default function Dashboard() {
 
     return (
         <div className='page-wrapper'> 
-            <HorizontalScrollFilmGrid films={watchlistStreaming} />
+            <HorizontalScrollFilmGrid films={watchlistStreaming} title='Streaming From Your Watchlist' />
+            <HorizontalScrollFilmGrid films={popularFilms} title='Popular Films' />
         </div>
     );
 }

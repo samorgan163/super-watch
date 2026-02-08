@@ -28,3 +28,13 @@ exports.findFilmsByTitle = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.getCurrentlyPopularFilms = async (req, res, next) => {
+    const { page } = req.query;
+    try {        const results = await tmdbService.getCurrentlyPopularFilms(page);
+        return res.status(200).json(results);
+    }
+    catch (err) {
+        next(err);
+    }
+};

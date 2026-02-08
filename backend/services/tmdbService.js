@@ -52,7 +52,7 @@ function _handleError(error) {
         throw { code: 'TMDB_TIMEOUT', message: 'TMDb request timed out' };
     }
     throw { code: 'TMDB_UNKNOWN_ERROR', message: 'Unknown TMDb error', error };
-}
+};
 
 async function _withRetry(fn, retries = 3, delay = 500) {
     try {
@@ -75,7 +75,7 @@ async function _withRetry(fn, retries = 3, delay = 500) {
 
         throw error; // Non-retryable (e.g., TMDB_AUTH_ERROR)
     }
-}
+};
 
 exports.getFilmById = async (tmdbId) => {
     const film = await _withRetry(async () => {
@@ -141,7 +141,7 @@ exports.getFilmById = async (tmdbId) => {
         }
     });
     return film;
-}
+};
 
 exports.searchForFilm = async (searchString, page) => {
     const searchReults = await _withRetry(async () => {
@@ -161,7 +161,7 @@ exports.searchForFilm = async (searchString, page) => {
         }
     });
     return searchReults;
-}
+};
 
 exports.getStreamingProvidersById = async (tmdbId) => {
     const streamingProviders = await _withRetry(async () => {
@@ -192,7 +192,7 @@ exports.getStreamingProvidersById = async (tmdbId) => {
         }
     });
     return streamingProviders;
-}
+};
 
 // returns array of all directors
 exports.getDirector = async (tmdbId) => {
@@ -214,7 +214,7 @@ exports.getDirector = async (tmdbId) => {
         }
     });
     return director;
-}
+};
 
 // returns cast
 exports.getCast = async (tmdbId) => {
@@ -230,4 +230,31 @@ exports.getCast = async (tmdbId) => {
         }
     });
     return cast;
-}
+};
+
+exports.getCurrentlyPopularFilms = async (pageNum) => {
+    const popularFilms = await _withRetry(async () => {
+        console.log('tmdb api pull request');
+        try {
+            const response = await tmdb.get(`/movie/popular?language=en-US&page=${pageNum}`);
+            
+            const popularFilms = [];
+            response.data.results.forEach(film => {
+                popularFilms.push({
+                    tmdbid: film.id,
+                    title: film.title,
+                    poster: film.poster_path ? `https://image.tmdb.org/t/p/w400${film.poster_path}` : null,
+                    streaming: [], // to be filled in later with separate requests
+                });
+            });
+
+            response.data.results = popularFilms; // overwrite results with simplified objects
+
+            return response.data;
+        }
+        catch (error) {
+            _handleError(error);
+        }
+    });
+    return popularFilms;
+};
