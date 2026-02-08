@@ -14,11 +14,11 @@ export default function App() {
 	return (
         <Routes>
             <Route path="/login" element={<Login /> } />
-            <Route path="/" element={<ProtectedRoute><AppLayout><Dashboard /></AppLayout></ProtectedRoute>} />
+            <Route path="/" element={<ProtectedRoute><AppLayout title='Dashboard'><Dashboard /></AppLayout></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><AppLayout><UserProfile /></AppLayout></ProtectedRoute>} />
             <Route path="/film/:tmdbId" element={<ProtectedRoute><AppLayout><Film /></AppLayout></ProtectedRoute>} />
             <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
-            <Route path='/watchlist' element={<ProtectedRoute><AppLayout><Watchlist /></AppLayout></ProtectedRoute>} />
+            <Route path='/watchlist' element={<ProtectedRoute><AppLayout title='Watchlist'><Watchlist /></AppLayout></ProtectedRoute>} />
             <Route path='/test' element={<AppLayout><PageLoading /></AppLayout>} />
         </Routes>
 	)

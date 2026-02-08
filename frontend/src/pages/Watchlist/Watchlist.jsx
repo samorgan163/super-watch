@@ -41,9 +41,9 @@ function Watchlist() {
 
     return (
         <div className="page-wrapper">
-            <h1>Currently Streaming</h1>
+            <h1 style={{fontSize: "24px"}}>Currently Streaming</h1>
             <FilmsGrid films={watchlistStreaming || []}/>
-            <h1>Not Available</h1>
+            <h1 style={{fontSize: "24px"}}>Not Available</h1>
             <FilmsGrid films={watchlistUnavailable || []} fadeOpacity={true} />
         </div>
     );
