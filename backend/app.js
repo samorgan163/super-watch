@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // error classes
-const { NotFoundError, ConflictError } = require('./errors/customErrors.js');
+const { NotFoundError, ConflictError, NotAuthenticatedError } = require('./errors/customErrors.js');
 
 // controllers
 const authController = require('./controllers/auth-controller.js');
@@ -70,6 +70,10 @@ app.use((err, req, res, next) => {
 
     if (err instanceof ConflictError) {
         return res.status(409).json({ message: err.message });
+    }
+
+    if (err instanceof NotAuthenticatedError) {
+        return res.status(401).json({ message: err.message });
     }
     
     // fallback for unexpected errors

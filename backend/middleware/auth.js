@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+const { NotAuthenticatedError } = require('../errors/customErrors.js');
+
 exports.authenticateUser = (req, res, next) => {
     // get access token 
     const token = req.cookies.accessToken;
     
     if (!token) {
-        return res.status(401).json('Not authenticated.');
+        throw new NotAuthenticatedError('No access token provided.');
     }
 
     try {
@@ -13,7 +15,7 @@ exports.authenticateUser = (req, res, next) => {
         req.user = { id: payload.userId };
         next();
     }
-    catch (error) {
-        res.status(401).json({ nessage: 'Invalid or expired token.' });
+    catch (err) {
+        throw new NotAuthenticatedError('Invalid access token.');
     }
 }

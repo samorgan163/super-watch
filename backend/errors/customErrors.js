@@ -11,3 +11,10 @@ export class ConflictError extends Error {
         this.name = 'ConflictError';
     }
 };
+
+export class NotAuthenticatedError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'NotAuthenticatedError';
+    }
+};
