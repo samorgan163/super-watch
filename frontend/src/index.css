@@ -168,6 +168,12 @@ a {
     text-decoration: none;
 }
 
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+}
+
 .page-wrapper {
     margin-top: 32px;
 }

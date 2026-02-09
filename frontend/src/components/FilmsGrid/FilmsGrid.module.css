@@ -2,16 +2,7 @@
 .filmsGridSection {
     width: 100%;
     height: auto;
-}
-
-.filmsGridSection h2 {
-    font-size: 24px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    
-    margin-bottom: 24px;
-    padding: 0 20px;
+    margin-bottom: 2rem;
 }
 
 .filmsGrid {
@@ -21,9 +12,7 @@
     padding: 0 20px;                       /* 20px padding left & right */
 }
 
-.film {
-    margin-bottom: 30px;
-}
+.film {}
 
 .filmImageWrapper {
     position: relative;
@@ -38,11 +27,7 @@
 }
 
 .film p {
-    color: white;
-    font-size: 20px;
     user-select: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
 }
 
 .fade {
@@ -53,4 +38,16 @@
     position: absolute;
     left: 12px;
     bottom: 12px;
+}
+
+@media (min-width: 768px) {
+    .filmsGrid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on larger screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .filmsGrid {
+        grid-template-columns: repeat(6, 1fr); /* 6 columns on even larger screens */
+    }
 }
