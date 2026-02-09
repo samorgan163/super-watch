@@ -146,6 +146,12 @@ button:focus-visible {
     box-sizing: border-box;
 }
 
+html {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
 body {
     width: 100%;
     background-color: #15293E;

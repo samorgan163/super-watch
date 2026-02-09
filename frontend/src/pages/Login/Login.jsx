@@ -27,28 +27,29 @@ function Login() {
     }
 
     return (
-        <div className={styles.loginContainer}>
-            <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <section className={styles.loginContainer}>
+            <div className={styles.loginWrapper}>
                 <h2>Login</h2>
+                <form className={styles.loginForm} onSubmit={handleSubmit}>
+                    <input
+                        placeholder="Username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                    />
 
-                <input
-                    placeholder="Username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
+                    <button type="submit">Login</button>
 
-                <button type="submit">Login</button>
-
-                {error && <p>{error}</p>}
-            </form>
-        </div>
+                    {error && <p>{error}</p>}
+                </form>
+            </div>
+        </section>
     );
 
 }
