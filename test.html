@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .guide-right {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: rgba(255, 166, 0, 0.438);
+                width: 40px;
+                height: 100vh;
+                z-index: 100;
+            }
+            .guide-left {
+                display: block;
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: rgba(255, 166, 0, 0.438);
+                width: 40px;
+                height: 100vh;
+                z-index: 1;
+            }
+
+            .container-wrapper {
+                position: relative;
+            }
+
+            .container {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                position: relative;
+                padding-left: 40px;
+                gap: 20px;
+            }
+
+            .item {
+                flex-shrink: 0;
+                background-color: red;
+                aspect-ratio: 2/3;
+            }
+
+            .item:last-child {
+                margin-right: 60px;
+            }
+
+            .btn-move {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                display: block;
+                width: 50px;
+                height: 50px;
+                background-color: green;
+                cursor: pointer;
+                z-index: 2;
+            }
+            #btn-right {
+                right: 0;
+            }
+            #btn-left {
+                left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="guide-right"></div>
+        <div class="guide-left"></div>
+        <div class="container-wrapper">
+            <div id="btn-right" class="btn-move"></div>
+            <div id="btn-left" class="btn-move"></div>
+            <div class="container">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+                <div class="item">9</div>
+                <div class="item">10</div>
+            </div>
+        </div>
+
+        <script>
+            const itemsContainer = document.querySelector(".container");
+            const items = document.querySelectorAll(".item");
+            const btnRight = document.querySelector("#btn-right");
+            const btnLeft = document.querySelector("#btn-left");
+
+            const numberOfItemsVisible = 4;
+            const sidePadding = 40;
+
+            function setItemsWidth() {
+                const itemWidth =
+                    window.innerWidth / numberOfItemsVisible - sidePadding;
+                items.forEach((item) => {
+                    item.style.width = `${itemWidth}px`;
+                });
+            }
+
+            function calcAmountToScroll() {
+                return (
+                    items[0].offsetWidth * numberOfItemsVisible +
+                    20 * numberOfItemsVisible
+                );
+            }
+
+            function moveItemsRight() {
+                itemsContainer.scrollBy({
+                    left: calcAmountToScroll(),
+                    behavior: "smooth",
+                });
+            }
+
+            function moveItemsLeft() {
+                itemsContainer.scrollBy({
+                    left: -calcAmountToScroll(),
+                    behavior: "smooth",
+                });
+            }
+
+            btnRight.addEventListener("click", () => {
+                moveItemsRight();
+            });
+
+            btnLeft.addEventListener("click", () => {
+                moveItemsLeft();
+            });
+
+            setItemsWidth();
+        </script>
+    </body>
+</html>
