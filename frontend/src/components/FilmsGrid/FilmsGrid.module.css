@@ -1,15 +1,13 @@
 
-.filmsGridSection {
+.filmsGridWrapper {
     width: 100%;
     height: auto;
-    margin-bottom: 2rem;
 }
 
 .filmsGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* always 2 columns */
-    gap: 20px;                             /* 20px gap between columns */
-    padding: 0 20px;                       /* 20px padding left & right */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
 .film {}
@@ -17,9 +15,11 @@
 .filmImageWrapper {
     position: relative;
     aspect-ratio: 2 / 3;
+    display: block;
 }
 
 .film img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -48,6 +48,6 @@
 
 @media (min-width: 1024px) {
     .filmsGrid {
-        grid-template-columns: repeat(6, 1fr); /* 6 columns on even larger screens */
+        grid-template-columns: repeat(7, 1fr); /* 6 columns on even larger screens */
     }
 }

@@ -39,9 +39,13 @@ export default function Dashboard() {
     if (loading) return <PageLoading />;
 
     return (
-        <div className='page-wrapper'> 
-            <HorizontalScrollFilmGrid films={watchlistStreaming} title='Streaming From Your Watchlist' />
-            <HorizontalScrollFilmGrid films={popularFilms} title='Popular Films' />
-        </div>
+        <>
+            <section> 
+                <HorizontalScrollFilmGrid films={watchlistStreaming} title='Streaming From Your Watchlist' />
+            </section>
+            <section>
+                <HorizontalScrollFilmGrid films={popularFilms} title='Popular Films' />
+            </section>
+        </>
     );
 }

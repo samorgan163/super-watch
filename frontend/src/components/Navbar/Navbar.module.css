@@ -3,10 +3,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem var(--desktop-padding);
+    padding: 0 var(--desktop-padding);
     background-color: var(--primary-color);
     position: fixed;
     width: 100%;
+    height: var(--desktop-nav-height);
     z-index: 100;
 }
 

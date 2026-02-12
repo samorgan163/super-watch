@@ -1,18 +1,7 @@
 .filmsGridSection {
     width: 100%;
     height: auto;
-    margin-bottom: 32px;
     position: relative;
-}
-
-.filmsGridSection h2 {
-    font-size: 24px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    
-    margin-bottom: 16px;
-    padding: 0 20px;
 }
 
 .filmsGrid {

@@ -1,6 +1,6 @@
 import TopNavbar from './components/TopNavbar/TopNavbar';
 import BottomNavbar from './components/BottomNavbar/BottomNavbar';
-import Navbar from './components/NavBar/Navbav';
+import Navbar from './components/Navbar/Navbar';
 
 function AppLayout({ title, children }) {
     return (

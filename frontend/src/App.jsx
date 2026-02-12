@@ -9,7 +9,7 @@ import Film from "./pages/Film/Film";
 import Search from "./pages/Search/Search";
 import Watchlist from "./pages/Watchlist/Watchlist";
 import PageLoading from "./components/PageLoading/PageLoading";
-import Navbar from "./components/NavBar/Navbav";
+import Navbar from "./components/Navbar/Navbar";
 
 export default function App() {
 	return (
