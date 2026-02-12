@@ -9,6 +9,7 @@ import Film from "./pages/Film/Film";
 import Search from "./pages/Search/Search";
 import Watchlist from "./pages/Watchlist/Watchlist";
 import PageLoading from "./components/PageLoading/PageLoading";
+import Navbar from "./components/NavBar/Navbav";
 
 export default function App() {
 	return (
@@ -19,7 +20,7 @@ export default function App() {
             <Route path="/film/:tmdbId" element={<ProtectedRoute><AppLayout><Film /></AppLayout></ProtectedRoute>} />
             <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
             <Route path='/watchlist' element={<ProtectedRoute><AppLayout title='Watchlist'><Watchlist /></AppLayout></ProtectedRoute>} />
-            <Route path='/test' element={<AppLayout><PageLoading /></AppLayout>} />
+            <Route path='/test' element={<Navbar />} />
         </Routes>
 	)
 }

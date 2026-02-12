@@ -1,0 +1,77 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem var(--desktop-padding);
+    background-color: var(--primary-color);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 1rem;
+    align-items: center;
+}
+
+.navbar ul li a {
+    color: white;
+    cursor: pointer;
+    transition: border 0.25s;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 2px solid transparent;
+    align-self: start;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    border: 2px solid var(--accent-color);
+}
+
+.primary li a .active {
+    border: 2px solid var(--accent-color);
+}
+
+.searchIcon {
+    width: 2rem;           /* total size including padding */
+    height: 2rem;
+    display: flex;          /* center icon inside */
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
+    background: transparent; 
+}
+
+.searchIcon svg {
+    width: 60%;
+    height: 60%;
+}
+
+
+.userAvatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: white;
+}
