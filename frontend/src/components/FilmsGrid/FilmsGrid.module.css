@@ -40,14 +40,32 @@
     bottom: 12px;
 }
 
+@media (min-width: 576px) {
+    .filmsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (min-width: 768px) {
     .filmsGrid {
-        grid-template-columns: repeat(4, 1fr); /* 4 columns on larger screens */
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
     .filmsGrid {
-        grid-template-columns: repeat(7, 1fr); /* 6 columns on even larger screens */
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .filmsGrid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .filmsGrid {
+        grid-template-columns: repeat(7, 1fr);
     }
 }
