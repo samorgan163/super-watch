@@ -112,6 +112,7 @@
 
             function calcAmountToScroll() {
                 return (
+                    // number of items to scroll, determined by the number visible, plus the gap between items
                     items[0].offsetWidth * numberOfItemsVisible +
                     20 * numberOfItemsVisible
                 );
@@ -131,15 +132,12 @@
                 });
             }
 
-            btnRight.addEventListener("click", () => {
-                moveItemsRight();
-            });
-
-            btnLeft.addEventListener("click", () => {
-                moveItemsLeft();
-            });
+            btnRight.addEventListener("click", moveItemsRight);
+            btnLeft.addEventListener("click", moveItemsLeft);
 
             setItemsWidth();
+
+            addEventListener("resize", setItemsWidth);
         </script>
     </body>
 </html>

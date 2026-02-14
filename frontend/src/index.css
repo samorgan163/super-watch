@@ -147,13 +147,16 @@ button:focus-visible {
 }
 
 :root {
-	--desktop-padding: 60px;
-	--desktop-nav-height: 4.2rem;
-	--desktop-section-spacing: 2rem;
+    --desktop-padding: 60px;
+    --desktop-nav-height: 4.2rem;
+    --desktop-section-spacing: 2rem;
+
+    --mobile-padding: 20px;
+    --mobile-section-spacing: 2rem;
 
     --primary-color: #14111D;
-	--secondary-color: #1E1B26;
-	--accent-color: #71282F;
+    --secondary-color: #1E1B26;
+    --accent-color: #71282F;
 }
 
 html {
@@ -168,7 +171,7 @@ body {
 }
 
 main {
-    padding-top: 56px; /* To appear below nav bar */
+    padding-top: calc(56px + var(--mobile-section-spacing)); /* To appear below nav bar */
     padding-bottom: 80px; /* To appear above bottom nav bar */
     /*margin-top: 32px;*/
     position: relative;
@@ -185,16 +188,22 @@ section {
 }
 
 .section-with-padding {
-	padding: 0 var(--desktop-padding);
+	padding: 0 var(--mobile-padding);
+}
+
+@media (min-width: 768px) {
+	.section-with-padding {
+		padding: 0 var(--desktop-padding);
+	}
 }
 
 a {
-  color: inherit; 
-  text-decoration: none; 
+	color: inherit; 
+	text-decoration: none; 
 }
 
 a:visited {
-  color: inherit;
+  	color: inherit;
 }
 
 h2 {
