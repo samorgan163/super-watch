@@ -11,13 +11,45 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+    padding: 0;
+
+    background: white;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+
+    fill: none;
+
+    stroke: #262626;
+    stroke-width: 2;
+    stroke-linecap: round;
+
+    transition: stroke 0.2s ease;
 }
 
 .scrollBtnRight {
-    right: 0;
+    right: 24px;
 }
 .scrollBtnLeft {
-    left: 0;
+    left: 24px;
 }
 
 .container {

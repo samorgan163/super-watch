@@ -34,13 +34,25 @@ export default function HorizontalScrollFilm2({ films, title }) {
                 onClick={() => scroll('right')} 
                 className={`${styles.scrollBtn} ${styles.scrollBtnRight}`}
             >
-                Right
+                <svg
+                    className={styles.icon}
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M8 5L16 12L8 19" />
+                </svg>
             </button>
             <button 
                 onClick={() => scroll('left')}
                 className={`${styles.scrollBtn} ${styles.scrollBtnLeft}`}
             >
-                Left
+                <svg
+                    className={styles.icon}
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M16 5 L8 12 L16 19" />
+                </svg>
             </button>
             <div className={styles.container} ref={containerRef}>
                 {films?.map((film) => (
