@@ -9,12 +9,17 @@
     position: relative;
     padding: 0 var(--padding-side);
     gap: var(--grid-item-gap);
+
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--padding-side);
 }
 
 .item {
     flex: 0 0 calc((100vw - calc(var(--padding-side) * 2) - (var(--grid-item-gap) * 2)) / 2);
     aspect-ratio: 2/3;
     background-color: red;
+
+    scroll-snap-align: start;
 }
 
 .item:last-child {
