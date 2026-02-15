@@ -2,6 +2,20 @@
     position: relative;
 }
 
+.scrollBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.scrollBtnRight {
+    right: 0;
+}
+.scrollBtnLeft {
+    left: 0;
+}
+
 .container {
     width: 100%;
     display: flex;
@@ -12,6 +26,7 @@
 
     scroll-snap-type: x mandatory;
     scroll-padding-left: var(--padding-side);
+    scroll-behavior: smooth;
 }
 
 .item {
@@ -23,11 +38,7 @@
 }
 
 .item:last-child {
-    margin-right: 20px;
-}
-
-.item:last-child {
-    margin-right: 60px;
+    margin-right: var(--grid-item-gap);
 }
 
 @media (min-width: 576px) {
