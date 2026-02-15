@@ -154,8 +154,8 @@ button:focus-visible {
     --mobile-padding: 20px;
     --mobile-section-spacing: 2rem;
 
-	--padding-side: clamp(20px, 3vw, 60px);
-	--grid-item-gap: 1rem;
+    --padding-side: clamp(20px, 3vw, 60px);
+    --grid-item-gap: 1rem;
 
     --primary-color: #14111D;
     --secondary-color: #1E1B26;

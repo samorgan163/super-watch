@@ -1,0 +1,30 @@
+:root {
+    --grid-items: 7;
+}
+
+.containerWrapper {
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    position: relative;
+    padding: 0 var(--padding-side);
+    gap: var(--grid-item-gap);
+}
+
+.item {
+    flex: 0 0 calc((100vw - calc(var(--padding-side) * 2) - (var(--grid-item-gap) * var(--grid-items))) / var(--grid-items));
+    aspect-ratio: 2/3;
+    background-color: red;
+}
+
+.item:last-child {
+    margin-right: 20px;
+}
+
+.item:last-child {
+    margin-right: 60px;
+}

@@ -41,17 +41,18 @@
                 overflow-x: auto;
                 position: relative;
                 padding-left: 40px;
+                padding-right: 40px; /* add this instead of manual spacing */
                 gap: 20px;
             }
 
             .item {
-                flex-shrink: 0;
-                background-color: red;
+                flex: 0 0 calc((100vw - 80px - (20px * 7)) / 7);
                 aspect-ratio: 2/3;
+                background-color: red;
             }
 
             .item:last-child {
-                margin-right: 60px;
+                margin-right: 20px;
             }
 
             .btn-move {
@@ -90,6 +91,17 @@
                 <div class="item">8</div>
                 <div class="item">9</div>
                 <div class="item">10</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+                <div class="item">9</div>
+                <div class="item">10</div>
+                <div class="item">10</div>
             </div>
         </div>
 
@@ -99,16 +111,8 @@
             const btnRight = document.querySelector("#btn-right");
             const btnLeft = document.querySelector("#btn-left");
 
-            const numberOfItemsVisible = 4;
+            const numberOfItemsVisible = 7;
             const sidePadding = 40;
-
-            function setItemsWidth() {
-                const itemWidth =
-                    window.innerWidth / numberOfItemsVisible - sidePadding;
-                items.forEach((item) => {
-                    item.style.width = `${itemWidth}px`;
-                });
-            }
 
             function calcAmountToScroll() {
                 return (
@@ -134,10 +138,6 @@
 
             btnRight.addEventListener("click", moveItemsRight);
             btnLeft.addEventListener("click", moveItemsLeft);
-
-            setItemsWidth();
-
-            addEventListener("resize", setItemsWidth);
         </script>
     </body>
 </html>
