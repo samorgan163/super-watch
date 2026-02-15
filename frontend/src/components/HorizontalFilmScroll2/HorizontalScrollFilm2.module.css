@@ -6,7 +6,16 @@
     padding-left: var(--padding-side);
 }
 
+/* scroll buttons only visible when the user is hovering the container */
+.containerWrapper:hover .scrollBtn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .scrollBtn {
+    opacity: 0;
+    pointer-events: none;
+
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -28,6 +37,20 @@
     transition: all 0.2s ease;
 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.scrollBtn:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.scrollBtn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* scroll buttons only visible when scroll is possible */
+.containerWrapper:hover .scrollBtn:disabled {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .icon {
@@ -55,7 +78,7 @@
 .container {
     width: 100%;
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
     position: relative;
     padding: 0 var(--padding-side);
     gap: var(--grid-item-gap);
@@ -63,6 +86,14 @@
     scroll-snap-type: x mandatory;
     scroll-padding-left: var(--padding-side);
     scroll-behavior: smooth;
+
+    /* remove scroll bar Firefox */
+    scrollbar-width: none; 
+}
+
+/* remove scroll bar Chrome, Safari, Edge */
+.container::-webkit-scrollbar {
+    display: none;
 }
 
 .film {

@@ -1,11 +1,14 @@
 import styles from './HorizontalScrollFilm2.module.css';
 import ServiceIcon from '../ServiceIcon/ServiceIcon';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function HorizontalScrollFilm2({ films, title }) {
     
     const containerRef = useRef(null);
+
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
 
     function scroll(direction) {
         if (!containerRef.current) return;
@@ -26,13 +29,40 @@ export default function HorizontalScrollFilm2({ films, title }) {
             behavior: "smooth",
         });
     }
-    
+
+    const updateScrollButtons = () => {
+        if (!containerRef.current) return;
+
+        const container = containerRef.current;
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+        setCanScrollLeft(container.scrollLeft > 0);
+        setCanScrollRight(container.scrollLeft < maxScrollLeft);
+    };
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+        
+        updateScrollButtons();
+
+        container.addEventListener("scroll", updateScrollButtons);
+        window.addEventListener("resize", updateScrollButtons);
+
+        return () => {
+            container.removeEventListener("scroll", updateScrollButtons);
+            window.removeEventListener("resize", updateScrollButtons);
+        }
+
+    }, []);
+
     return (
         <div className={styles.containerWrapper}>
             <h2>{title}</h2>
             <button 
                 onClick={() => scroll('right')} 
                 className={`${styles.scrollBtn} ${styles.scrollBtnRight}`}
+                disabled={!canScrollRight}
             >
                 <svg
                     className={styles.icon}
@@ -45,6 +75,7 @@ export default function HorizontalScrollFilm2({ films, title }) {
             <button 
                 onClick={() => scroll('left')}
                 className={`${styles.scrollBtn} ${styles.scrollBtnLeft}`}
+                disabled={!canScrollLeft}
             >
                 <svg
                     className={styles.icon}
