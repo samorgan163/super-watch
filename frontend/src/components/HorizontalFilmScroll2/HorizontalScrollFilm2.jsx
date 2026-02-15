@@ -1,7 +1,9 @@
 import styles from './HorizontalScrollFilm2.module.css';
+import ServiceIcon from '../ServiceIcon/ServiceIcon';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function HorizontalScrollFilm2() {
+export default function HorizontalScrollFilm2({ films, title }) {
     
     const containerRef = useRef(null);
 
@@ -27,6 +29,7 @@ export default function HorizontalScrollFilm2() {
     
     return (
         <div className={styles.containerWrapper}>
+            <h2>{title}</h2>
             <button 
                 onClick={() => scroll('right')} 
                 className={`${styles.scrollBtn} ${styles.scrollBtnRight}`}
@@ -40,35 +43,21 @@ export default function HorizontalScrollFilm2() {
                 Left
             </button>
             <div className={styles.container} ref={containerRef}>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
-                <div className={styles.item}>1</div>
+                {films?.map((film) => (
+                    <div className={styles.film} key={film?.tmdbid}>
+                        <Link aria-label={film?.title} to={`/film/${film?.tmdbid}`}>
+                            <div className={styles.filmImageWrapper}>
+                                <div className={styles.serviceWrapper}>
+                                    {film.streaming?.[0] && 
+                                        <ServiceIcon className={styles.service} service={film.streaming[0]} />
+                                    }
+                                </div>
+                                <img loading="lazy" src={film?.poster} alt="" />
+                            </div>
+                        </Link>
+                        <p>{film?.title}</p>
+                    </div>
+                ))}
             </div>
         </div>
     )

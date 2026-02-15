@@ -42,13 +42,10 @@ export default function Dashboard() {
     return (
         <>
             <section>
-                <HorizontalScrollFilm2 />
-            </section>
-            <section> 
-                <HorizontalScrollFilmGrid films={watchlistStreaming} title='Streaming From Your Watchlist' />
+                <HorizontalScrollFilm2 films={watchlistStreaming} title='Streaming From Your Watchlist' />
             </section>
             <section>
-                <HorizontalScrollFilmGrid films={popularFilms} title='Popular Films' />
+                <HorizontalScrollFilm2 films={popularFilms} title='Popular Films' />
             </section>
         </>
     );
