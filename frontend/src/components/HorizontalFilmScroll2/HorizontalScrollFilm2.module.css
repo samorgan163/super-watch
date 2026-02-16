@@ -6,10 +6,15 @@
     padding-left: var(--padding-side);
 }
 
-/* scroll buttons only visible when the user is hovering the container */
-.containerWrapper:hover .scrollBtn {
-    opacity: 1;
-    pointer-events: auto;
+/* 
+    scroll buttons only visible when the user is hovering the container,
+    only applied to devices where hover is available    
+*/
+@media (hover: hover) {
+    .containerWrapper:hover .scrollBtn {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 .scrollBtn {
@@ -134,6 +139,7 @@
     bottom: 12px;
 }
 
+/* responsive layout */
 @media (min-width: 576px) {
     .film {
         flex: 0 0 calc((100vw - calc(var(--padding-side) * 2) - (var(--grid-item-gap) * 3)) / 3);
