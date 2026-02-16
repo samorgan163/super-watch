@@ -33,21 +33,22 @@
 }
 
 .navbar ul li a {
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
-    transition: border 0.25s;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     border: 2px solid transparent;
-    align-self: start;
     text-decoration: none;
+
+    transition: color 0.25s;
 }
 
-ul li a:hover {
-    border: 2px solid var(--accent-color);
+.navbar ul li a:hover {
+    color: white;
 }
 
-.primary li a .active {
+.navbar ul li a.active {
+    color: white;
     border: 2px solid var(--accent-color);
 }
 
