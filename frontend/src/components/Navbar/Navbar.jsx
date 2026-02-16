@@ -14,7 +14,9 @@ export default function Navbar() {
                             key="Dashboard" 
                             to="/" 
                             aria-label="Dashboard"
-                            className={({ isActive }) => isActive ? styles.active : ''}
+                            className={({ isActive }) =>
+                                `${styles.dashboardLink} ${isActive ? styles.dashboardLinkActive : ''}`
+                            }
                         >
                             Dashboard
                         </NavLink>
@@ -24,7 +26,9 @@ export default function Navbar() {
                             key="Watchlist" 
                             to="/watchlist" 
                             aria-label="Watchlist"
-                            className={({ isActive }) => isActive ? styles.active : ''}
+                            className={({ isActive }) =>
+                                `${styles.dashboardLink} ${isActive ? styles.dashboardLinkActive : ''}`
+                            }
                         >
                             Watchlist
                         </NavLink>
@@ -34,13 +38,27 @@ export default function Navbar() {
             
             <ul aria-label="User actions">
                 <li>
-                    <NavLink 
-                        key="Search" 
+                    <NavLink
+                        key="Search"
                         to="/search"
                         aria-label="Search"
-                        className={({ isActive }) => isActive ? styles.active : ''}
+                        className={({ isActive }) =>
+                                `${styles.searchLink} ${isActive ? styles.searchLinkActive : ''}`
+                            }
                     >
                         <IoSearch />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        key="Profile"
+                        to="/profile"
+                        aria-label="Profile"
+                        className={({ isActive }) =>
+                                `${styles.profileLink} ${isActive ? styles.profileLinkActive : ''}`
+                            }
+                    >
+                        <img src="./src/assets/icons/default-user.jpg" alt="" />
                     </NavLink>
                 </li>
                 <li><div className={styles.userAvatar}></div></li>

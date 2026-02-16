@@ -194,15 +194,6 @@ section {
 	  padding: 0 var(--padding-side);
 }
 
-a {
-    color: inherit; 
-    text-decoration: none; 
-}
-
-a:visited {
-  	color: inherit;
-}
-
 h2 {
     font-size: 24px;
     font-weight: 600;
