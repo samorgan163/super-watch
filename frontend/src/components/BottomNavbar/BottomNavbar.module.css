@@ -1,7 +1,7 @@
 .navBottomWrapper {
 	padding-bottom: 30px; /* iOS safe area */
 	position: fixed;
-	background-color: #0C1821;
+	background-color: var(--primary-color);
 	z-index: 100;
 	bottom: 0;
 	width: 100%;
