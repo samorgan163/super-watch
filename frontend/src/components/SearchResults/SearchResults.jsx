@@ -111,11 +111,16 @@ function SearchResults({ query }) {
     }
 
     return (
-        <section id="search-results-wrapper" className={styles.SearchResultsWrapper}>
+        <div id="search-results-wrapper" className={styles.SearchResultsWrapper}>
             {results.map((film) => (
                 <Link key={film.id} to={`/film/${film.id}`} aria-label={film.title} className={styles.film}>
                     <div className={styles.filmPosterWrapper}>
-                        <img loading="lazy" src={`https://image.tmdb.org/t/p/w400${film.poster_path}`} alt="" />
+                        {film.poster_path 
+                            ? 
+                            <img loading="lazy" src={`https://image.tmdb.org/t/p/w400${film.poster_path}`} alt="" />
+                            :
+                            <img loading="lazy" src="./src/assets/icons/no-film-image.jpg" alt="" />
+                        }
                     </div>
                     <div className={styles.filmMetadataWrapper}>
                         <h3>{film.title}</h3>
@@ -136,7 +141,7 @@ function SearchResults({ query }) {
                     />
                 </div>} 
 
-        </section>
+        </div>
     );
 }
 

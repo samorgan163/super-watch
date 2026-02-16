@@ -28,7 +28,9 @@ function Search() {
         <>
             <SearchNavbar onSearchChange={setSearchTerm} />
             <main>
-                {query && <SearchResults query={query} />}
+                <section className='section-with-padding'>
+                    {query && <SearchResults query={query} />}
+                </section>
             </main>
             <BottomNavbar/>
         </>

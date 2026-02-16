@@ -1,6 +1,11 @@
 .SearchResultsWrapper {
-    padding: 0 20px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--grid-item-gap);
+}
+
+.SearchResultsWrapper a {
+    text-decoration: none;
 }
 
 .loading {
@@ -30,18 +35,18 @@
 .film {
     display: flex;
     width: 100%;
+    aspect-ratio: 6/2;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
     border-bottom-left-radius: 10px;
 }
 
 .filmPosterWrapper {
-    height: 120px;
-    width: 80px;
-    flex-shrink: 0;
+    height: 100%;
+    aspect-ratio: 2/3;
 }
 
 .filmPosterWrapper img {
+    display: block;
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -63,21 +68,44 @@
 
 .filmMetadataWrapper h3 {
     color: white;
-    font-size: 17px;
+    font-size: 1rem;
     font-weight: 600;
-    font-family: 'Inter', sans-serif;
 }
 
 .filmMetadataWrapper .releaseYear {
-    font-family: 'Inter', sans-serif;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
     margin-top: 2px;
 }
 
 .filmMetadataWrapper .director {
-    font-family: 'Inter', sans-serif;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 12px;
-    margin-top: 4px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+@media (min-width: 768px) {
+    .SearchResultsWrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .film {
+        border: 1px solid #2F2D34;
+        border-radius: 10px;
+        background-color: #18161E;
+
+        transition: border 0.25s;
+    }
+    .film:hover {
+        border: 1px solid white;
+    }
+    .filmPosterWrapper img {
+        border: none;
+        border-top-right-radius: 0px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .SearchResultsWrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
