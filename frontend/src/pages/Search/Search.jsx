@@ -26,13 +26,12 @@ function Search() {
 
     return (
         <>
-            <SearchNavbar onSearchChange={setSearchTerm} />
-            <main>
-                <section className='section-with-padding'>
-                    {query && <SearchResults query={query} />}
-                </section>
-            </main>
-            <BottomNavbar/>
+            <section className='section-with-padding'>
+                <SearchNavbar onSearchChange={setSearchTerm} />
+            </section>
+            <section className='section-with-padding'>
+                {query && <SearchResults query={query} />}
+            </section>
         </>
     );
 }

@@ -40,6 +40,7 @@ function SearchNavbar({ onSearchChange }) {
                         className={styles.clearIconContainer}
                         id="clear-icon"
                         onClick={clearInput}
+                        type='button'
                     >
                         <svg
                             className={styles.clearIcon}
