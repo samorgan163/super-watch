@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
+import styles from "./UserProfile.module.css"
+
 export default function UserProfile() {
 
     const [username, setUsername] = useState('');
@@ -45,10 +47,12 @@ export default function UserProfile() {
 
     return (
         <>
-            <h1>Hello, {username}! Welcome to your profile.</h1>
-            <button onClick={handleLogout}>Logout</button>
+            <div className={styles.profileWrapper}>
+                <h1>Hello, {username}! Welcome to your profile.</h1>
+                <button onClick={handleLogout}>Logout</button>
+            </div>
+            
         </>
-        
     )
 
 }
