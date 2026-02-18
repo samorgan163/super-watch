@@ -113,7 +113,7 @@ exports.getFilmById = async (tmdbId) => {
                                 id: person.id,
                                 name: person.name,
                                 role: person.character,
-                                poster: person.profile_path
+                                poster: `https://image.tmdb.org/t/p/w400${person.profile_path}`
                             })),
                 logo: `https://image.tmdb.org/t/p/w500${filmDetails.images.logos[0].file_path}`,
             }

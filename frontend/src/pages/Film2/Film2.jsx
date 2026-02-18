@@ -2,6 +2,7 @@ import MetaData from '../../components/Film/MetaData/MetaData'
 import Trailer from '../../components/Film/Trailer/Trailer'
 import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
 import PageLoading from '../../components/PageLoading/PageLoading'
+import PersonCard from '../../components/Cards/PersonCard/PersonCard'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -57,7 +58,19 @@ export default function Film2() {
                     />
                 </div>
                 
-                <HorizontalScrollRow title='Top Cast' />
+                <HorizontalScrollRow 
+                    title='Top Cast'
+                    items={results.top_cast}
+                    getKey={(person) => person.id}
+                    renderItem={(person) => (
+                        <PersonCard
+                            tmdbID={person.id}
+                            name={person.name}
+                            role={person.role}
+                            poster={person.poster}
+                        />
+                    )}
+                />
             </div>
         </div>
     )
