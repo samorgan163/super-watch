@@ -1,10 +1,8 @@
 import styles from './HorizontalScrollRow.module.css';
-import ServiceIcon from '../ServiceIcon/ServiceIcon';
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import FilmCard from '../cards/FilmCard';
 
-export default function HorizontalScrollRow({ films, title }) {
+import { useEffect, useRef, useState } from 'react';
+
+export default function HorizontalScrollRow({ title, items, renderItem, getKey }) {
     
     const containerRef = useRef(null);
 
@@ -87,9 +85,9 @@ export default function HorizontalScrollRow({ films, title }) {
                 </svg>
             </button>
             <div className={styles.container} ref={containerRef}>
-                {films?.map((film) => (
-                    <div className={styles.containerItem} key={film?.tmdbid}>
-                        <FilmCard tmdbID={film.tmdbid} title={film.title} poster={film.poster} streaming={film.streaming} />
+                {items?.map((item) => (
+                    <div className={styles.containerItem} key={getKey(item)}>
+                        {renderItem(item)}
                     </div>
                 ))}
             </div>

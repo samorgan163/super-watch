@@ -1,5 +1,5 @@
 import styles from './FilmCard.module.css';
-import ServiceIcon from '../ServiceIcon/ServiceIcon';
+import ServiceIcon from '../../ServiceIcon/ServiceIcon';
 
 import { Link } from 'react-router-dom';
 

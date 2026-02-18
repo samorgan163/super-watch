@@ -2,7 +2,9 @@ import styles from "./Dashboard.module.css";
 import HorizontalScrollFilmGrid from '../../components/HorizontalScrollFilmGrid/HorizontalScrollFilmGrid';
 import { useEffect, useState } from "react";
 import PageLoading from "../../components/PageLoading/PageLoading";
+
 import HorizontalScrollRow from "../../components/HorizontalScrollRow/HorizontalScrollRow";
+import FilmCard from '../../components/Cards/FilmCard/FilmCard'
 
 export default function Dashboard() {
 
@@ -42,10 +44,34 @@ export default function Dashboard() {
     return (
         <>
             <section>
-                <HorizontalScrollRow films={watchlistStreaming} title='Streaming From Your Watchlist' />
+                <HorizontalScrollRow 
+                    title='Streaming From Your Watchlist'
+                    items={watchlistStreaming}
+                    getKey={(film) => film.tmdbid}
+                    renderItem={(film) => (
+                        <FilmCard
+                            tmdbID={film.tmdbid}
+                            title={film.title}
+                            poster={film.poster}
+                            streaming={film.streaming}
+                        />
+                    )}
+                />
             </section>
             <section>
-                <HorizontalScrollRow films={popularFilms} title='Popular Films' />
+                <HorizontalScrollRow 
+                    title='Popular Films'
+                    items={popularFilms}
+                    getKey={(film) => film.tmdbid}
+                    renderItem={(film) => (
+                        <FilmCard
+                            tmdbID={film.tmdbid}
+                            title={film.title}
+                            poster={film.poster}
+                            streaming={film.streaming}
+                        />
+                    )}
+                />
             </section>
         </>
     );
