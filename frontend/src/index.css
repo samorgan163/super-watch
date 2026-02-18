@@ -157,9 +157,42 @@ button:focus-visible {
     --padding-side: clamp(20px, 3vw, 60px);
     --grid-item-gap: 1rem;
 
+	/* Colours */
     --primary-color: #14111D;
     --secondary-color: #1E1B26;
     --accent-color: #71282F;
+
+	--text-color-primary: white;
+
+    /* Text Sizes */
+	--font-size-sm: clamp(0.75rem, 2vw, 1rem);
+    --font-size-md: clamp(0.875rem, 2vw, 1.25rem);
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+}
+
+/* Text Stylings */
+.text-md {
+	font-size: var(--font-size-md);
+}
+.text-sm {
+	font-size: var(--font-size-sm);
+}
+
+.font-regular {
+	font-weight: var(--font-weight-regular);
+}
+.font-bold {
+	font-weight: var(--font-weight-bold);
+}
+
+.text-color-primary {
+	color: var(--text-color-primary);
+}
+.text-color-primary-80 {
+	color: rgba(255, 255, 255, 0.8);
 }
 
 html {

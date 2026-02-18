@@ -100,7 +100,7 @@ exports.getFilmById = async (tmdbId) => {
                 release_date: filmDetails.release_date,
                 trailer: null,
                 poster: `https://image.tmdb.org/t/p/w400${filmDetails.poster_path}`,
-                banner: `https://image.tmdb.org/t/p/w400${filmDetails.backdrop_path}`,
+                banner: `https://image.tmdb.org/t/p/w1280${filmDetails.backdrop_path}`,
                 ratings: [],
                 streaming: [],
                 cinema: [],
@@ -115,7 +115,7 @@ exports.getFilmById = async (tmdbId) => {
                                 role: person.character,
                                 poster: person.profile_path
                             })),
-                logo: `https://image.tmdb.org/t/p/w400${filmDetails.images.logos[0].file_path}`,
+                logo: `https://image.tmdb.org/t/p/w500${filmDetails.images.logos[0].file_path}`,
             }
 
             // filter streaming providers
