@@ -1,11 +1,36 @@
 import styles from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { IoSearch } from "react-icons/io5";
+import { useEffect, useState } from 'react';
+import { remove } from 'cheerio/lib/api/manipulation';
 
 export default function Navbar() {
 
+    const [ hasUserScrolled, setHasUserScrolled ] = useState(false);
+
+    useEffect(() => {
+        
+        const scrollHandler = () => {
+            setHasUserScrolled(window.scrollY > 0);
+        }
+
+        window.addEventListener('scroll', scrollHandler);
+
+        return () => window.removeEventListener('scroll', scrollHandler);
+
+    }, []);
+
     return (
-        <nav className={styles.navbar}>
+        <nav className={`
+            ${styles.navbar}
+            ${
+                hasUserScrolled 
+                ?
+                styles.navbarFullOpacity
+                :
+                styles.navbarFadedOpacity
+            }
+        `}>
             <div className={styles.left}>
                 <h1 className={styles.logo}>SuperWatch</h1>
                 <ul className={styles.primary} aria-label="Main navigation">

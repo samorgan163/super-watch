@@ -159,6 +159,8 @@ button:focus-visible {
 
 	/* Colours */
     --primary-color: #14111D;
+	--primary-color-40: #14111d5f;
+
     --secondary-color: #1E1B26;
     --accent-color: #71282F;
 
