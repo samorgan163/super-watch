@@ -1,0 +1,45 @@
+.metaDataWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+}
+
+.logoWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/1;
+    margin-bottom: 32px;
+}
+
+.logoWrapper img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+
+    position: absolute;
+    bottom: 0;
+}
+
+.right {
+}
+
+@media (min-width: 768px) {
+    .metaDataWrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: end;
+    }
+    .left {
+        max-width: 60%;
+    }
+    .right {
+        text-align: right;
+    }
+    .logoWrapper {
+        max-width: 60%;
+    }
+}
