@@ -1,6 +1,6 @@
 import MetaData from '../../components/Film/MetaData/MetaData'
 import Trailer from '../../components/Film/Trailer/Trailer'
-import HorizontalFilmScroll2 from '../../components/HorizontalFilmScroll2/HorizontalScrollFilm2'
+import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
 import PageLoading from '../../components/PageLoading/PageLoading'
 
 import { useState, useEffect } from 'react'
@@ -57,7 +57,7 @@ export default function Film2() {
                     />
                 </div>
                 
-                <HorizontalFilmScroll2 title='Top Cast' />
+                <HorizontalScrollRow title='Top Cast' />
             </div>
         </div>
     )

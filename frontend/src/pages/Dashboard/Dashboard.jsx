@@ -2,7 +2,7 @@ import styles from "./Dashboard.module.css";
 import HorizontalScrollFilmGrid from '../../components/HorizontalScrollFilmGrid/HorizontalScrollFilmGrid';
 import { useEffect, useState } from "react";
 import PageLoading from "../../components/PageLoading/PageLoading";
-import HorizontalScrollFilm2 from "../../components/HorizontalFilmScroll2/HorizontalScrollFilm2";
+import HorizontalScrollRow from "../../components/HorizontalScrollRow/HorizontalScrollRow";
 
 export default function Dashboard() {
 
@@ -42,10 +42,10 @@ export default function Dashboard() {
     return (
         <>
             <section>
-                <HorizontalScrollFilm2 films={watchlistStreaming} title='Streaming From Your Watchlist' />
+                <HorizontalScrollRow films={watchlistStreaming} title='Streaming From Your Watchlist' />
             </section>
             <section>
-                <HorizontalScrollFilm2 films={popularFilms} title='Popular Films' />
+                <HorizontalScrollRow films={popularFilms} title='Popular Films' />
             </section>
         </>
     );

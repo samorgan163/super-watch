@@ -1,10 +1,10 @@
-import styles from './HorizontalScrollFilm2.module.css';
+import styles from './HorizontalScrollRow.module.css';
 import ServiceIcon from '../ServiceIcon/ServiceIcon';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FilmCard from '../cards/FilmCard';
 
-export default function HorizontalScrollFilm2({ films, title }) {
+export default function HorizontalScrollRow({ films, title }) {
     
     const containerRef = useRef(null);
 
