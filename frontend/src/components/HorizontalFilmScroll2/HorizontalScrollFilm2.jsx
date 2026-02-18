@@ -2,6 +2,7 @@ import styles from './HorizontalScrollFilm2.module.css';
 import ServiceIcon from '../ServiceIcon/ServiceIcon';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import FilmCard from '../cards/FilmCard';
 
 export default function HorizontalScrollFilm2({ films, title }) {
     
@@ -87,18 +88,8 @@ export default function HorizontalScrollFilm2({ films, title }) {
             </button>
             <div className={styles.container} ref={containerRef}>
                 {films?.map((film) => (
-                    <div className={styles.film} key={film?.tmdbid}>
-                        <Link aria-label={film?.title} to={`/film/${film?.tmdbid}`}>
-                            <div className={styles.filmImageWrapper}>
-                                <div className={styles.serviceWrapper}>
-                                    {film.streaming?.[0] && 
-                                        <ServiceIcon className={styles.service} service={film.streaming[0]} />
-                                    }
-                                </div>
-                                <img loading="lazy" src={film?.poster} alt="" />
-                            </div>
-                        </Link>
-                        <p>{film?.title}</p>
+                    <div className={styles.containerItem} key={film?.tmdbid}>
+                        <FilmCard tmdbID={film.tmdbid} title={film.title} poster={film.poster} streaming={film.streaming} />
                     </div>
                 ))}
             </div>
