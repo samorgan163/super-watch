@@ -81,7 +81,9 @@ exports.getFilmById = async (tmdbId) => {
     const film = await _withRetry(async () => {
         console.log('tmdb api pull request');
         try {
-            const response = await tmdb.get(`/movie/${tmdbId}?append_to_response=watch/providers,credits`);
+            const response = await tmdb.get(
+                `/movie/${tmdbId}?append_to_response=watch/providers,credits,images&include_image_language=en-US`
+            );
             const filmDetails = response.data;
 
             // create film object
@@ -112,7 +114,8 @@ exports.getFilmById = async (tmdbId) => {
                                 name: person.name,
                                 role: person.character,
                                 poster: person.profile_path
-                            }))
+                            })),
+                logo: `https://image.tmdb.org/t/p/w400${filmDetails.images.logos[0].file_path}`,
             }
 
             // filter streaming providers

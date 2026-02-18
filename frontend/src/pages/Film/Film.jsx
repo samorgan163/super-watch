@@ -32,6 +32,7 @@ export default function Film() {
                 if (response.ok) {
                     const result = await response.json();
                     setResults(result);
+                    console.log(result);
                 }
 
             } catch {

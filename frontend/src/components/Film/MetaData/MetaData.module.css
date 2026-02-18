@@ -6,13 +6,15 @@
 }
 
 .left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .logoWrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 2/1;
-    margin-bottom: 32px;
 }
 
 .logoWrapper img {
@@ -22,6 +24,7 @@
 
     position: absolute;
     bottom: 0;
+    left: 0;
 }
 
 .right {

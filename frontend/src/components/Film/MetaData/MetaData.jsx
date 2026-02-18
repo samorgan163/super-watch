@@ -1,23 +1,26 @@
 import styles from './MetaData.module.css'
 
-export default function MetaData() {
+export default function MetaData({ logo, releaseDate, runtime, overview, director }) {
 
     return (
         <div className={styles.metaDataWrapper}>
             <div className={styles.left}>
                 <div className={styles.logoWrapper}>
-                    <img src="./src/assets/marty-logo.png" alt="" />
+                    <img src={logo} alt="" />
                 </div>
-                <p>2025 - 15 - 122mins</p>
+                <p>
+                    {releaseDate?.slice(0,4)}
+                    &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                    Age&nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                    {runtime} mins
+                </p>
                 <p className={styles.overview}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Iste, autem eum, incidunt facilis maxime quasi ea corrupti beatae illo magnam repellendus, 
-                    quod odit itaque. Nam, dolorem temporibus. Odio, repudiandae impedit.
+                    {overview}
                 </p>
             </div>
             <div className={styles.right}>
                 <p>Directed By</p>
-                <p>Sam Raimi</p>
+                <p>{director}</p>
             </div>
             
         </div>
