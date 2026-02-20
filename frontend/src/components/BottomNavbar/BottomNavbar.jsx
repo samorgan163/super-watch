@@ -1,13 +1,15 @@
 import styles from './BottomNavbar.module.css';
 import { Link } from "react-router-dom";
 
+import { IoHomeSharp } from "react-icons/io5";
+
 import watchlistIcon from '../../assets/icons/watchlist.png';
 
 const navItems = [
-	{ label: 'Dashboard', href: '/', icon: watchlistIcon },
-	{ label: 'Add', href: '/search', icon: watchlistIcon },
-	{ label: 'Watchlist', href: '/watchlist', icon: watchlistIcon },
-	{ label: 'Profile', href: '/profile', icon: watchlistIcon },
+	{ label: 'Dashboard', href: '/', icon: <IoHomeSharp /> },
+	{ label: 'Add', href: '/search', icon: <IoHomeSharp /> },
+	{ label: 'Watchlist', href: '/watchlist', icon: <IoHomeSharp /> },
+	{ label: 'Profile', href: '/profile', icon: <IoHomeSharp /> },
 ];
 
 function BottomNavbar() {
@@ -16,7 +18,9 @@ function BottomNavbar() {
 			<div className={styles.navBottom}>
 				{navItems.map((item) => (
 					<Link key={item.label} to={item.href} aria-label={item.label}>
-						<img src={item.icon} alt={`${item.label} icon`} />
+						
+							{item.icon}
+						
 						<p>{item.label}</p>
 					</Link>
 				))}

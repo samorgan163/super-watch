@@ -2,7 +2,6 @@ import styles from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from 'react';
-import { remove } from 'cheerio/lib/api/manipulation';
 
 export default function Navbar() {
 
