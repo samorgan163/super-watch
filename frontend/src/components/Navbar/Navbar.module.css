@@ -9,14 +9,18 @@
     height: var(--desktop-nav-height);
     z-index: 100;
 
-    transition: background-color 0.1s;
+    transition: background-color 0.5s, border-bottom 0.5s, backdrop-filter 0.5s;
 }
 
 .navbarFullOpacity {
-    background-color: var(--primary-color);
+    background: rgba(25, 25, 25, 0.9);
+    border-bottom: 0.5px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
 }
 .navbarFadedOpacity {
-    background-color: var(--primary-color-40);
+    background-color: none;
+    border-bottom: 0.5px solid transparent;
+    backdrop-filter: blur(0px);
 }
 
 .left {

@@ -26,6 +26,6 @@
 
 @media (min-width: 768px) {
     .trailerWrapper::before {
-        background: linear-gradient(to top, #1E1B26 0%, #1e1b2600 100%);
+        background: linear-gradient(to top, var(--secondary-color) 0%, #0e0e0e00 100%);
     }
 }

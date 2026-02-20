@@ -57,7 +57,7 @@ export default function HorizontalScrollRow({ title, items, renderItem, getKey }
 
     return (
         <div className={styles.containerWrapper}>
-            <h2>{title}</h2>
+            <h2 className='text-l font-bold text-color-primary mb-16'>{title}</h2>
             <button 
                 onClick={() => scroll('right')} 
                 className={`${styles.scrollBtn} ${styles.scrollBtnRight}`}
