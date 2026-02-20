@@ -13,15 +13,15 @@ export default function MetaData({ title, logo, poster, releaseDate, runtime, ov
                         <img src={poster} alt="" />
                     </div>
                     <div className={styles.metaData}>
-                        <h2>{title}</h2>
-                        <p className='text-md font-normal text-color-primary' >
+                        <p className='text-l font-bold text-color-primary mb-4'>{title}</p>
+                        <p className='text-xs font-normal text-color-primary mb-16' >
                             {releaseDate?.slice(0,4)}
                             &nbsp;&nbsp;&bull;&nbsp;&nbsp;
                             Age&nbsp;&nbsp;&bull;&nbsp;&nbsp;
                             {runtime} mins
                         </p>
                         <div className={styles.director}>
-                            <p className='text-sm font-regular text-color-primary-80'>From</p>
+                            <p className='text-xs font-regular text-color-primary-80'>From</p>
                             <p className='text-md font-bold text-color-primary' >{director}</p>
                         </div>
                     </div>
