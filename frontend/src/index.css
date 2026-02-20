@@ -166,7 +166,7 @@ button:focus-visible {
 	--gray-700: #3E3E3E;
 	--gray-800: #171717;
 	--gray-800-90: #171717E6;
-    --gray-900: #0E0E0E;
+  --gray-900: #0E0E0E;
 
 	--color-bg: var(--gray-900);
 

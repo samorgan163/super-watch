@@ -2,7 +2,7 @@
     padding-top: var(--mobile-section-spacing);
 }
 .mobilePaddingBottom {
-    padding-bottom: var(--mobile-nav-bottom-height);
+    padding-bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom));
 }
 
 .desktopPaddingTop {
