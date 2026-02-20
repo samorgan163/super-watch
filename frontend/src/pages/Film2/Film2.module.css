@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     /* TODO: this is a quick fix to push the page back up due to the padding on <main> */
-    margin-top: calc(-1 * (var(--desktop-nav-height) + var(--desktop-section-spacing)));
+    /*margin-top: calc(-1 * (var(--desktop-nav-height) + var(--desktop-section-spacing)));*/
 }
 
 .contentWrapper {

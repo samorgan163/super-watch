@@ -152,6 +152,7 @@ button:focus-visible {
     --desktop-nav-height: 4.2rem;
     --desktop-section-spacing: 2rem;
 
+    --mobile-nav-bottom-height: 60px;
     --mobile-padding: 20px;
     --mobile-section-spacing: 2rem;
 
@@ -268,18 +269,8 @@ body {
     background-color: var(--color-bg);
 }
 
-main {
-    padding-top: calc(56px + var(--mobile-section-spacing)); /* To appear below nav bar */
-    padding-bottom: 80px; /* To appear above bottom nav bar */
-    /*margin-top: 32px;*/
-    position: relative;
-}
 
-@media (min-width: 768px) {
-    main {
-      padding-top: calc(var(--desktop-nav-height) + var(--desktop-section-spacing));
-    }
-}
+
 
 section {
 	  margin-bottom: var(--desktop-section-spacing);

@@ -1,0 +1,10 @@
+.mobilePaddingTop {
+    padding-top: var(--mobile-section-spacing);
+}
+.mobilePaddingBottom {
+    padding-bottom: var(--mobile-nav-bottom-height);
+}
+
+.desktopPaddingTop {
+    padding-top: calc(var(--desktop-nav-height) + var(--desktop-section-spacing));
+}

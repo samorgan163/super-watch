@@ -11,7 +11,7 @@
 
 .navBottom {
   display: flex;
-  height: 60px;
+  height: var(--mobile-nav-bottom-height);
 }
 
 .navBottom a {
