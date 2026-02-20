@@ -164,18 +164,19 @@ button:focus-visible {
 	--gray-0: #fff;
 	--gray-700: #3E3E3E;
 	--gray-800: #171717;
+	--gray-800-90: #171717E6;
     --gray-900: #0E0E0E;
 
 	--color-bg: var(--gray-900);
 
 	--color-text-primary: var(--gray-0);
 
-	--color-border: /*var(--gray-700);*/ red;
-	--color-border-hover: /*var(--gray-0);*/ blue;
+	--color-border: var(--gray-700);
+	--color-border-hover: var(--gray-0);
 	
 	--color-card-bg: var(--gray-800);
 
-	--color-nav-bg: var(--gray-800);
+	--color-nav-bg: var(--gray-800-90);
 
     /* Text Sizes */
     --font-size-xxs: 0.6875rem;
