@@ -27,7 +27,12 @@ function BottomNavbar() {
 		<nav className={styles.navBottomWrapper}>
 			<div className={styles.navBottom}>
 				
-					<NavLink key='Dashboard' to='/' end aria-label='Dashboard'>
+					<NavLink 
+						key='Dashboard' 
+						to='/' end 
+						aria-label='Dashboard'
+						className={({ isActive }) => isActive ? styles.active : ''}
+					>
 						{({ isActive }) => (
 							<>
 								{isActive ? <IoHomeSharp /> : <IoHomeOutline />}
@@ -35,7 +40,12 @@ function BottomNavbar() {
 							</>
 						)}
 					</NavLink>
-					<NavLink key='Search' to='/search' aria-label='Search'>
+					<NavLink 
+						key='Search' 
+						to='/search' 
+						aria-label='Search'
+						className={({ isActive }) => isActive ? styles.active : ''}
+					>
 						{({ isActive }) => (
 							<>
 								{isActive ? <IoSearchSharp /> : <IoSearchOutline />}
@@ -43,7 +53,12 @@ function BottomNavbar() {
 							</>
 						)}
 					</NavLink>
-					<NavLink key='Watchlist' to='/watchlist' aria-label='Watchlist'>
+					<NavLink 
+						key='Watchlist' 
+						to='/watchlist' 
+						aria-label='Watchlist'
+						className={({ isActive }) => isActive ? styles.active : ''}
+					>
 						{({ isActive }) => (
 							<>
 								{isActive ? <IoDocumentText /> : <IoDocumentTextOutline />}
@@ -51,7 +66,12 @@ function BottomNavbar() {
 							</>
 						)}
 					</NavLink>
-					<NavLink key='Profile' to='/profile' aria-label='Profile'>
+					<NavLink 
+						key='Profile' 
+						to='/profile' 
+						aria-label='Profile'
+						className={({ isActive }) => isActive ? styles.active : ''}
+					>
 						{({ isActive }) => (
 							<>
 								{isActive ? <IoPersonSharp /> : <IoPersonOutline />}
