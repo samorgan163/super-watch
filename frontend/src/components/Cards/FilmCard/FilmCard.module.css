@@ -12,7 +12,12 @@
     object-position: center;
 
     border-radius: var(--card-border-radius);
-    border: 1px solid #363636;
+    border: 1px solid var(--color-border);
+
+    transition: border 0.25s;
+}
+.film:hover img {
+    border: 1px solid var(--color-border-hover);
 }
 
 .film p {

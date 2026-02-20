@@ -2,9 +2,9 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: rgba(25, 25, 25, 0.9);
+  background: var(--color-nav-bg);
   backdrop-filter: blur(20px);
-  border-top: 0.5px solid rgba(255,255,255,0.2);
+  border-top: 0.5px solid var(--color-border);
   padding-bottom: env(safe-area-inset-bottom); /* safe zone for home buton on mobile */
   z-index: 100;
 }

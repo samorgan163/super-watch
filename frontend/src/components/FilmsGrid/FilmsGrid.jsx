@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './FilmsGrid.module.css';
+import FilmCard from '../Cards/FilmCard/FilmCard';
 
 import ServiceIcon from '../ServiceIcon/ServiceIcon';
 
@@ -12,14 +13,13 @@ export default function FilmsGrid({ title, films, fadeOpacity = false }) {
                 {films.map((film) => (
                     <div className={ fadeOpacity ? `${styles.film} ${styles.fade}` : styles.film}>
                         <Link key={film.tmdbid} to={`/film/${film.tmdbid}`} aria-label={film.title}>
-                            <div className={styles.filmImageWrapper}>
-                                <div className={styles.serviceWrapper}>
-                                    {(film.streaming && film.streaming.length > 0) ? <ServiceIcon service={film.streaming[0]} /> : ''}
-                                </div>
-                                <img src={film.poster} alt="" />
-                            </div>
+                            <FilmCard 
+                                tmdbID={film.tmdbid}
+                                title={film.title}
+                                poster={film.poster}
+                                streaming={film.streaming}
+                            />
                         </Link>
-                        <p>{film.title}</p>
                     </div>
                 ))}
             </div>

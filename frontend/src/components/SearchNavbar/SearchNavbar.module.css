@@ -11,8 +11,8 @@
     padding-left: 4rem;
     padding-right: 4rem;
 
-    background-color: #18161E;
-    border: 1px solid #2F2D34;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
 
     font-size: 1.2rem;
     color: white;
@@ -22,12 +22,12 @@
 }
 
 .searchBarInput:hover {
-    border: 1px solid white;
+    border: 1px solid var(--color-border-hover);
 }
 
 .searchBarInput:focus {
     outline: none;
-    border: 1px solid white;
+    border: 1px solid var(--color-border-hover);
 }
 
 .searchIconContainer {

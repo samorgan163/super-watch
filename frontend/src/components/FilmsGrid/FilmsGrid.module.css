@@ -10,34 +10,8 @@
     gap: var(--grid-item-gap);
 }
 
-.film {}
-
-.filmImageWrapper {
-    position: relative;
-    aspect-ratio: 2 / 3;
-    display: block;
-}
-
-.film img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.film p {
-    user-select: none;
-}
-
 .fade {
     opacity: 0.5;
-}
-
-.serviceWrapper {
-    position: absolute;
-    left: 12px;
-    bottom: 12px;
 }
 
 @media (min-width: 576px) {

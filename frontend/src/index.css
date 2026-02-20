@@ -161,11 +161,21 @@ button:focus-visible {
 	--card-border-radius: 8px;
 
 	/* Colours */
-    --primary-color: #14111D;
-	  --primary-color-40: #14111d5f;
-    --secondary-color: #0E0E0E;
-    --accent-color: #71282F;
-	--text-color-primary: white;
+	--gray-0: #fff;
+	--gray-700: #3E3E3E;
+	--gray-800: #171717;
+    --gray-900: #0E0E0E;
+
+	--color-bg: var(--gray-900);
+
+	--color-text-primary: var(--gray-0);
+
+	--color-border: /*var(--gray-700);*/ red;
+	--color-border-hover: /*var(--gray-0);*/ blue;
+	
+	--color-card-bg: var(--gray-800);
+
+	--color-nav-bg: var(--gray-800);
 
     /* Text Sizes */
     --font-size-xxs: 0.6875rem;
@@ -240,7 +250,7 @@ button:focus-visible {
 }
 
 .text-color-primary {
-	color: var(--text-color-primary);
+	color: var(--color-text-primary);
 }
 .text-color-primary-80 {
 	color: rgba(255, 255, 255, 0.8);
@@ -254,7 +264,7 @@ html {
 
 body {
     width: 100%;
-    background-color: var(--secondary-color);
+    background-color: var(--color-bg);
 }
 
 main {
