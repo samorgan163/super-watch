@@ -38,8 +38,8 @@ export default function MetaData({ title, logo, poster, releaseDate, runtime, ov
             </div>
             <div className={styles.right}>
                 <div className={styles.directorDesktop}>
-                    <p className='text-sm font-regular text-color-primary-80'>Directed By</p>
-                    <p className='text-md font-bold text-color-primary' >{director}</p>
+                    <p className='text-sm font-regular text-color-primary-80 mb-8'>Directed By</p>
+                    <p className='text-l font-bold text-color-primary' >{director}</p>
                 </div>
             </div>
             
