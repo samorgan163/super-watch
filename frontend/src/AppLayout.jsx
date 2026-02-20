@@ -12,7 +12,7 @@ function AppLayout({ title, children }) {
 		<>
 			{isMobileLayout ? (
 				<>
-					<TopNavbar />
+					{/*<TopNavbar />*/}
 					<main>{children}</main>
 					<BottomNavbar />
 				</>

@@ -168,7 +168,7 @@ button:focus-visible {
 
     /* Text Sizes */
 	--font-size-sm: clamp(0.75rem, 2vw, 1rem);
-    --font-size-md: clamp(0.875rem, 2vw, 1.25rem);
+    --font-size-md: clamp(1rem, 2vw, 1.25rem);
 
     --font-weight-regular: 400;
     --font-weight-medium: 500;
@@ -233,12 +233,5 @@ h2 {
     font-size: 24px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-p {
-    font-size: 1rem;
-    font-weight: 400;
     color: white;
 }

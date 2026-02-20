@@ -1,6 +1,6 @@
 import styles from './MetaData.module.css'
 
-export default function MetaData({ logo, releaseDate, runtime, overview, director }) {
+export default function MetaData({ title, logo, poster, releaseDate, runtime, overview, director }) {
 
     return (
         <div className={styles.metaDataWrapper}>
@@ -8,7 +8,25 @@ export default function MetaData({ logo, releaseDate, runtime, overview, directo
                 <div className={styles.logoWrapper}>
                     <img src={logo} alt="" />
                 </div>
-                <p className='text-md font-bold text-color-primary' >
+                <div className={styles.mobileMetaData}>
+                    <div className={styles.posterWrapper}>
+                        <img src={poster} alt="" />
+                    </div>
+                    <div className={styles.metaData}>
+                        <h2>{title}</h2>
+                        <p className='text-md font-normal text-color-primary' >
+                            {releaseDate?.slice(0,4)}
+                            &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                            Age&nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                            {runtime} mins
+                        </p>
+                        <div className={styles.director}>
+                            <p className='text-sm font-regular text-color-primary-80'>From</p>
+                            <p className='text-md font-bold text-color-primary' >{director}</p>
+                        </div>
+                    </div>
+                </div>
+                <p className={`${styles.releaseDetailsLarge} text-md font-bold text-color-primary`} >
                     {releaseDate?.slice(0,4)}
                     &nbsp;&nbsp;&bull;&nbsp;&nbsp;
                     Age&nbsp;&nbsp;&bull;&nbsp;&nbsp;
@@ -19,8 +37,10 @@ export default function MetaData({ logo, releaseDate, runtime, overview, directo
                 </p>
             </div>
             <div className={styles.right}>
-                <p className='text-sm font-regular text-color-primary-80'>Directed By</p>
-                <p className='text-md font-bold text-color-primary' >{director}</p>
+                <div className={styles.directorDesktop}>
+                    <p className='text-sm font-regular text-color-primary-80'>Directed By</p>
+                    <p className='text-md font-bold text-color-primary' >{director}</p>
+                </div>
             </div>
             
         </div>

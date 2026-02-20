@@ -51,10 +51,12 @@ export default function Film2() {
                 <div className={`${styles.metaDataWrapper} section-with-padding`}>
                     <MetaData 
                         logo={results?.logo}
+                        poster={results?.poster}
                         releaseDate={results.release_date}
                         runtime={results.runtime}
                         overview={results.overview}
                         director={results.director?.[0].name}
+                        title={results?.title}
                     />
                 </div>
                 
