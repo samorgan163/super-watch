@@ -281,16 +281,15 @@ section {
 .form-input-text {
     height: 46px;
     width: 100%;
-    border-radius: 10px;
+    border-radius: var(--card-border-radius);
     padding-left: 4rem;
     padding-right: 4rem;
 
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
 
-    font-size: 1.2rem;
-    color: white;
-    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--color-text-primary);
 
     transition: border 0.25s;
 }
