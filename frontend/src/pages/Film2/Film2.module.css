@@ -11,20 +11,27 @@
 .toolbarWrapper {
     position: fixed;
     left: 0;
-    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom) + 8px); /* TODO: magic number */
     width: 100%;
+
+    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom)); /* TODO: magic number */
     z-index: 10;
-    padding: 0 calc(var(--padding-side) + 6px); /* to push in, not to align with other items */
-    margin-top: 20px;
+    padding: 12px calc(var(--padding-side) + 6px); /* to push in, not to align with other items */
+
+    background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
 @media (min-width: 768px) {
     .toolbarWrapper {
-        max-width: 400px;
+        margin-top: 20px;
         position: relative;
         bottom: 0;
-        width: auto;
+        width: fit-content;
         padding: 0;
+        background: none;
     }
 }
 

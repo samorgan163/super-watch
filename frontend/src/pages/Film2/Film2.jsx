@@ -3,7 +3,9 @@ import Trailer from '../../components/Film/Trailer/Trailer'
 import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
 import PageLoading from '../../components/PageLoading/PageLoading'
 import PersonCard from '../../components/Cards/PersonCard/PersonCard'
-import ToolBar from '../../components/Film/ToolBar/ToolBar'
+
+import Streaming from '../../components/Film/Streaming/Streaming'
+import WatchlistButton from '../../components/WatchlistButton/WatchlistButton'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -60,7 +62,8 @@ export default function Film2() {
                         title={results?.title}
                     />
                     <div className={styles.toolbarWrapper}>
-                        <ToolBar />
+                        <Streaming service={results?.streaming?.[0]}/>
+                        <WatchlistButton tmdbId={results?.tmdbid}/>
                     </div>
                    
                 </section>
