@@ -70,13 +70,13 @@ function SearchResults({ query }) {
         );
 
         if (loaderRef.current) {
-        observer.observe(loaderRef.current);
+            observer.observe(loaderRef.current);
         }
 
         return () => {
-        if (loaderRef.current) {
-            observer.unobserve(loaderRef.current);
-        }
+            if (loaderRef.current) {
+                observer.unobserve(loaderRef.current);
+            }
         };
     }, [hasMore]);
 
@@ -123,9 +123,9 @@ function SearchResults({ query }) {
                         }
                     </div>
                     <div className={styles.filmMetadataWrapper}>
-                        <h3>{film.title}</h3>
-                        <p className={styles.releaseYear}>{film?.release_date.slice(0,4)}</p>
-                        <p className={styles.director}>Director Name</p>
+                        <h2 className='font-bold text-md text-color-primary'>{film.title}</h2>
+                        <p className='font-regular text-s text-color-primary'>{film?.release_date.slice(0,4)}</p>
+                        <p className='font-regular text-s text-color-primary'>Director Name</p>
                     </div>
                 </Link>
             ))}

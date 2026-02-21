@@ -53,10 +53,10 @@
 
 .filmMetadataWrapper {
     padding: 0 12px;
-    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 6px;
 }
 
 @media (min-width: 768px) {
