@@ -43,7 +43,7 @@ export default function Film2() {
         }
 
         getResults();
-    }, []);
+    }, [ tmdbId ]);
 
     if (loading) return <PageLoading />;
 
