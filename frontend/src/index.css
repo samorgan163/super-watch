@@ -269,13 +269,35 @@ body {
     background-color: var(--color-bg);
 }
 
-
-
-
 section {
 	  margin-bottom: var(--desktop-section-spacing);
 }
 
 .section-with-padding {
 	  padding: 0 var(--padding-side);
+}
+
+/* Text form input */
+.form-input-text {
+    height: 46px;
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Inter', sans-serif;
+
+    transition: border 0.25s;
+}
+.form-input-text:hover {
+    border: 1px solid var(--color-border-hover);
+}
+.form-input-text:focus {
+    outline: none;
+    border: 1px solid var(--color-border-hover);
 }

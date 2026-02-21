@@ -59,7 +59,7 @@ function SearchNavbar({ onSearchChange }) {
                     ref={searchBar}
                     enterkeyhint="search"
                     type="text"
-                    className={styles.searchBarInput}
+                    className='form-input-text'
                     name="film-to-search"
                     id="search-bar"
                     placeholder="Add to Watchlist..."
