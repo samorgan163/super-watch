@@ -3,6 +3,7 @@ import Trailer from '../../components/Film/Trailer/Trailer'
 import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
 import PageLoading from '../../components/PageLoading/PageLoading'
 import PersonCard from '../../components/Cards/PersonCard/PersonCard'
+import ToolBar from '../../components/Film/ToolBar/ToolBar'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -58,6 +59,10 @@ export default function Film2() {
                         director={results.director?.[0].name}
                         title={results?.title}
                     />
+                    <div className={styles.toolbarWrapper}>
+                        <ToolBar />
+                    </div>
+                   
                 </section>
                 
                 <section>

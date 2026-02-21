@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+
+    height: 3.2rem;
+    padding: 0 2rem;
+
+    gap: 1rem;
+
+    border-radius: var(--card-border-radius);
+}

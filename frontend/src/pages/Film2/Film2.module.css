@@ -8,6 +8,26 @@
     width: 100%;
 }
 
+.toolbarWrapper {
+    position: fixed;
+    left: 0;
+    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom) + 8px); /* TODO: magic number */
+    width: 100%;
+    z-index: 10;
+    padding: 0 calc(var(--padding-side) + 6px); /* to push in, not to align with other items */
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .toolbarWrapper {
+        max-width: 400px;
+        position: relative;
+        bottom: 0;
+        width: auto;
+        padding: 0;
+    }
+}
+
 @media (min-width: 768px) and (max-aspect-ratio: 16/9) {
     .contentWrapper {
         position: relative;

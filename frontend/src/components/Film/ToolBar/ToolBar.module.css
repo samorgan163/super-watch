@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.streamingContainer {
+    flex-grow: 1;
+}
+
+.watchlistButtonContainer {
+    flex-shrink: 0;
+}
