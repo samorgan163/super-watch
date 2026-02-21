@@ -27,17 +27,19 @@ function Login() {
     }
 
     return (
-        <section className={styles.loginContainer}>
+        <div className={styles.loginContainer}>
             <div className={styles.loginWrapper}>
                 <h2>Login</h2>
                 <form className={styles.loginForm} onSubmit={handleSubmit}>
                     <input
+                        className='form-input-text'
                         placeholder="Username"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
 
                     <input
+                        className='form-input-text'
                         type="password"
                         placeholder="Password"
                         value={password}
@@ -49,7 +51,7 @@ function Login() {
                     {error && <p>{error}</p>}
                 </form>
             </div>
-        </section>
+        </div>
     );
 
 }
