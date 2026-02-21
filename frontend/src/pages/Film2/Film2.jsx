@@ -48,7 +48,7 @@ export default function Film2() {
         <div className={styles.filmWrapper}>
             <Trailer trailerImageURL={results?.banner} />
             <div className={styles.contentWrapper}>
-                <div className={`${styles.metaDataWrapper} section-with-padding`}>
+                <section className={`${styles.metaDataWrapper} section-with-padding`}>
                     <MetaData 
                         logo={results?.logo}
                         poster={results?.poster}
@@ -58,21 +58,24 @@ export default function Film2() {
                         director={results.director?.[0].name}
                         title={results?.title}
                     />
-                </div>
+                </section>
                 
-                <HorizontalScrollRow 
-                    title='Top Cast'
-                    items={results.top_cast}
-                    getKey={(person) => person.id}
-                    renderItem={(person) => (
-                        <PersonCard
-                            tmdbID={person.id}
-                            name={person.name}
-                            role={person.role}
-                            poster={person.poster}
-                        />
-                    )}
-                />
+                <section>
+                    <HorizontalScrollRow 
+                        title='Top Cast'
+                        items={results.top_cast}
+                        getKey={(person) => person.id}
+                        renderItem={(person) => (
+                            <PersonCard
+                                tmdbID={person.id}
+                                name={person.name}
+                                role={person.role}
+                                poster={person.poster}
+                            />
+                        )}
+                    />
+                </section>
+               
             </div>
         </div>
     )
