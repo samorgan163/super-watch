@@ -1,17 +1,13 @@
 .searchBarForm {
     width: 100%;
     position: relative;
-    
 }
 
-.searchIconContainer {
+.iconContainer {
     height: 100%;
     width: 4rem;
-    background-color: none;
 
     position: absolute;
-    top: 0;
-    left: 0;
 
     display: flex;
     justify-content: center;
@@ -19,31 +15,27 @@
 }
 
 .searchIcon {
+    left: 0;
+    top: 0;
+}
+
+.searchIcon svg {
     display: block;
     fill: white;
     width: 1.2rem;
     height: 1.2rem;
 }
 
-.clearIconContainer {
-    height: 100%;
-    width: 4rem;
-    background-color: none;
-
-    position: absolute;
-    top: 0;
+.clearIcon {
     right: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 0;
 
     background: none;
     border: none;
     cursor: pointer;
 }
 
-.clearIcon {
+.clearIcon svg {
     display: block;
     fill: white;
     width: 1.2rem;

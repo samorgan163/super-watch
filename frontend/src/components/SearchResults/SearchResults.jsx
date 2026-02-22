@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import { BounceLoader } from "react-spinners";
 
-function SearchResults({ query }) {
+export default function SearchResults({ query }) {
 
     const [results, setResults] = useState([]);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -29,7 +29,7 @@ function SearchResults({ query }) {
             const result = await response.json();
 
             // artificial delay for testing
-            /* await new Promise(resolve => setTimeout(resolve, 2000)); */
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
             setResults(prev =>
                 result.page === 1 ? (result.results || []) : [...prev, ...(result.results || [])]
@@ -63,6 +63,7 @@ function SearchResults({ query }) {
         const observer = new IntersectionObserver(
             entries => {
                 if (entries[0].isIntersecting) {
+                    console.log('intersecting');
                     setPage(prev => prev + 1); // trigger next page
                 }
             },
@@ -113,7 +114,12 @@ function SearchResults({ query }) {
     return (
         <div id="search-results-wrapper" className={styles.SearchResultsWrapper}>
             {results.map((film) => (
-                <Link key={film.id} to={`/film/${film.id}`} aria-label={film.title} className={styles.film}>
+                <Link 
+                    key={film.id} 
+                    to={`/film/${film.id}`} 
+                    aria-label={film.title} 
+                    className={styles.film}
+                >
                     <div className={styles.filmPosterWrapper}>
                         {film.poster_path 
                             ? 
@@ -123,9 +129,15 @@ function SearchResults({ query }) {
                         }
                     </div>
                     <div className={styles.filmMetadataWrapper}>
-                        <h2 className='font-bold text-md text-color-primary'>{film.title}</h2>
-                        <p className='font-regular text-s text-color-primary'>{film?.release_date.slice(0,4)}</p>
-                        <p className='font-regular text-s text-color-primary'>Director Name</p>
+                        <h2 className='font-bold text-md text-color-primary'>
+                            {film?.title || 'Unknown'}
+                        </h2>
+                        <p className='font-regular text-s text-color-primary'>
+                            {film?.release_date?.slice(0,4) || 'Unknown'}
+                        </p>
+                        <p className='font-regular text-s text-color-primary'>
+                            Director Name
+                        </p>
                     </div>
                 </Link>
             ))}
@@ -144,5 +156,3 @@ function SearchResults({ query }) {
         </div>
     );
 }
-
-export default SearchResults;
