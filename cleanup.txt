@@ -1,0 +1,22 @@
+BottomNav, Navbar, PageLoading, TopNavBar, AppLayout
+
+Components:
+    - Cards/FilmCard (DONE)
+    - Cards/PersonCard (DONE)
+    - Film/MetaData
+    - Film/Streaming
+    - Film/Trailer
+    - FilmsGrid
+    - HorizontalScrollRow
+    - SearchNavBar
+    - SearchResults
+    - ServiceIcon
+    - WatchlistButton
+
+Pages: 
+    - Dashboard
+    - Film2
+    - Login
+    - Search
+    - UserProfile
+    - Watchlist

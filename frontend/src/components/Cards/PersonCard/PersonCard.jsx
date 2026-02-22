@@ -6,12 +6,22 @@ export default function FilmCard({ tmdbID, name, role, poster }) {
 
     return (
         <div className={styles.person}>
-            <Link aria-label={name || 'Unknown'} to={`/`}>
+            <Link 
+                aria-label={name ? `Link to ${name} page` : 'Link to person page'}
+                to={`#`}
+            >
                 <div className={styles.personImageWrapper}>
-                    <img loading="lazy" src={poster} alt="" />
+                    <img 
+                        loading="lazy" 
+                        src={poster} 
+                        alt={name ? `Picture of ${name}` : 'Picture of person'}
+                        className='media-img media-img-border'
+                    />
                 </div>
             </Link>
-            <p>{name || 'Unknown'}</p>
+            <p className='text-color-primary font-regular text-md'>
+                {name ? name : 'Unknown'}
+            </p>
         </div>
     )
 
