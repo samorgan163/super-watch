@@ -77,7 +77,7 @@
         height: 100%;
         flex-direction: row;
         justify-content: space-between;
-        align-items: end;
+        align-items: flex-end;
     }
     .left {
         max-width: 60%;

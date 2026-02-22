@@ -41,10 +41,10 @@ function Watchlist() {
 
     return (
         <>
-            <section className="section-with-padding">
+            <section className="section-with-mb section-with-px">
                 <FilmsGrid films={watchlistStreaming || []} title="Currently Streaming"/>
             </section>
-            <section className="section-with-padding">
+            <section className="section-with-mb section-with-px">
                 <FilmsGrid films={watchlistUnavailable || []} fadeOpacity={true} title="Not Available" />
             </section>
         </>

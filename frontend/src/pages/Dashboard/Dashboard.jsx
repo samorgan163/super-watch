@@ -43,7 +43,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <section>
+            <section className="section-with-mb">
                 <HorizontalScrollRow 
                     title='Streaming From Your Watchlist'
                     items={watchlistStreaming}

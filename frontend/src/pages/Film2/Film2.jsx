@@ -51,7 +51,7 @@ export default function Film2() {
         <div className={styles.filmWrapper}>
             <Trailer trailerImageURL={results?.banner} />
             <div className={styles.contentWrapper}>
-                <section className={`${styles.metaDataWrapper} section-with-padding`}>
+                <section className={`${styles.metaDataWrapper} section-with-px section-with-mb`}>
                     <MetaData 
                         logo={results?.logo}
                         poster={results?.poster}
@@ -68,7 +68,7 @@ export default function Film2() {
                    
                 </section>
                 
-                <section>
+                <section className='section-with-mb'>
                     <HorizontalScrollRow 
                         title='Top Cast'
                         items={results.top_cast}

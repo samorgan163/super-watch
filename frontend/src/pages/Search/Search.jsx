@@ -26,10 +26,10 @@ function Search() {
 
     return (
         <>
-            <section className='section-with-padding'>
+            <section className='section-with-px section-with-mb'>
                 <SearchNavbar onSearchChange={setSearchTerm} />
             </section>
-            <section className='section-with-padding'>
+            <section className='section-with-px section-with-mb'>
                 {query && <SearchResults query={query} />}
             </section>
         </>

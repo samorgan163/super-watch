@@ -148,13 +148,9 @@ button:focus-visible {
 
 :root {
 	/* Layout */
-    --desktop-padding: 60px;
     --desktop-nav-height: 4.2rem;
-    --desktop-section-spacing: 2rem;
 
     --mobile-nav-bottom-height: 60px;
-    --mobile-padding: 20px;
-    --mobile-section-spacing: 2rem;
 
     --padding-side: clamp(20px, 3vw, 60px);
     --grid-item-gap: 1rem;
@@ -166,7 +162,7 @@ button:focus-visible {
 	--gray-700: #3E3E3E;
 	--gray-800: #171717;
 	--gray-800-90: #171717E6;
-  --gray-900: #0E0E0E;
+  	--gray-900: #0E0E0E;
 
 	--color-bg: var(--gray-900);
 
@@ -192,7 +188,32 @@ button:focus-visible {
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
+
+    /* Spacings */
+    --space-s: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lm: 24px;
+    --space-l: 32px;
+
+	--section-spacing: var(--space-l);
 }
+
+.section-with-mb {
+	margin-bottom: var(--section-spacing);
+}
+.section-with-px {
+	padding: 0 var(--padding-side);
+}
+
+
+
+
+
+
+
+
+
 
 /* Text sizes classes */
 .text-xxs {
@@ -267,14 +288,6 @@ html {
 body {
     width: 100%;
     background-color: var(--color-bg);
-}
-
-section {
-	  margin-bottom: var(--desktop-section-spacing);
-}
-
-.section-with-padding {
-	  padding: 0 var(--padding-side);
 }
 
 /* Text form input */
