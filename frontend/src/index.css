@@ -202,6 +202,29 @@ button:focus-visible {
     --icon-size-s: 32px;
 }
 
+/* buttons */
+.button {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-border-radius);
+
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+
+  height: 3.2rem;
+  gap: 1rem;
+  padding: 0 1.5rem;
+
+  transition: 0.25s ease;
+}
+.button-circle {
+  border-radius: 50%;
+  width: 3.2rem; 
+  padding: 0;
+}
+
+/* layout spacings */
 .section-with-mb {
 	margin-bottom: var(--section-spacing);
 }
@@ -209,6 +232,7 @@ button:focus-visible {
 	padding: 0 var(--padding-side);
 }
 
+/* media */
 .media-img {
   display: block;
   width: 100%;

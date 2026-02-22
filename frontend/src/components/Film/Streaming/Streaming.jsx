@@ -3,7 +3,7 @@ import ServiceIcon from '../../ServiceIcon/ServiceIcon';
 
 export default function Streaming({ service }) {
     return (
-        <div className={styles.wrapper}>
+        <div className='button'>
             {service ? (
                 <>
                     <ServiceIcon service={service} size={'var(--icon-size-s)'} />

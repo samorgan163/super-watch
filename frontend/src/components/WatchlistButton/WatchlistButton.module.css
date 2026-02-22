@@ -1,15 +1,13 @@
-.watchlistBtn {
-    border-radius: 50%;
-    background-color: var(--color-card-bg);
-    width: 3.2rem;
-    height: 3.2rem;
-    border: 1px solid var(--color-border);
-    z-index: 100000;
+.watchlistBtn svg {
+    width: var(--icon-size-s);
+    height: var(--icon-size-s);
 }
 
-.watchlistBtn svg {
-    width: 2rem;
-    height: 2rem;
+.watchlistBtn circle {
+    fill: white;
+}
+.watchlistBtn path {
+    stroke: white;
 }
 
 .watchlistBtn.liked circle {
@@ -19,9 +17,7 @@
     stroke: rgb(61, 214, 61);
 }
 
-.watchlistBtn.superLiked circle {
-    fill: orange;
-}
-.watchlistBtn.superLiked path {
-    stroke: orange;
+.watchlistBtn:hover {
+    cursor: pointer;
+    border: 1px solid var(--color-border-hover);
 }

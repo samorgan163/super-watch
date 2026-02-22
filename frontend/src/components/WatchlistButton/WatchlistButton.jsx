@@ -1,24 +1,29 @@
-import { useEffect, useState } from 'react';
 import styles from './WatchlistButton.module.css';
 
 import { useWatchlist } from '../../hooks/useWatchlist';
 
-function WatchlistButton({ tmdbId }) {
+export default function WatchlistButton({ tmdbId }) {
 
     const { inWatchlist, loading, toggleWatchlist } = useWatchlist(tmdbId);
 
     return (
         <button 
-            className={`${styles.watchlistBtn} ${inWatchlist ? styles.liked : ""}`}
+            className={`
+                ${styles.watchlistBtn} 
+                ${inWatchlist ? styles.liked : ""} 
+                button
+                button-circle
+            `}
             disabled={loading}
             onClick={toggleWatchlist}
         >
-            <svg viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="15" cy="17" r="4" fill="white" fill-opacity="0.8"/>
-                <path d="M27 16.2638C20.019 26.5787 9.98103 26.5787 3 16.2638C6.7967 11.4662 11.3233 10 15.12 10C19.1616 10 23.2033 11.4662 27 16.2638Z" stroke="white" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="2.8235"/>
+                <path 
+                    d="M21.6 11.07C15.215 20.43 8.78497 20.43 2.39997 11.07C5.43736 7.78 9.05864 6 12.096 6C15.3293 6 18.5626 7.78 21.6 11.07Z" 
+                    stroke-width="1.5" 
+                    stroke-linejoin="round"/>
             </svg>
         </button>
     );
 }
-
-export default WatchlistButton; 

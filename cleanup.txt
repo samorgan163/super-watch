@@ -4,14 +4,14 @@ Components:
     - Cards/FilmCard (DONE)
     - Cards/PersonCard (DONE)
     - Film/MetaData
-    - Film/Streaming
+    - Film/Streaming (DONE)
     - Film/Trailer (DONE)
     - FilmsGrid (DONE)
     - HorizontalScrollRow
     - SearchNavBar
     - SearchResults
-    - ServiceIcon
-    - WatchlistButton
+    - ServiceIcon (DONE)
+    - WatchlistButton (DONE)
 
 Pages: 
     - Dashboard (DONE)
