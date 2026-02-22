@@ -16,14 +16,6 @@
     left: 0;
 }
 
-.trailerWrapper img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
 @media (min-width: 768px) {
     .trailerWrapper::before {
         background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);

@@ -58,7 +58,7 @@ export default function Dashboard() {
                     )}
                 />
             </section>
-            <section>
+            <section className="section-with-mb">
                 <HorizontalScrollRow 
                     title='Popular Films'
                     items={popularFilms}

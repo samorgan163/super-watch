@@ -5,8 +5,8 @@ Components:
     - Cards/PersonCard (DONE)
     - Film/MetaData
     - Film/Streaming
-    - Film/Trailer
-    - FilmsGrid
+    - Film/Trailer (DONE)
+    - FilmsGrid (DONE)
     - HorizontalScrollRow
     - SearchNavBar
     - SearchResults
@@ -14,9 +14,9 @@ Components:
     - WatchlistButton
 
 Pages: 
-    - Dashboard
+    - Dashboard (DONE)
     - Film2
     - Login
     - Search
     - UserProfile
-    - Watchlist
+    - Watchlist (DONE)
