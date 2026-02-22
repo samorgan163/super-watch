@@ -2,7 +2,7 @@ import styles from './MetaData.module.css'
 
 function ReleaseInfo({ releaseDate, age, runtime }) {
 
-    const formattedDate = releaseDate.slice(0,4) // extract the year
+    const formattedDate = releaseDate?.slice(0,4) || 'Unknown' // extract the year
 
     return (
         <>
@@ -30,11 +30,11 @@ export default function MetaData({
         <div className={styles.metaDataWrapper}>
             <div className={styles.left}>
                 <div className={styles.logoWrapper}>
-                    <img src={logo} alt="" />
+                    <img src={logo} alt={title ? `${title} logo` : 'Film logo'} />
                 </div>
                 <div className={styles.mobileMetaData}>
                     <div className={styles.posterWrapper}>
-                        <img src={poster} alt="" />
+                        <img src={poster} alt={title ? `${title} poster` : 'Film poster'} />
                     </div>
                     <div className={styles.metaData}>
                         <p className='text-l font-bold text-color-primary mb-4'>{title}</p>

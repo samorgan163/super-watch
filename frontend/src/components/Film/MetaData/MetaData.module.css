@@ -24,8 +24,7 @@
     max-width: 500px; /* res from backend */
 }
 
-.right {
-}
+.right {}
 
 .directorDesktop {
     display: none;
