@@ -6,7 +6,7 @@ export default function Streaming({ service }) {
         <div className={styles.wrapper}>
             {service ? (
                 <>
-                    <ServiceIcon service={service} />
+                    <ServiceIcon service={service} size={'var(--icon-size-s)'} />
                     <p className="text-color-primary">Streaming Now</p>
                 </>
             ) : (

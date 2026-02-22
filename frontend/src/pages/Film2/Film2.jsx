@@ -62,7 +62,7 @@ export default function Film2() {
                         title={results?.title}
                     />
                     <div className={styles.toolbarWrapper}>
-                        <Streaming service={results?.streaming?.[0]}/>
+                        <Streaming service={results?.streaming?.[0]} />
                         <WatchlistButton tmdbId={results?.tmdbid}/>
                     </div>
                    

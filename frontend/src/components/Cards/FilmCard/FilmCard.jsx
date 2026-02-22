@@ -14,7 +14,10 @@ export default function FilmCard({ tmdbID, title, poster, streaming }) {
                 <div className={styles.filmImageWrapper}>
                     <div className={styles.serviceWrapper}>
                         {streaming?.[0] && 
-                            <ServiceIcon className={styles.service} service={streaming[0]} />
+                            <ServiceIcon 
+                                service={streaming[0]}
+                                size={'var(--icon-size-s)'} 
+                            />
                         }
                     </div>
                     <img 

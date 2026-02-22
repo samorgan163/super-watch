@@ -20,6 +20,7 @@ function ServiceIcon({ service, size }) {
     return (
         <div className={styles.serviceImageWrapper}>
             <img
+                style={{ width: size, height: size }}
                 className='media-img media-img-border'
                 src={services.get(service)} 
                 alt={service} 

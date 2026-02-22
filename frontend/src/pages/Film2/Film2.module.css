@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
 
-    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom)); /* TODO: magic number */
+    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom));
     z-index: 10;
     padding: 12px calc(var(--padding-side) + 6px); /* to push in, not to align with other items */
 

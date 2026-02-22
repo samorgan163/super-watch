@@ -196,7 +196,10 @@ button:focus-visible {
     --space-lm: 24px;
     --space-l: 32px;
 
-	--section-spacing: var(--space-l);
+	  --section-spacing: var(--space-l);
+
+    /* icons */
+    --icon-size-s: 32px;
 }
 
 .section-with-mb {
