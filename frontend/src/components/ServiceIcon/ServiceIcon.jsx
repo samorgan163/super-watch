@@ -1,14 +1,13 @@
-// services icons
+// service icons
 import netflix from '../../assets/icons/service-icons/NETFLIX.png';
 import prime from '../../assets/icons/service-icons/PRIME.png';
 import bbc from '../../assets/icons/service-icons/BBC.png';
 import itvx from '../../assets/icons/service-icons/ITVX.png';
 import vue from '../../assets/icons/service-icons/VUE.png';
 
-// css
 import styles from './ServiceIcon.module.css';
 
-function ServiceIcon({ service }) {
+function ServiceIcon({ service, size }) {
 
     const services = new Map([
         ['NETFLIX', netflix],
@@ -20,7 +19,11 @@ function ServiceIcon({ service }) {
 
     return (
         <div className={styles.serviceImageWrapper}>
-            <img src={services.get(service)} alt={service} />
+            <img
+                className='media-img media-img-border'
+                src={services.get(service)} 
+                alt={service} 
+            />
         </div>
     );
 
