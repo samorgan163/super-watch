@@ -90,16 +90,14 @@ export default function SearchResults({ query }) {
 
     if (initialLoading) {
         return (
-            <section id="search-results-wrapper" className={styles.SearchResultsWrapper}>
-                <div ref={loaderRef} className={styles.loading}>
-                    <BounceLoader
-                        color={'#1657c7ff'}
-                        //loading={loading}
-                        size={30}
-                        aria-label="Loading Spinner"
-                    />
-                </div>
-            </section>
+           <div className={styles.loadingWrapperNew}>
+                <BounceLoader
+                    color={'#1657c7ff'}
+                    //loading={loading}
+                    size={30}
+                    aria-label="Loading Spinner"
+                />
+            </div>
         );
     }
     
@@ -112,6 +110,7 @@ export default function SearchResults({ query }) {
     }
 
     return (
+        
         <div id="search-results-wrapper" className={styles.SearchResultsWrapper}>
             {results.map((film) => (
                 <Link 
@@ -142,17 +141,19 @@ export default function SearchResults({ query }) {
                 </Link>
             ))}
 
-            {/* Loader / sentinel */}
             {hasMore && 
-                <div ref={loaderRef} className={styles.loading}>
+                <div 
+                    className={styles.loadingWrapperNew}
+                    ref={loaderRef}    
+                >
                     <BounceLoader
                         color={'#1657c7ff'}
                         //loading={loading}
                         size={30}
                         aria-label="Loading Spinner"
                     />
-                </div>} 
-
+                </div>
+            }
         </div>
     );
 }
