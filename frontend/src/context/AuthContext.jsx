@@ -1,6 +1,8 @@
 // AuthContext.js
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { checkAuth, login, logout } from "../api/auth";
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -10,20 +12,10 @@ export function AuthProvider({ children }) {
 
     // Check auth on app load
     useEffect(() => {
-        const checkAuth = async () => {
+        const authenticate = async () => {
             try {
-                const res = await fetch('http://192.168.0.77:3000/auth/me', {
-                    credentials: 'include',
-                });
-
-                if (!res.ok) {
-                    setUser(null);
-                }
-                else {
-                    const data = await res.json();
-                    setUser({ id: data.user_id });
-                }
-
+                const result = await checkAuth();
+                setUser({ id: result.user_id });
             } catch (err) {
                 console.error('Auth check failed', err);
                 setUser(null);
@@ -31,34 +23,26 @@ export function AuthProvider({ children }) {
                 setLoading(false);
             }
         };
-
-        checkAuth();
+        authenticate();
     }, []);
 
-    const login = async (username, password) => {
-        const res = await fetch('http://192.168.0.77:3000/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ username, password }),
-        });
-
-        if (!res.ok) throw new Error('Invalid credentials');
-
-        const data = await res.json(); // optional: backend can return username
-        setUser({ id: data.user_id });
+    const handleLogin = async (username, password) => {
+        try {
+            const result = await login(username, password);
+            setUser({ id: result.user_id });
+        }
+        catch (err) {
+            console.error('sign in failed', err);
+        }
     };
 
-    const logout = async () => {
-        await fetch('http://192.168.0.77:3000/auth/logout', {
-            method: 'POST',
-            credentials: 'include',
-        });
+    const handleLogout = async () => {
+        await logout();
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, handleLogin, handleLogout }}>
             {children}
         </AuthContext.Provider>
     );

@@ -12,7 +12,7 @@ export default function UserProfile() {
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { handleLogout } = useAuth();
 
     useEffect(() => {
         const getUser = async () => {
@@ -27,8 +27,8 @@ export default function UserProfile() {
         getUser();
     }, []);
 
-    const handleLogout = async () => {
-        await logout();
+    const logout = async () => {
+        await handleLogout();
         navigate('/login');
     }
 
@@ -40,7 +40,7 @@ export default function UserProfile() {
         <>
             <div className={styles.profileWrapper}>
                 <h1>Hello, {username}! Welcome to your profile.</h1>
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={logout}>Logout</button>
             </div>
             
         </>

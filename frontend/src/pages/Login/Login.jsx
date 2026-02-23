@@ -10,7 +10,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-    const { login } = useAuth();
+    const { handleLogin } = useAuth();
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -18,7 +18,7 @@ function Login() {
         setError(null);
 
         try {
-            await login(username, password);
+            await handleLogin(username, password);
             navigate('/');
         }
         catch (error) {
