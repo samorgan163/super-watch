@@ -19,7 +19,7 @@ const app = express();
 // Allow requests from your frontend
 app.use(
   cors({
-    origin: "http://192.168.0.77:5173",
+    origin: process.env.FRONT_END_URL,
     credentials: true, // only if using cookies/auth
   })
 );
@@ -47,7 +47,7 @@ app.post('/auth/login', authController.login);
 app.post('/auth/logout', authController.logout);
 
 // --- USER ROUTES --- //
-app.get('/dashboard', authenticateUser, dashboardController.getDashboard);
+app.get('/user/dashboard', authenticateUser, dashboardController.getDashboard);
 app.get('/user/profile', authenticateUser, userController.getUserProfile);
 
 // --- FILM ROUTES --- //

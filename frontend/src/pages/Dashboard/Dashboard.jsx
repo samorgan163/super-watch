@@ -6,6 +6,8 @@ import PageLoading from "../../components/PageLoading/PageLoading";
 import HorizontalScrollRow from "../../components/HorizontalScrollRow/HorizontalScrollRow";
 import FilmCard from '../../components/Cards/FilmCard/FilmCard'
 
+import { getDashboard } from "../../api/user";
+
 export default function Dashboard() {
 
     const [loading, setLoading] = useState(true);
@@ -17,17 +19,9 @@ export default function Dashboard() {
         const getDashboardData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://192.168.0.77:3000/dashboard`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    setWatchlistStreaming(result.streaming_watchlist);
-                    setPopularFilms(result.popular_films.results);
-                }
-
+                const result = await getDashboard();
+                setWatchlistStreaming(result.streaming_watchlist);
+                setPopularFilms(result.popular_films.results);
             } catch {
                 console.log('Network Error');
             }

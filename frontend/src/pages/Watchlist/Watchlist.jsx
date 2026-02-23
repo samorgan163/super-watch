@@ -5,6 +5,8 @@ import FilmCard from "../../components/Cards/FilmCard/FilmCard";
 
 import { useState, useEffect } from "react";
 
+import { getWatchlist } from "../../api/watchlist";
+
 function Watchlist() {
 
     const [loading, setLoading] = useState(true);
@@ -13,20 +15,12 @@ function Watchlist() {
     const [watchlistUnavailable, setWatchlistUnavailable] = useState([]);
 
     useEffect(() => {
-        const getWatchlist = async () => {
+        const getData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://192.168.0.77:3000/watchlist`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    setWatchlistStreaming(result.streaming);
-                    setWatchlistUnavailable(result.unavailable);
-                }
-
+                const result = await getWatchlist();
+                setWatchlistStreaming(result.streaming);
+                setWatchlistUnavailable(result.unavailable);
             } catch (error) {
                 console.log('Network Error:', error);
             }
@@ -34,8 +28,7 @@ function Watchlist() {
                 setLoading(false);  
             }
         }
-
-        getWatchlist();
+        getData();
     }, []);
 
     if (loading) return <PageLoading />;

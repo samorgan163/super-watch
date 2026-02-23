@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-import styles from "./UserProfile.module.css"
+import styles from "./UserProfile.module.css";
+
+import { getProfile } from "../../api/user";
 
 export default function UserProfile() {
 
@@ -15,18 +17,7 @@ export default function UserProfile() {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await fetch('http://192.168.0.77:3000/user/profile',
-                    {
-                        method: 'GET',
-                        credentials: 'include',
-                    }
-                );
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch user');
-                }
-
-                const result = await res.json();
+                const result = await getProfile();
                 setUsername(result.username);
             }
             catch (error) {

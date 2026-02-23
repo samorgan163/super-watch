@@ -1,26 +1,19 @@
 // hooks/useLike.js
 import { useState, useEffect } from "react";
 
+import { checkWatchlist, removeFromWatchlist, addToWatchlist } from "../api/watchlist";
+
 export function useWatchlist(tmdbId) {
 
     const [inWatchlist, setInWatchlist] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-
-        const checkWatchlist = async () => {
+        const checkIfInWatchlist = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://192.168.0.77:3000/watchlist/check/${encodeURIComponent(tmdbId)}`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    setInWatchlist(result.in_watchlist);
-                }
-
+                const result = await checkWatchlist(tmdbId);
+                setInWatchlist(result.in_watchlist);
             } catch {
                 console.log('Network Error');
             }
@@ -28,9 +21,7 @@ export function useWatchlist(tmdbId) {
                 setLoading(false);
             }
         }
-
-        checkWatchlist();
-
+        checkIfInWatchlist();
     }, [tmdbId]);
 
     const toggleWatchlist = async () => {
@@ -41,17 +32,11 @@ export function useWatchlist(tmdbId) {
             setLoading(true);
             setInWatchlist(false); // optimistic update UI
             try {
-                const res = await fetch(`http://192.168.0.77:3000/watchlist/${encodeURIComponent(tmdbId)}`, {
-                    method: "DELETE",
-                    credentials: "include",
-                });
-
-                if (!res.ok) {
-                    setInWatchlist(true); // revert UI change on failure
-                }
+                await removeFromWatchlist(tmdbId);
             }
             catch {
                 setInWatchlist(true); // revert UI change on failure
+                // TODO: display error to user?
             }
             finally {
                 setLoading(false);
@@ -62,14 +47,7 @@ export function useWatchlist(tmdbId) {
             setLoading(true);
             setInWatchlist(true); // optimistic update UI
             try {
-                const res = await fetch(`http://192.168.0.77:3000/watchlist/${encodeURIComponent(tmdbId)}`, {
-                    method: "POST",
-                    credentials: "include",
-                });
-
-                if (!res.ok) {
-                    setInWatchlist(false); // revert UI change on failure
-                }
+                await addToWatchlist(tmdbId);
             }
             catch (error) {
                 setInWatchlist(false); // revert UI change on failure

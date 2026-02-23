@@ -4,7 +4,7 @@ import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
 import SearchNavbar from "../../components/SearchNavbar/SearchNavbar";
 import SearchResults from '../../components/SearchResults/SearchResults';
 
-function Search() {
+export default function Search() {
     
     const [searchTerm, setSearchTerm] = useState('');
     const [query, setQuery] = useState('');
@@ -35,5 +35,3 @@ function Search() {
         </>
     );
 }
-
-export default Search;

@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 import { BounceLoader } from "react-spinners";
 
+import { searchFilms } from '../../api/film';
+
 export default function SearchResults({ query }) {
 
     const [results, setResults] = useState([]);
@@ -20,13 +22,7 @@ export default function SearchResults({ query }) {
     // function to send search request
     const getResults = async (searchQuery, pageNum) => {
         try {  
-            const formattedQuery = searchQuery//.replaceAll(' ', '+');
-            const response = await fetch(
-                `http://192.168.0.77:3000/film/search?title=${encodeURIComponent(formattedQuery)}&page=${encodeURIComponent(pageNum)}`, {
-                method: "GET",
-                credentials: "include",
-            });
-            const result = await response.json();
+            const result = await searchFilms(searchQuery, pageNum);
 
             // artificial delay for testing
             await new Promise(resolve => setTimeout(resolve, 2000));

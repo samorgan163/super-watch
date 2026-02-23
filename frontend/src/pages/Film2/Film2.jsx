@@ -10,6 +10,8 @@ import WatchlistButton from '../../components/WatchlistButton/WatchlistButton'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
+import { getFilm } from '../../api/film';
+
 import styles from './Film2.module.css'
 
 export default function Film2() {
@@ -20,20 +22,11 @@ export default function Film2() {
     const { tmdbId } = useParams();
 
     useEffect(() => {
-        setLoading(true);
-
         const getResults = async () => {
             try {
-                const response = await fetch(`http://192.168.0.77:3000/film/${encodeURIComponent(tmdbId)}`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    setResults(result);
-                }
-
+                setLoading(true);
+                const result = await getFilm(tmdbId);
+                setResults(result);
             } catch {
                 console.log('Network Error');
             }
