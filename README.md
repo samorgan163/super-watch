@@ -47,9 +47,13 @@ The backend integrates the TMDB API for live film details.
 The backend acts as middleware between the user and the TMDB API, centralising data handling, authentication/authorisation, and TMDB API integration.
 
 ### Search and Film Details
+![Search and film details diagram](./images/search-film-diagram.jpg)
+
 Search and Film details are pulled from the TMDB API via the backend and parsed to the user. 
 
 ### Watchlist Funtionality
+![Watchlist functionality diagram](./images/watchlist-diagram.jpg)
+
 When a user saves a film:
 - A shared film copy is stored in the database (if not already present)
 - Users reference films in their individual watchlists
