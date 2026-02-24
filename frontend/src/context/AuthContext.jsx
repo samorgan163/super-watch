@@ -1,7 +1,6 @@
-// AuthContext.js
 import { createContext, useContext, useEffect, useState } from "react";
-
 import { checkAuth, login, logout } from "../api/auth";
+import { setUnauthorizedHandler } from "../api/client";
 
 const AuthContext = createContext();
 
@@ -41,11 +40,19 @@ export function AuthProvider({ children }) {
         setUser(null);
     };
 
+    // handle setting user to null on no auth
+    useEffect(() => {
+        setUnauthorizedHandler(() => {
+            setUser(null);
+        });
+    }, []);
+
     return (
         <AuthContext.Provider value={{ user, loading, handleLogin, handleLogout }}>
             {children}
         </AuthContext.Provider>
     );
+
 }
 
 export function useAuth() {
