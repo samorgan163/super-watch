@@ -59,6 +59,7 @@ export default function Watchlist() {
             <section className="section-with-mb section-with-px">
                 <FilmsGrid 
                     title='Not Available'
+                    fadeOpacity={true}
                     items={watchlistUnavailable}
                     getKey={(film) => film.tmdbid}
                     renderItem={(film) => (
