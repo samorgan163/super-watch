@@ -2,6 +2,7 @@ import MetaData from '../../components/Film/MetaData/MetaData'
 import Trailer from '../../components/Film/Trailer/Trailer'
 import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
 import PageLoading from '../../components/PageLoading/PageLoading'
+import PageRetry from '../../components/PageRetry/PageRetry'
 import PersonCard from '../../components/Cards/PersonCard/PersonCard'
 
 import Streaming from '../../components/Film/Streaming/Streaming'
@@ -18,27 +19,31 @@ export default function Film2() {
 
     const [results, setResults] = useState({});
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const { tmdbId } = useParams();
 
-    useEffect(() => {
-        const getResults = async () => {
-            try {
-                setLoading(true);
-                const result = await getFilm(tmdbId);
-                setResults(result);
-            } catch {
-                console.log('Network Error');
-            }
-            finally {
-                setLoading(false);
-            }
+    const getResults = async () => {
+        try {
+            setError(false);
+            setLoading(true);
+            const result = await getFilm(tmdbId);
+            setResults(result);
+        } catch {
+            setError(true);
         }
+        finally {
+            setLoading(false);
+        }
+    }
 
+    useEffect(() => {
         getResults();
     }, [ tmdbId ]);
 
     if (loading) return <PageLoading />;
+
+    if (error) return <PageRetry retryAction={getResults} />;
 
     return (
         <div className={styles.filmWrapper}>

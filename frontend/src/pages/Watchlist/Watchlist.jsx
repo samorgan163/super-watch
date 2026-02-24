@@ -37,7 +37,7 @@ export default function Watchlist() {
 
     if (loading) return <PageLoading />;
 
-    if (error) return <PageRetry retryAction={getData} />
+    if (error) return <PageRetry retryAction={getData} />;
 
     return (
         <>
