@@ -6,34 +6,11 @@ import PageRetry from "../../components/PageRetry/PageRetry";
 import HorizontalScrollRow from "../../components/HorizontalScrollRow/HorizontalScrollRow";
 import FilmCard from '../../components/Cards/FilmCard/FilmCard'
 
-import { getDashboard } from "../../api/user";
+import { useDashboard } from "../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    
-    const [watchlistStreaming, setWatchlistStreaming] = useState([]);
-    const [popularFilms, setPopularFilms] = useState([]);
-
-    const getData = async () => {
-        try {
-            setError(false);
-            setLoading(true);
-            const result = await getDashboard();
-            setWatchlistStreaming(result.streaming_watchlist);
-            setPopularFilms(result.popular_films.results);
-        } catch {
-            setError(true);
-        }
-        finally {
-            setLoading(false);  
-        }
-    }
-
-    useEffect(() => {
-        getData();
-    }, []);
+    const { loading, error, watchlistStreaming, popularFilms, getData } = useDashboard();
 
     if (loading) return <PageLoading />;
 

@@ -1,67 +1,45 @@
-import MetaData from '../../components/Film/MetaData/MetaData'
-import Trailer from '../../components/Film/Trailer/Trailer'
-import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow'
-import PageLoading from '../../components/PageLoading/PageLoading'
-import PageRetry from '../../components/PageRetry/PageRetry'
-import PersonCard from '../../components/Cards/PersonCard/PersonCard'
+import MetaData from '../../components/Film/MetaData/MetaData';
+import Trailer from '../../components/Film/Trailer/Trailer';
+import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow';
+import PageLoading from '../../components/PageLoading/PageLoading';
+import PageRetry from '../../components/PageRetry/PageRetry';
+import PersonCard from '../../components/Cards/PersonCard/PersonCard';
+import Streaming from '../../components/Film/Streaming/Streaming';
+import WatchlistButton from '../../components/WatchlistButton/WatchlistButton';
 
-import Streaming from '../../components/Film/Streaming/Streaming'
-import WatchlistButton from '../../components/WatchlistButton/WatchlistButton'
-
-import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
-import { getFilm } from '../../api/film';
+import { useFilm } from '../../hooks/useFilm';
 
-import styles from './Film.module.css'
+import styles from './Film.module.css';
 
 export default function Film() {
 
-    const [results, setResults] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const { tmdbID } = useParams();
 
-    const { tmdbId } = useParams();
-
-    const getResults = async () => {
-        try {
-            setError(false);
-            setLoading(true);
-            const result = await getFilm(tmdbId);
-            setResults(result);
-        } catch {
-            setError(true);
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        getResults();
-    }, [ tmdbId ]);
+    const { loading, error, filmData, getData } = useFilm(tmdbID);
 
     if (loading) return <PageLoading />;
 
-    if (error) return <PageRetry retryAction={getResults} />;
+    if (error) return <PageRetry retryAction={getData} />;
 
     return (
         <div className={styles.filmWrapper}>
-            <Trailer trailerImageURL={results?.banner} />
+            <Trailer trailerImageURL={filmData?.banner} />
             <div className={styles.contentWrapper}>
                 <section className={`${styles.metaDataWrapper} section-with-px section-with-mb`}>
                     <MetaData 
-                        logo={results?.logo}
-                        poster={results?.poster}
-                        releaseDate={results.release_date}
-                        runtime={results.runtime}
-                        overview={results.overview}
-                        director={results.director?.[0].name}
-                        title={results?.title}
+                        logo={filmData?.logo}
+                        poster={filmData?.poster}
+                        releaseDate={filmData.release_date}
+                        runtime={filmData.runtime}
+                        overview={filmData.overview}
+                        director={filmData.director?.[0].name}
+                        title={filmData?.title}
                     />
                     <div className={styles.toolbarWrapper}>
-                        <Streaming service={results?.streaming?.[0]} />
-                        <WatchlistButton tmdbId={results?.tmdbid}/>
+                        <Streaming service={filmData?.streaming?.[0]} />
+                        <WatchlistButton tmdbId={filmData?.tmdbid}/>
                     </div>
                    
                 </section>
@@ -69,7 +47,7 @@ export default function Film() {
                 <section className='section-with-mb'>
                     <HorizontalScrollRow 
                         title='Top Cast'
-                        items={results.top_cast}
+                        items={filmData.top_cast}
                         getKey={(person) => person.id}
                         renderItem={(person) => (
                             <PersonCard
