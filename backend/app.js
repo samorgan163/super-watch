@@ -18,10 +18,10 @@ const app = express();
 
 // Allow requests from your frontend
 app.use(
-  cors({
-    origin: process.env.FRONT_END_URL,
-    credentials: true, // only if using cookies/auth
-  })
+    cors({
+        origin: process.env.FRONT_END_URL,
+        credentials: true, // only if using cookies/auth
+    })
 );
 
 app.use(express.json());

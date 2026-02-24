@@ -1,145 +1,3 @@
-
-/*
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-*/
-
-/*
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-  	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  	outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-    a:hover {
-      color: #747bff;
-    }
-    button {
-      background-color: #f9f9f9;
-    }
-}
-*/
 * {
     margin: 0;
     padding: 0;
@@ -149,12 +7,9 @@ button:focus-visible {
 :root {
 	/* Layout */
     --desktop-nav-height: 4.2rem;
-
     --mobile-nav-bottom-height: 60px;
-
     --padding-side: clamp(20px, 3vw, 60px);
     --grid-item-gap: 1rem;
-
 	--card-border-radius: 8px;
 
 	/* Colours */
@@ -165,14 +20,10 @@ button:focus-visible {
   	--gray-900: #0E0E0E;
 
 	--color-bg: var(--gray-900);
-
 	--color-text-primary: var(--gray-0);
-
 	--color-border: var(--gray-700);
 	--color-border-hover: var(--gray-0);
-	
 	--color-card-bg: var(--gray-800);
-
 	--color-nav-bg: var(--gray-800-90);
 
     /* Text Sizes */
@@ -195,8 +46,8 @@ button:focus-visible {
     --space-md: 16px;
     --space-lm: 24px;
     --space-l: 32px;
-
-	  --section-spacing: var(--space-l);
+	
+	--section-spacing: var(--space-l);
 
     /* icons */
     --icon-size-s: 32px;
@@ -251,13 +102,6 @@ button:focus-visible {
 
   transition: border 0.25s ease;
 }
-
-
-
-
-
-
-
 
 /* Text sizes classes */
 .text-xxs {
@@ -316,22 +160,12 @@ button:focus-visible {
 	margin-bottom: 16px;
 }
 
+/* Text colours */
 .text-color-primary {
 	color: var(--color-text-primary);
 }
 .text-color-primary-80 {
 	color: rgba(255, 255, 255, 0.8);
-}
-
-html {
-    font-family: 'Inter', sans-serif;
-    /* line-height: 1.5; */
-    font-weight: 400;
-}
-
-body {
-    width: 100%;
-    background-color: var(--color-bg);
 }
 
 /* Text form input */
@@ -356,4 +190,13 @@ body {
 .form-input-text:focus {
     outline: none;
     border-color: var(--color-border-hover);
+}
+
+html {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    width: 100%;
+    background-color: var(--color-bg);
 }
