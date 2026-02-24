@@ -1,6 +1,6 @@
 # SuperWatch - Film Web Application
-SuperWatch is a full-stack film discovery web app built with React and Node.js/Express. 
-It integrates the TMDB API for live film data and streaming availability, while persisting user watchlists in MongoDB.
+SuperWatch is a film discovery app where users can seach for films, view film details and streaming availability, and create a watchlist.
+Built with React, Node.js/Express, mongoDB and integrated with the TMDB API.
 
 ![App preview](./images/app-preview.jpg)
 
