@@ -9,37 +9,40 @@ import WatchlistButton from '../../components/WatchlistButton/WatchlistButton';
 
 import { useParams } from 'react-router-dom';
 
-import { useFilm } from '../../hooks/useFilm';
-
 import styles from './Film.module.css';
+import { useFetch } from '../../hooks/useFetch';
+import { getFilm } from '../../api/film';
 
 export default function Film() {
 
+    // get tmdbID from route params
     const { tmdbID } = useParams();
 
-    const { loading, error, filmData, getData } = useFilm(tmdbID);
+    const { loading, error, data, retry } = useFetch(
+        () => getFilm(tmdbID), [tmdbID]
+    );
 
     if (loading) return <PageLoading />;
 
-    if (error) return <PageRetry retryAction={getData} />;
+    if (error) return <PageRetry retryAction={retry} />;
 
     return (
         <div className={styles.filmWrapper}>
-            <Trailer trailerImageURL={filmData?.banner} />
+            <Trailer trailerImageURL={data?.banner} />
             <div className={styles.contentWrapper}>
                 <section className={`${styles.metaDataWrapper} section-with-px section-with-mb`}>
                     <MetaData 
-                        logo={filmData?.logo}
-                        poster={filmData?.poster}
-                        releaseDate={filmData.release_date}
-                        runtime={filmData.runtime}
-                        overview={filmData.overview}
-                        director={filmData.director?.[0].name}
-                        title={filmData?.title}
+                        logo={data?.logo}
+                        poster={data?.poster}
+                        releaseDate={data.release_date}
+                        runtime={data.runtime}
+                        overview={data.overview}
+                        director={data.director?.[0].name}
+                        title={data?.title}
                     />
                     <div className={styles.toolbarWrapper}>
-                        <Streaming service={filmData?.streaming?.[0]} />
-                        <WatchlistButton tmdbId={filmData?.tmdbid}/>
+                        <Streaming service={data?.streaming?.[0]} />
+                        <WatchlistButton tmdbId={data?.tmdbid}/>
                     </div>
                    
                 </section>
@@ -47,7 +50,7 @@ export default function Film() {
                 <section className='section-with-mb'>
                     <HorizontalScrollRow 
                         title='Top Cast'
-                        items={filmData.top_cast}
+                        items={data.top_cast}
                         getKey={(person) => person.id}
                         renderItem={(person) => (
                             <PersonCard

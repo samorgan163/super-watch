@@ -16,7 +16,8 @@ export function useDashboard() {
             const result = await getDashboard();
             setWatchlistStreaming(result.streaming_watchlist);
             setPopularFilms(result.popular_films.results);
-        } catch {
+        } catch (err) {
+            console.log(err);
             setError(true);
         }
         finally {

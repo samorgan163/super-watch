@@ -7,12 +7,9 @@ import PageLoading from "../../components/PageLoading/PageLoading";
 import PageRetry from "../../components/PageRetry/PageRetry";
 
 import { getProfile } from "../../api/user";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function UserProfile() {
-
-    const [username, setUsername] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const navigate = useNavigate();
     const { handleLogout } = useAuth();
@@ -22,34 +19,19 @@ export default function UserProfile() {
         navigate('/login');
     }
 
-    const getUserData = async () => {
-        try {
-            setError(false);
-            setLoading(true);
-            const result = await getProfile();
-            setUsername(result.username);
-        }
-        catch (err) {
-            setError(true);
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        getUserData();
-    }, []);
+    const { loading, error, data, retry } = useFetch(
+        () => getProfile(), []
+    );
 
     if (loading) return <PageLoading />
 
-    if (error) return <PageRetry retryAction={getUserData} />
+    if (error) return <PageRetry retryAction={retry} />
 
     return (
         <>
             <div className={styles.profileWrapper}>
                 <h2 className="font-regular text-color-primary text-l mb-16">
-                    Hello, {username}! Welcome to your profile.
+                    Hello, {data.username}! Welcome to your profile.
                 </h2>
                 <button 
                     onClick={logout}

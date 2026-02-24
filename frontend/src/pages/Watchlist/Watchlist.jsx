@@ -7,44 +7,24 @@ import PageRetry from "../../components/PageRetry/PageRetry";
 import { useState, useEffect } from "react";
 
 import { getWatchlist } from "../../api/watchlist";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function Watchlist() {
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    
-    const [watchlistStreaming, setWatchlistStreaming] = useState([]);
-    const [watchlistUnavailable, setWatchlistUnavailable] = useState([]);
-
-    const getData = async () => {
-        try {
-            setError(false);
-            setLoading(true);
-            const result = await getWatchlist();
-            setWatchlistStreaming(result.streaming);
-            setWatchlistUnavailable(result.unavailable);
-        } catch (error) {
-            setError(true);
-        }
-        finally {
-            setLoading(false);  
-        }
-    }
-
-    useEffect(() => {
-        getData();
-    }, []);
+    const { loading, error, data, retry } = useFetch(
+        () => getWatchlist(), []
+    );
 
     if (loading) return <PageLoading />;
 
-    if (error) return <PageRetry retryAction={getData} />;
+    if (error) return <PageRetry retryAction={retry} />;
 
     return (
         <>
             <section className="section-with-mb section-with-px">
                 <FilmsGrid 
                     title='Currently Streaming'
-                    items={watchlistStreaming}
+                    items={data.streaming}
                     getKey={(film) => film.tmdbid}
                     renderItem={(film) => (
                         <FilmCard
@@ -60,7 +40,7 @@ export default function Watchlist() {
                 <FilmsGrid 
                     title='Not Available'
                     fadeOpacity={true}
-                    items={watchlistUnavailable}
+                    items={data.unavailable}
                     getKey={(film) => film.tmdbid}
                     renderItem={(film) => (
                         <FilmCard

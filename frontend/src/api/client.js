@@ -34,5 +34,5 @@ export async function apiFetch(endpoint, options = {}) {
         throw new Error(`API Error: ${response.status}`);
     }
 
-    return response.json();
+    return await response.json();
 }
