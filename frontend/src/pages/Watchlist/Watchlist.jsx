@@ -2,36 +2,42 @@ import styles from "./Watchlist.module.css";
 import FilmsGrid from "../../components/FilmsGrid/FilmsGrid";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import FilmCard from "../../components/Cards/FilmCard/FilmCard";
+import PageRetry from "../../components/PageRetry/PageRetry";
 
 import { useState, useEffect } from "react";
 
 import { getWatchlist } from "../../api/watchlist";
 
-function Watchlist() {
+export default function Watchlist() {
 
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     
     const [watchlistStreaming, setWatchlistStreaming] = useState([]);
     const [watchlistUnavailable, setWatchlistUnavailable] = useState([]);
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                setLoading(true);
-                const result = await getWatchlist();
-                setWatchlistStreaming(result.streaming);
-                setWatchlistUnavailable(result.unavailable);
-            } catch (error) {
-                console.log('Network Error:', error);
-            }
-            finally {
-                setLoading(false);  
-            }
+    const getData = async () => {
+        try {
+            setError(false);
+            setLoading(true);
+            const result = await getWatchlist();
+            setWatchlistStreaming(result.streaming);
+            setWatchlistUnavailable(result.unavailable);
+        } catch (error) {
+            setError(true);
         }
+        finally {
+            setLoading(false);  
+        }
+    }
+
+    useEffect(() => {
         getData();
     }, []);
 
     if (loading) return <PageLoading />;
+
+    if (error) return <PageRetry retryAction={getData} />
 
     return (
         <>
@@ -68,5 +74,3 @@ function Watchlist() {
         </>
     );
 }
-
-export default Watchlist;
