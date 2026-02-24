@@ -38,7 +38,7 @@ function Watchlist() {
             <section className="section-with-mb section-with-px">
                 <FilmsGrid 
                     title='Currently Streaming'
-                    items={watchlistStreaming || []}
+                    items={watchlistStreaming}
                     getKey={(film) => film.tmdbid}
                     renderItem={(film) => (
                         <FilmCard
@@ -53,7 +53,7 @@ function Watchlist() {
             <section className="section-with-mb section-with-px">
                 <FilmsGrid 
                     title='Not Available'
-                    items={watchlistUnavailable || []}
+                    items={watchlistUnavailable}
                     getKey={(film) => film.tmdbid}
                     renderItem={(film) => (
                         <FilmCard
