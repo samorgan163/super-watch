@@ -1,5 +1,4 @@
 import styles from "./Dashboard.module.css";
-import HorizontalScrollFilmGrid from '../../components/HorizontalScrollFilmGrid/HorizontalScrollFilmGrid';
 import { useEffect, useState } from "react";
 import PageLoading from "../../components/PageLoading/PageLoading";
 import PageRetry from "../../components/PageRetry/PageRetry";

@@ -13,9 +13,9 @@ import { useParams } from 'react-router-dom';
 
 import { getFilm } from '../../api/film';
 
-import styles from './Film2.module.css'
+import styles from './Film.module.css'
 
-export default function Film2() {
+export default function Film() {
 
     const [results, setResults] = useState({});
     const [loading, setLoading] = useState(true);
