@@ -48,8 +48,15 @@ export default function UserProfile() {
     return (
         <>
             <div className={styles.profileWrapper}>
-                <h1>Hello, {username}! Welcome to your profile.</h1>
-                <button onClick={logout}>Logout</button>
+                <h2 className="font-regular text-color-primary text-l mb-16">
+                    Hello, {username}! Welcome to your profile.
+                </h2>
+                <button 
+                    onClick={logout}
+                    className="button button-hover text-md"
+                >
+                    Logout
+                </button>
             </div>
         </>
     )

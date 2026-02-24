@@ -46,7 +46,12 @@ function Login() {
                         onChange={e => setPassword(e.target.value)}
                     />
 
-                    <button type="submit">Login</button>
+                    <button 
+                        type="submit"
+                        className='button button-hover text-md text-color-primary'
+                    >
+                        Login
+                    </button>
 
                     {error && <p>{error}</p>}
                 </form>

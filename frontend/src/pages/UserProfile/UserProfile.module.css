@@ -1,7 +1,9 @@
 .profileWrapper {
+    position: fixed; /* cover the entire viewport */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-
+    height: 100%; /* full viewport height */
     display: flex;
     flex-direction: column;
     justify-content: center;
