@@ -1,36 +1,46 @@
 import { useEffect, useState } from 'react';
 
-import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
 import SearchNavbar from "../../components/SearchNavbar/SearchNavbar";
 import SearchResults from '../../components/SearchResults/SearchResults';
 
+import { useSearch } from '../../hooks/useSearch';
+
 export default function Search() {
     
-    const [searchTerm, setSearchTerm] = useState('');
-    const [query, setQuery] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const [debouncedQuery, setDebouncedQuery] = useState('');
+
+    const { results, loading, hasNextPage, loaderRef } = useSearch(debouncedQuery);
 
     useEffect(() => {
 
-        if (searchTerm.trim() === '') {
-            setQuery('');
+        if (inputValue.trim() === '') {
+            setDebouncedQuery('');
             return;
         }
 
         const userTypingDelay = setTimeout(() => {
-            setQuery(searchTerm.trim());
+            setDebouncedQuery(inputValue.trim());
         }, 500); // delay to ensure user has stopped typing
         
         return () => clearTimeout(userTypingDelay);
-    }, [searchTerm]);
+    }, [inputValue]);
 
 
     return (
         <>
             <section className='section-with-px section-with-mb'>
-                <SearchNavbar onSearchChange={setSearchTerm} />
+                <SearchNavbar onInputChange={setInputValue} />
             </section>
             <section className='section-with-px section-with-mb'>
-                {query && <SearchResults query={query} />}
+                {debouncedQuery && 
+                    <SearchResults 
+                        results={results}
+                        loading={loading}
+                        hasMore={hasNextPage}
+                        loaderRef={loaderRef}
+                    />
+                }
             </section>
         </>
     );

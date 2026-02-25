@@ -1,17 +1,20 @@
 import { useRef, useState } from 'react';
 import styles from './SearchNavbar.module.css';
 
-export default function SearchNavbar({ onSearchChange }) {
+export default function SearchNavbar({ onInputChange }) {
     
+    // to track when to show, clear input icon
     const [inputValue, setInputValue] = useState('');
+    
     const searchBarRef = useRef(null);
 
     const handleChange = (e) => {
         const value = e.target.value;
         setInputValue(value);
-        onSearchChange(value);
+        onInputChange(value);
     };
 
+    // hide keyboard, request is already handled when input changes
     const handleSubmit = (e) => {
         e.preventDefault();
         searchBarRef.current?.blur();
@@ -19,7 +22,7 @@ export default function SearchNavbar({ onSearchChange }) {
 
     const clearInput = () => {
         setInputValue('');
-        onSearchChange('');
+        onInputChange('');
         searchBarRef.current?.focus();
     };
     

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const rateLimit = require('express-rate-limit');
 
 // error classes
 const { NotFoundError, ConflictError, NotAuthenticatedError } = require('./errors/customErrors.js');
@@ -15,6 +16,14 @@ const watchlistController = require('./controllers/watchlist-controller.js');
 const dashboardController = require('./controllers/dashboard-controller.js');
 
 const app = express();
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 2000,
+    limit: 2,
+    message: 'Rate limit exceeded',
+});
+app.use(limiter);
 
 // Allow requests from your frontend
 app.use(
