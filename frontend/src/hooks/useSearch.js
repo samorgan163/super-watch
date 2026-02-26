@@ -52,15 +52,14 @@ export function useSearch(query) {
         }
     }, []);
     
-    // for inital fetch
+    // revert to default states on query change
     useEffect(() => {
         setResults([]); // set results first to stop stale state flash
         if (!query) return;
-        // query has changed, revert to default state
         setPage(1);
     }, [query]);
 
-    // for pagination fetches
+    // send request on page change
     useEffect(() => {
         if (!query) return;
 

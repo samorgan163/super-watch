@@ -12,6 +12,7 @@ export default function Search() {
 
     const { results, loading, hasNextPage, loaderRef } = useSearch(debouncedQuery);
 
+    // debounce query
     useEffect(() => {
 
         if (inputValue.trim() === '') {

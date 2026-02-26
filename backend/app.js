@@ -1,3 +1,4 @@
+// Requirements
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -5,43 +6,39 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
-// error classes
+// Error classes
 const { NotFoundError, ConflictError, NotAuthenticatedError } = require('./errors/customErrors.js');
 
-// controllers
+// Auth middleware
+const { authenticateUser } = require('./middleware/auth.js');
+
+// Controllers
 const authController = require('./controllers/auth-controller.js');
 const userController = require('./controllers/user-controller.js');
 const tmdbController = require('./controllers/tmdb-controller.js');
 const watchlistController = require('./controllers/watchlist-controller.js');
 const dashboardController = require('./controllers/dashboard-controller.js');
 
-const app = express();
+// Settings
+const corsSettings = {
+    origin: process.env.FRONT_END_URL,
+    credentials: true,
+};
 
-// Allow requests from your frontend
-app.use(
-    cors({
-        origin: process.env.FRONT_END_URL,
-        credentials: true, 
-    })
-);
-
-/*
-// Rate limiting
-const limiter = rateLimit({
+const rateLimitSettings = {
     windowMs: 2000,
     limit: 2,
     message: 'Rate limit exceeded',
-});
-app.use(limiter);
-*/
+};
 
+// Server setup
+const app = express();
+app.use(cors(corsSettings));
+//app.use(rateLimit(rateLimitSettings));
 app.use(express.json());
 app.use(cookieParser());
 
-// middleware
-const { authenticateUser } = require('./middleware/auth.js');
-
-// connect to database
+// Connect to database
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('Connected to database');
@@ -91,7 +88,7 @@ app.use((err, req, res, next) => {
     return res.status(500).json({ message: 'Server error' });
 });
 
-// server startup
+// Server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
     console.log(`Server listening on port: ${process.env.PORT}`);
 });
