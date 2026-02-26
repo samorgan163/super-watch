@@ -17,6 +17,15 @@ const dashboardController = require('./controllers/dashboard-controller.js');
 
 const app = express();
 
+// Allow requests from your frontend
+app.use(
+    cors({
+        origin: process.env.FRONT_END_URL,
+        credentials: true, 
+    })
+);
+
+/*
 // Rate limiting
 const limiter = rateLimit({
     windowMs: 2000,
@@ -24,14 +33,7 @@ const limiter = rateLimit({
     message: 'Rate limit exceeded',
 });
 app.use(limiter);
-
-// Allow requests from your frontend
-app.use(
-    cors({
-        origin: process.env.FRONT_END_URL,
-        credentials: true, // only if using cookies/auth
-    })
-);
+*/
 
 app.use(express.json());
 app.use(cookieParser());

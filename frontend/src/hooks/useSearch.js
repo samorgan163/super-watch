@@ -13,14 +13,24 @@ export function useSearch(query) {
 
     const loaderRef = useRef(null);
 
+    const abortControllerRef = useRef(null);
+
     // function to send search request
     const getResults = async (searchQuery, pageNum) => {
-        setLoading(true);
-        try {  
-            const result = await searchFilms(searchQuery, pageNum);
 
-            // artificial delay for testing
-            await new Promise(resolve => setTimeout(resolve, 2000));
+        // cancel previous request
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
+        
+        // set abort controller ref
+        const abortController = new AbortController();
+        abortControllerRef.current = abortController;
+        
+        setLoading(true);
+
+        try {  
+            const result = await searchFilms(searchQuery, pageNum, abortController.signal);
 
             // TODO: this checking of page may be redundant,
             // we revert state back to default on query change below,
@@ -33,7 +43,10 @@ export function useSearch(query) {
 
             setHasNextPage(result.page < result.total_pages);
         } catch (error) {
-            console.log('Network Error');
+            if (error.name === "AbortError") {
+                console.log('Request aborted');
+                return;
+            }
         }
         finally {
             setLoading(false);

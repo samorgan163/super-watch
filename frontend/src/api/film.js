@@ -6,8 +6,9 @@ export const getFilm = (tmdbID) => {
     });
 };
 
-export const searchFilms = (formattedQuery, pageNum) => {
+export const searchFilms = (formattedQuery, pageNum, signal) => {
     return apiFetch(`/film/search?title=${encodeURIComponent(formattedQuery)}&page=${encodeURIComponent(pageNum)}`, {
         method: 'GET',
+        signal,
     });
 };

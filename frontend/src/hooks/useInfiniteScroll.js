@@ -29,6 +29,7 @@ export function useInfiniteScroll(enabled, ref, callBack) {
         observer.observe(element);
         
         return () => {
+            console.log('observer unmount');
             observer.unobserve(element);
             observer.disconnect();
         };
