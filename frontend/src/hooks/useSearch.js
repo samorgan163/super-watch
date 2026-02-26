@@ -16,8 +16,7 @@ export function useSearch(query) {
     const abortControllerRef = useRef(null);
 
     // function to send search request
-    const getResults = async (searchQuery, pageNum) => {
-
+    const getResults = useCallback( async (searchQuery, pageNum) => {
         // cancel previous request
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
@@ -35,11 +34,11 @@ export function useSearch(query) {
             // TODO: this checking of page may be redundant,
             // we revert state back to default on query change below,
             // more efficient to just append fetched results to results?
-            setResults(prev =>
-                result.page === 1 
-                    ? (result.results) 
-                    : [...prev, ...(result.results)] // apend new results to old results
-            );
+            if (result.page === 1) {
+                setResults(result.results);
+            } else {
+                setResults(prev => [...prev, ...result.results]);
+            }
 
             setHasNextPage(result.page < result.total_pages);
         } catch (error) {
@@ -51,28 +50,29 @@ export function useSearch(query) {
         finally {
             setLoading(false);
         }
-    }
-
+    }, []);
+    
     // for inital fetch
     useEffect(() => {
-
+        setResults([]); // set results first to stop stale state flash
         if (!query) return;
-
         // query has changed, revert to default state
-        setResults([]);
         setPage(1);
-
-        getResults(query, 1);
     }, [query]);
 
     // for pagination fetches
     useEffect(() => {
         if (!query) return;
 
-        // page has changed, make sure it is not page 1
-        if (page > 1) getResults(query, page);
+        getResults(query, page);
 
-    }, [query, page]);
+        return () => {
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+        }
+
+    }, [query, page, getResults]);
 
     // callback function for observer,
     // observer will change page, triggering a pagination fetch
@@ -89,6 +89,11 @@ export function useSearch(query) {
         getNextPage,
     );
 
-    return { results, loading, hasNextPage, loaderRef };
+    return { 
+        results,
+        loading,
+        hasNextPage,
+        loaderRef
+    };
 
 }
