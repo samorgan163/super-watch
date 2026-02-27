@@ -1,28 +1,27 @@
 import styles from './PersonCard.module.css';
+import MediaCard from '../MediaCard/MediaCard';
 
-import { Link } from 'react-router-dom';
+export default function PersonCard({ tmdbID, name, role, poster }) {
 
-export default function FilmCard({ tmdbID, name, role, poster }) {
+    // do not currently have a person page
+    const url = '#';
+
+    const cleanedName = name || 'Unknown';
+
+    const cleanedRole = role || 'Unknown';
+
+    /* use when you change backend
+    const posterPrefixURL = 'https://image.tmdb.org/t/p/w400';
+    const posterSRC = poster ? `${posterPrefixURL}${poster}` : null;
+    */
 
     return (
-        <div className={styles.person}>
-            <Link 
-                aria-label={name ? `Link to ${name} page` : 'Link to person page'}
-                to={`#`}
-            >
-                <div className={styles.personImageWrapper}>
-                    <img 
-                        loading="lazy" 
-                        src={poster} 
-                        alt={name ? `Picture of ${name}` : 'Picture of person'}
-                        className='media-img media-img-border'
-                    />
-                </div>
-            </Link>
-            <p className='text-color-primary font-regular text-md'>
-                {name ? name : 'Unknown'}
-            </p>
-        </div>
-    )
+        <MediaCard
+            toURL={url}
+            imageSRC={poster}
+            title={cleanedName}
+            subText={cleanedRole}
+        />
+    );
 
 }

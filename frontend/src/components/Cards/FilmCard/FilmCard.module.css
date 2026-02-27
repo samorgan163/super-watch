@@ -1,14 +1,1 @@
-.filmImageWrapper {
-    position: relative;
-    aspect-ratio: 2/3;
-}
 
-.film:hover img {
-    border: 1px solid var(--color-border-hover);
-}
-
-.serviceWrapper {
-    position: absolute;
-    left: 12px; /* TODO: magic numbers */
-    bottom: 12px;
-}

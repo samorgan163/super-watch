@@ -1,34 +1,36 @@
 import styles from './FilmCard.module.css';
 import ServiceIcon from '../../ServiceIcon/ServiceIcon';
-
-import { Link } from 'react-router-dom';
+import MediaCard from '../MediaCard/MediaCard';
 
 export default function FilmCard({ tmdbID, title, poster, streaming }) {
 
+    const url = tmdbID ? `/film/${tmdbID}` : '/404';
+
+    const cleanedTitle = title || 'Unknown';
+
+    const primaryService = streaming?.[0] || null;
+
+    /* use when you change backend
+    const posterPrefixURL = 'https://image.tmdb.org/t/p/w400';
+    const posterSRC = poster ? `${posterPrefixURL}${poster}` : null;
+    */
+
     return (
-        <div className={styles.film}>
-            <Link 
-                aria-label={title ? `Link to ${title} page` : 'Link to film page'}
-                to={`/film/${tmdbID}`}
-            >
-                <div className={styles.filmImageWrapper}>
-                    <div className={styles.serviceWrapper}>
-                        {streaming?.[0] && 
-                            <ServiceIcon 
-                                service={streaming[0]}
-                                size={'var(--icon-size-s)'} 
-                            />
-                        }
-                    </div>
-                    <img 
-                        loading="lazy" 
-                        src={poster || './src/assets/icons/no-film-image.jpg'} 
-                        alt={title ? `${title} poster` : 'Film poster'}
-                        className='media-img media-img-border'
-                     />
-                </div>
-            </Link>
-        </div>
-    )
+
+        <MediaCard 
+            toURL={url}
+            imageSRC={poster}
+            title={cleanedTitle}
+            serviceOverlay={
+                primaryService && (
+                    <ServiceIcon 
+                        service={primaryService}
+                        size={'var(--icon-size-s)'} 
+                    />
+                )
+            }
+        />
+
+    );
 
 }
