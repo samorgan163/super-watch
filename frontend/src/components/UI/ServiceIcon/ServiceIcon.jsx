@@ -1,9 +1,9 @@
 // service icons
-import netflix from '../../assets/icons/service-icons/NETFLIX.png';
-import prime from '../../assets/icons/service-icons/PRIME.png';
-import bbc from '../../assets/icons/service-icons/BBC.png';
-import itvx from '../../assets/icons/service-icons/ITVX.png';
-import vue from '../../assets/icons/service-icons/VUE.png';
+import netflix from '../../../assets/icons/service-icons/NETFLIX.png'
+import prime from '../../../assets/icons/service-icons/PRIME.png';
+import bbc from '../../../assets/icons/service-icons/BBC.png';
+import itvx from '../../../assets/icons/service-icons/ITVX.png';
+import vue from '../../../assets/icons/service-icons/VUE.png';
 
 import styles from './ServiceIcon.module.css';
 

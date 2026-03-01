@@ -1,5 +1,5 @@
 import styles from './PersonCard.module.css';
-import MediaCard from '../MediaCard/MediaCard';
+import MediaCard from '../../Media/MediaCard/MediaCard';
 
 export default function PersonCard({ tmdbID, name, role, poster }) {
 

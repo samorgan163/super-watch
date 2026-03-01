@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 import styles from "./UserProfile.module.css";
-import PageLoading from "../../components/PageLoading/PageLoading";
-import PageRetry from "../../components/PageRetry/PageRetry";
+import PageLoading from '../../components/UI/PageLoading/PageLoading';
+import PageRetry from '../../components/UI/PageRetry/PageRetry';
 
 import { getProfile } from "../../api/user";
 import { useFetch } from "../../hooks/useFetch";

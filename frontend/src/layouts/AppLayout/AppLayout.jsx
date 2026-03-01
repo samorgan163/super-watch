@@ -1,6 +1,6 @@
-import TopNavbar from '../../components/TopNavbar/TopNavbar';
-import BottomNavbar from '../../components/BottomNavbar/BottomNavbar';
-import Navbar from '../../components/Navbar/Navbar';
+import TopNavbar from '../../components/Nav/TopNavbar/TopNavbar';
+import BottomNavbar from '../../components/Nav/BottomNavbar/BottomNavbar';
+import Navbar from '../../components/Nav/Navbar/Navbar';
 
 import styles from './AppLayout.module.css';
 

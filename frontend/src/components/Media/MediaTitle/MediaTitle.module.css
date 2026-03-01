@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100%;
+}
+
+.logoWrapper {
+    width: 100%;
+    display: none;
+}
+
+.logoWrapper img {
+    display: block;
+    width: 100%;
+}
+
+.title {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        margin-bottom: var(--grid-item-gap);
+    }
+    .logoWrapper {
+        display: block;
+    }
+    .title {
+        display: none;
+    }
+}

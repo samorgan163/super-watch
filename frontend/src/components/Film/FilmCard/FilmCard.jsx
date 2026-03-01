@@ -1,6 +1,6 @@
 import styles from './FilmCard.module.css';
-import ServiceIcon from '../../ServiceIcon/ServiceIcon';
-import MediaCard from '../MediaCard/MediaCard';
+import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
+import MediaCard from '../../Media/MediaCard/MediaCard';
 
 export default function FilmCard({ tmdbID, title, poster, streaming }) {
 

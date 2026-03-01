@@ -1,8 +1,8 @@
 import styles from "./Watchlist.module.css";
-import FilmsGrid from "../../components/FilmsGrid/FilmsGrid";
-import PageLoading from "../../components/PageLoading/PageLoading";
-import FilmCard from "../../components/Cards/FilmCard/FilmCard";
-import PageRetry from "../../components/PageRetry/PageRetry";
+import MediaGrid from '../../components/Media/MediaGrid/MediaGrid';
+import PageLoading from "../../components/UI/PageLoading/PageLoading";
+import FilmCard from "../../components/Film/FilmCard/FilmCard";
+import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
 import { useState, useEffect } from "react";
 
@@ -22,7 +22,7 @@ export default function Watchlist() {
     return (
         <>
             <section className="section-with-mb section-with-px">
-                <FilmsGrid 
+                <MediaGrid 
                     title='Currently Streaming'
                     items={data.streaming}
                     getKey={(film) => film.tmdbid}
@@ -37,7 +37,7 @@ export default function Watchlist() {
                 />
             </section>
             <section className="section-with-mb section-with-px">
-                <FilmsGrid 
+                <MediaGrid 
                     title='Not Available'
                     fadeOpacity={true}
                     items={data.unavailable}

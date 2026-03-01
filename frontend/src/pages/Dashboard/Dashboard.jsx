@@ -1,9 +1,9 @@
 import styles from "./Dashboard.module.css";
-import PageLoading from "../../components/PageLoading/PageLoading";
-import PageRetry from "../../components/PageRetry/PageRetry";
+import PageLoading from "../../components/UI/PageLoading/PageLoading";
+import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
-import HorizontalScrollRow from "../../components/HorizontalScrollRow/HorizontalScrollRow";
-import FilmCard from '../../components/Cards/FilmCard/FilmCard'
+import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
+import FilmCard from '../../components/Film/FilmCard/FilmCard';
 
 import { useFetch } from "../../hooks/useFetch";
 import { getDashboard } from "../../api/user";
@@ -21,7 +21,7 @@ export default function Dashboard() {
     return (
         <>
             <section className="section-with-mb">
-                <HorizontalScrollRow 
+                <MediaScrollRow 
                     title='Streaming From Your Watchlist'
                     items={data.streaming_watchlist}
                     getKey={(film) => film.tmdbid}
@@ -36,7 +36,7 @@ export default function Dashboard() {
                 />
             </section>
             <section className="section-with-mb">
-                <HorizontalScrollRow 
+                <MediaScrollRow 
                     title='Popular Films'
                     items={data.popular_films.results}
                     getKey={(film) => film.tmdbid}

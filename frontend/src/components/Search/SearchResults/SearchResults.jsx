@@ -1,5 +1,5 @@
 import styles from './SearchResults.module.css';
-import FilmCardWithDetails from '../Cards/FilmCardWithDetails/FilmCardWithDetails';
+import FilmCardWithDetails from '../../Film/FilmCardWithDetails/FilmCardWithDetails';
 
 import { BounceLoader } from "react-spinners";
 

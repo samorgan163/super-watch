@@ -13,8 +13,6 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoPersonSharp } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 
-import watchlistIcon from '../../assets/icons/watchlist.png';
-
 const navItems = [
 	{ label: 'Dashboard', href: '/', iconSharp: <IoHomeSharp />, iconOutline: <IoHomeOutline /> },
 	{ label: 'Add', href: '/search', iconSharp: <IoHomeSharp />, iconOutline: <IoHomeOutline /> },

@@ -1,11 +1,11 @@
 import MetaData from '../../components/Film/MetaData/MetaData';
 import Trailer from '../../components/Film/Trailer/Trailer';
-import HorizontalScrollRow from '../../components/HorizontalScrollRow/HorizontalScrollRow';
-import PageLoading from '../../components/PageLoading/PageLoading';
-import PageRetry from '../../components/PageRetry/PageRetry';
-import PersonCard from '../../components/Cards/PersonCard/PersonCard';
+import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
+import PageLoading from '../../components/UI/PageLoading/PageLoading';
+import PageRetry from '../../components/UI/PageRetry/PageRetry';
+import PersonCard from '../../components/Person/PersonCard/PersonCard';
 import Streaming from '../../components/Film/Streaming/Streaming';
-import WatchlistButton from '../../components/WatchlistButton/WatchlistButton';
+import WatchlistButton from '../../components/UI/WatchlistButton/WatchlistButton';
 
 import { useParams } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ export default function Film() {
                 </section>
                 
                 <section className='section-with-mb'>
-                    <HorizontalScrollRow 
+                    <MediaScrollRow 
                         title='Top Cast'
                         items={data.top_cast}
                         getKey={(person) => person.id}

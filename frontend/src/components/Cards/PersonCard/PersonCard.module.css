@@ -1,9 +1,0 @@
-.personImageWrapper {
-    position: relative;
-    aspect-ratio: 2/3;
-    margin-bottom: 8px; /* TODO: magic number */
-}
-
-.person:hover img {
-    border: 1px solid var(--color-border-hover);
-}

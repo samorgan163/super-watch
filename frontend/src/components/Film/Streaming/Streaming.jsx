@@ -1,5 +1,5 @@
 import styles from './Streaming.module.css';
-import ServiceIcon from '../../ServiceIcon/ServiceIcon';
+import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
 
 export default function Streaming({ service }) {
     return (

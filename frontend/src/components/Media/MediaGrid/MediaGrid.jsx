@@ -1,4 +1,4 @@
-import styles from './FilmsGrid.module.css';
+import styles from './MediaGrid.module.css';
 
 export default function FilmsGrid({ title, items, renderItem, getKey, fadeOpacity = false }) {
 

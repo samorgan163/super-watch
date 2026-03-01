@@ -1,4 +1,4 @@
-import styles from './HorizontalScrollRow.module.css';
+import styles from './MediaScrollRow.module.css';
 
 import { useEffect, useRef, useState } from 'react';
 

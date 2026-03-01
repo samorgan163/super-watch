@@ -1,6 +1,6 @@
 import styles from './WatchlistButton.module.css';
 
-import { useWatchlist } from '../../hooks/useWatchlist';
+import { useWatchlist } from '../../../hooks/useWatchlist';
 
 export default function WatchlistButton({ tmdbId }) {
 

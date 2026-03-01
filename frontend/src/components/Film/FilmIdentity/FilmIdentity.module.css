@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--grid-item-gap);
+}
+
+.posterWrapper {
+    width: 20%;
+}
+
+.posterWrapper img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2/3;
+}
+
+@media (min-width: 768px) {
+    .posterWrapper {
+        display: none;
+    }
+    .director {
+        display: none;
+    }
+}
