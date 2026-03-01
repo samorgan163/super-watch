@@ -2,8 +2,9 @@ import styles from './FilmIdentity.module.css';
 
 import MediaTitle from '../../Media/MediaTitle/MediaTitle';
 import MediaReleaseInfo from '../../Media/MediaReleaseInfo/MediaReleaseInfo';
+import FilmDirector from '../FilmDirector/FilmDirector';
 
-export default function FilmIdentity({ poster, title, logo }) {
+export default function FilmIdentity({ poster, title, logo, directors }) {
 
     return (
         <div className={styles.wrapper}>
@@ -20,7 +21,9 @@ export default function FilmIdentity({ poster, title, logo }) {
                     ageRating={'12'}
                     runtime={'122'}
                 />
-                <p className={`${styles.director} text-md font-bold text-color-primary`}>Directed by: Goes Here</p>
+                <FilmDirector 
+                    directors={directors}
+                />
             </div>
         </div>
     );

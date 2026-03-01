@@ -4,6 +4,12 @@
     gap: var(--grid-item-gap);
 }
 
+.metaDataWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-item-gap);
+}
+
 .posterWrapper {
     width: 30%;
     aspect-ratio: 2/3;

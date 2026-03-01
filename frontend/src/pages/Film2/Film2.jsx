@@ -41,6 +41,7 @@ export default function Film2() {
                         poster={data?.poster}
                         title={data?.title}
                         logo={data?.logo}
+                        directors={data?.director}
                     />
                     <MediaOverview
                         overview={data?.overview}
