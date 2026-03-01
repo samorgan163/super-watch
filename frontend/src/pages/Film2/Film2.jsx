@@ -1,7 +1,6 @@
 import FullsreenMediaLayout from "../../layouts/FullscreenMediaLayout/FullScreenMediaLayout";
 
 import Trailer from "../../components/Film/Trailer/Trailer";
-import MetaData from "../../components/Film/MetaData/MetaData";
 import MediaScrollRow from "../../components/Media/MediaScrollRow/MediaScrollRow";
 import PersonCard from "../../components/Person/PersonCard/PersonCard";
 
@@ -10,14 +9,15 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { getFilm } from "../../api/film";
 
-import MediaTitle from '../../components/Media/MediaTitle/MediaTitle';
-import MediaReleaseInfo from "../../components/Media/MediaReleaseInfo/MediaReleaseInfo";
 import MediaOverview from "../../components/Media/MediaOverview/MediaOverview";
 import WatchlistButton from "../../components/UI/WatchlistButton/WatchlistButton";
 import Streaming from "../../components/Film/Streaming/Streaming";
 import MediaActions from "../../components/Media/MediaActions/MediaActions";
 
 import FilmIdentity from "../../components/Film/FilmIdentity/FilmIdentity";
+
+import PageLoading from "../../components/UI/PageLoading/PageLoading";
+import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
 export default function Film2() {
 
@@ -28,15 +28,19 @@ export default function Film2() {
         () => getFilm(tmdbID), [tmdbID]
     );
 
+    if (loading) return <PageLoading />;
+    
+    if (error) return <PageRetry retryAction={retry} />;
+
     return (
         <FullsreenMediaLayout 
             media={<Trailer trailerImageURL={data?.banner} />}
             mediaOverlay={
                 <>
                     <FilmIdentity 
-                        poster={data.poster}
-                        title={data.title}
-                        logo={data.logo}
+                        poster={data?.poster}
+                        title={data?.title}
+                        logo={data?.logo}
                     />
                     <MediaOverview
                         overview={data?.overview}

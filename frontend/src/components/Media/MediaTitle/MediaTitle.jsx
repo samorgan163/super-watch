@@ -4,12 +4,14 @@ export default function MediaTitle({ title, logo }) {
     
     const cleanedTitle = title || 'Unknown';
 
+    const logoAltText = title ? `${title} logo` : 'Film logo';
+
     return (
         <div className={styles.wrapper}>
             {logo ? (
                 <>
                 <div className={styles.logoWrapper}>
-                    <img src={logo} alt={`${title} logo`} />
+                    <img loading='lazy' src={logo} alt={logoAltText} />
                 </div>
 
                 <h1 className={`${styles.title} text-l font-bold text-color-primary`}>{cleanedTitle}</h1>

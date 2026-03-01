@@ -1,18 +1,26 @@
 .wrapper {
+    position: fixed;
+    bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom));
+    padding: 12px 0; /* TODO: magic numbers, spacing between bottom */
+
     display: flex;
+    justify-content: center;
     gap: var(--grid-item-gap);
 
-    position: fixed;
-    bottom: 0;
-    z-index: 3;
     width: 100%;
-    justify-content: center;
+    z-index: 3;
+    
+    background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
 }
-
 
 @media (min-width: 768px) {
     .wrapper {
         position: relative;
+        bottom: 0;
+        padding: 0;
+
         justify-content: flex-start;
+
+        background: none;
     }
 }

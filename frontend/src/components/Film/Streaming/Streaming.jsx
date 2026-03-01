@@ -2,6 +2,7 @@ import styles from './Streaming.module.css';
 import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
 
 export default function Streaming({ service }) {
+
     return (
         <div className='button'>
             {service ? (
@@ -14,4 +15,5 @@ export default function Streaming({ service }) {
             )}
         </div>
     );
+    
 }

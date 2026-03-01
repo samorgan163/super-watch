@@ -1,17 +1,28 @@
 import styles from './MediaReleaseInfo.module.css';
 
-export default function MediaReleaseInfo({ date, age, runtime }) {
+export default function MediaReleaseInfo({ releaseDate, ageRating, runtime }) {
 
-    const releaseYear = date?.slice(0, 4);
-
+    // extract year from release date
+    const releaseYear = releaseDate?.slice(0, 4) || null;
+    
     return (
-        <p className='text-md font-bold text-color-primary'>
-            {releaseYear}
-            &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-            {age}
-            &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-            {runtime ? `${runtime} mins` : ''}
-        </p>
+        <div className={styles.wrapper}>
+            {releaseYear && (
+                <p className='text-md font-bold text-color-primary'>
+                    {releaseYear}
+                </p>
+            )}
+            {ageRating && (
+                <p className='text-md font-bold text-color-primary'>
+                    {ageRating}
+                </p>
+            )}
+            {runtime && (
+                <p className='text-md font-bold text-color-primary'>
+                    {runtime} mins
+                </p>
+            )}
+        </div>
     );
 
 }

@@ -8,7 +8,7 @@ export default function FilmIdentity({ poster, title, logo }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.posterWrapper}>
-                <img src={poster} alt="" />
+                <img loading='lazy' src={poster} alt={title ? `${title} poster` : 'Film poster'} />
             </div>
             <div className={styles.metaDataWrapper}>
                 <MediaTitle 
@@ -16,8 +16,8 @@ export default function FilmIdentity({ poster, title, logo }) {
                     logo={logo}
                 />
                 <MediaReleaseInfo 
-                    date={'2024'}
-                    age={'12'}
+                    releaseDate={'2024'}
+                    ageRating={'12'}
                     runtime={'122'}
                 />
                 <p className={`${styles.director} text-md font-bold text-color-primary`}>Directed by: Goes Here</p>
