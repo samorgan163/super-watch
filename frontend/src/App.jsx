@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 
-import Dashboard from './pages/Dashboard/Dashboard';
-import Login from "./pages/Login/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 import AppLayout from "./layouts/AppLayout/AppLayout";
+
+
+import Login from "./pages/Login/Login";
+import Dashboard from './pages/Dashboard/Dashboard';
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Search from "./pages/Search/Search";
 import Watchlist from "./pages/Watchlist/Watchlist";
 import Film from "./pages/Film/Film";
-
-import FullsreenMediaLayout from "./layouts/FullscreenMediaLayout/FullScreenMediaLayout";
-import Film2 from "./pages/Film2/Film2";
 
 export default function App() {
 	return (
@@ -19,10 +19,8 @@ export default function App() {
             <Route path="/" element={<ProtectedRoute><AppLayout title='Dashboard'><Dashboard /></AppLayout></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><AppLayout><UserProfile /></AppLayout></ProtectedRoute>} />
             <Route path="/film/:tmdbID" element={<ProtectedRoute><AppLayout fullHeight><Film /></AppLayout></ProtectedRoute>} />
-            <Route path="/film2/:tmdbID" element={<ProtectedRoute><AppLayout fullHeight><Film2 /></AppLayout></ProtectedRoute>} />
             <Route path='/search' element={<ProtectedRoute><AppLayout><Search /></AppLayout></ProtectedRoute>} />
             <Route path='/watchlist' element={<ProtectedRoute><AppLayout title='Watchlist'><Watchlist /></AppLayout></ProtectedRoute>} />
-            <Route path='/test' element={<FullsreenMediaLayout><h2>Top Cast</h2></FullsreenMediaLayout>} />
         </Routes>
 	)
 }

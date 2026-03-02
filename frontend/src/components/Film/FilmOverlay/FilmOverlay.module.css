@@ -1,0 +1,75 @@
+.wrapper {
+    display: grid;
+    gap: var(--grid-item-gap);
+
+    grid-template-columns: 30% auto;
+    grid-template-areas:
+        'poster meta'
+        'overview overview'
+        /* no actions because component aligns itself */
+}
+
+.poster {
+    grid-area: poster;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+.poster img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+.meta {
+    grid-area: meta;
+    align-self: center;
+}
+
+.overview {
+    grid-area: overview;
+}
+
+.desktopDirector {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "meta director"
+            "overview director"
+            "actions director";
+    }
+
+    .poster { 
+        display: none; 
+    }
+    
+    .meta { 
+        grid-area: meta; 
+    }
+
+    .mobileDirector { 
+        display: none; 
+    }
+    
+    .desktopDirector {
+        display: block;
+        grid-area: director;
+        align-self: end;
+        justify-self: end;
+    }
+    
+    .overview { 
+        grid-area: overview; 
+    }
+    
+    .actions  { 
+        grid-area: actions; 
+    }
+
+}

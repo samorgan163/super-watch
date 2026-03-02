@@ -9,9 +9,7 @@ export default function FullsreenMediaLayout({media, mediaOverlay, children}) {
             </div>
             <div className={styles.overlayAndContentWrapper}>
                 <div className={styles.mediaOverlayWrapper}>
-                    <div className={styles.left}>
-                        {mediaOverlay}
-                    </div>
+                    {mediaOverlay}
                 </div>
                 <div className={styles.contentWrapper}>
                     {children}

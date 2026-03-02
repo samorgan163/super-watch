@@ -1,19 +1,19 @@
-import MetaData from '../../components/Film/MetaData/MetaData';
-import Trailer from '../../components/Film/Trailer/Trailer';
-import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
-import PageLoading from '../../components/UI/PageLoading/PageLoading';
-import PageRetry from '../../components/UI/PageRetry/PageRetry';
-import PersonCard from '../../components/Person/PersonCard/PersonCard';
-import Streaming from '../../components/Film/Streaming/Streaming';
-import WatchlistButton from '../../components/UI/WatchlistButton/WatchlistButton';
+import FullsreenMediaLayout from "../../layouts/FullscreenMediaLayout/FullScreenMediaLayout";
 
-import { useParams } from 'react-router-dom';
+import FilmOverlay from "../../components/Film/FilmOverlay/FilmOverlay";
+import Trailer from "../../components/Film/Trailer/Trailer";
+import MediaScrollRow from "../../components/Media/MediaScrollRow/MediaScrollRow";
+import PersonCard from "../../components/Person/PersonCard/PersonCard";
 
-import styles from './Film.module.css';
-import { useFetch } from '../../hooks/useFetch';
-import { getFilm } from '../../api/film';
+import PageLoading from "../../components/UI/PageLoading/PageLoading";
+import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
-export default function Film() {
+import { useParams } from "react-router-dom";
+import { useFetch } from "../../hooks/useFetch";
+
+import { getFilm } from "../../api/film";
+
+export default function Film2() {
 
     // get tmdbID from route params
     const { tmdbID } = useParams();
@@ -23,48 +23,41 @@ export default function Film() {
     );
 
     if (loading) return <PageLoading />;
-
+    
     if (error) return <PageRetry retryAction={retry} />;
 
     return (
-        <div className={styles.filmWrapper}>
-            <Trailer trailerImageURL={data?.banner} />
-            <div className={styles.contentWrapper}>
-                <section className={`${styles.metaDataWrapper} section-with-px section-with-mb`}>
-                    <MetaData 
-                        logo={data?.logo}
-                        poster={data?.poster}
-                        releaseDate={data.release_date}
-                        runtime={data.runtime}
-                        overview={data.overview}
-                        director={data.director?.[0].name}
-                        title={data?.title}
+        <FullsreenMediaLayout 
+            media={<Trailer trailerImageURL={data?.banner} />}
+            mediaOverlay={
+                <FilmOverlay 
+                    tmdbID={data?.tmdbid}
+                    title={data?.title}
+                    poster={data?.poster}
+                    logo={data?.logo}
+                    director={data?.director}
+                    overview={data?.overview}
+                    streaming={data?.streaming}
+                    releaseDate={data?.release_date}
+                    ageRating={data?.age}
+                    runtime={data?.runtime}
+                />
+            }
+        >
+            <MediaScrollRow 
+                title='Top Cast'
+                items={data.top_cast}
+                getKey={(person) => person.id}
+                renderItem={(person) => (
+                    <PersonCard
+                        tmdbID={person.id}
+                        name={person.name}
+                        role={person.role}
+                        poster={person.poster}
                     />
-                    <div className={styles.toolbarWrapper}>
-                        <Streaming service={data?.streaming?.[0]} />
-                        <WatchlistButton tmdbId={data?.tmdbid}/>
-                    </div>
-                   
-                </section>
-                
-                <section className='section-with-mb'>
-                    <MediaScrollRow 
-                        title='Top Cast'
-                        items={data.top_cast}
-                        getKey={(person) => person.id}
-                        renderItem={(person) => (
-                            <PersonCard
-                                tmdbID={person.id}
-                                name={person.name}
-                                role={person.role}
-                                poster={person.poster}
-                            />
-                        )}
-                    />
-                </section>
-               
-            </div>
-        </div>
-    )
+                )}
+            />
+        </FullsreenMediaLayout>
+    );
 
 }
