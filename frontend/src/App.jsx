@@ -4,13 +4,12 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import AppLayout from "./layouts/AppLayout/AppLayout";
 
-
 import Login from "./pages/Login/Login";
 import Dashboard from './pages/Dashboard/Dashboard';
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Search from "./pages/Search/Search";
 import Watchlist from "./pages/Watchlist/Watchlist";
-import Film from "./pages/Film/Film";
+import Film from './pages/Film/Film';
 
 export default function App() {
 	return (

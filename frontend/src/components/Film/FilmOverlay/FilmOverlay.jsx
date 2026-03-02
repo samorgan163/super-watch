@@ -2,6 +2,7 @@ import styles from './FilmOverlay.module.css';
 
 import MediaOverview from '../../Media/MediaOverview/MediaOverview';
 import MediaActions from '../../Media/MediaActions/MediaActions';
+import MediaPoster from '../../Media/MediaPoster/MediaPoster';
 import Streaming from '../Streaming/Streaming';
 import WatchlistButton from '../../UI/WatchlistButton/WatchlistButton';
 import MediaTitle from '../../Media/MediaTitle/MediaTitle';
@@ -25,11 +26,7 @@ export default function FilmOverlay({
         <div className={styles.wrapper}>
             
             <div className={styles.poster}>
-                <img
-                    loading="lazy"
-                    src={poster}
-                    alt={title ? `${title} poster` : 'Film poster'}
-                />
+                <MediaPoster imageSRC={poster} title={title}/>
             </div>
 
             <div className={styles.meta}>

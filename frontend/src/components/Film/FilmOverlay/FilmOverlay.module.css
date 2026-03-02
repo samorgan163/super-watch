@@ -1,4 +1,6 @@
 .wrapper {
+    width: 100%;
+
     display: grid;
     gap: var(--grid-item-gap);
 

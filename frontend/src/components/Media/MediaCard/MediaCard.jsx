@@ -4,6 +4,8 @@ import styles from './MediaCard.module.css';
 
 import NoPosterImage from '../../../assets/fallbacks/no-poster-image.jpg';
 
+import MediaPoster from "../MediaPoster/MediaPoster";
+
 export default function MediaCard({ 
     toURL = '#', 
     imageSRC = null, 
@@ -15,19 +17,14 @@ export default function MediaCard({
     return (
         <div className={styles.mediaCard}>
             
-            <Link 
-                to={toURL}
-            >
+            <Link to={toURL}>
                 <div className={styles.imageWrapper}>
                     {serviceOverlay && (
                         <div className={styles.serviceOverlayWrapper}>
                             {serviceOverlay}
                         </div>
                     )}
-                    <img 
-                        loading='lazy' 
-                        src={imageSRC || NoPosterImage} 
-                        alt={title ? `${title} poster image` : 'Media poster image'} />
+                    <MediaPoster imageSRC={imageSRC} title={title} hoverEffect/>
                 </div>
             </Link>
             
