@@ -6,37 +6,27 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
-// Error classes
-const { NotFoundError, ConflictError, NotAuthenticatedError } = require('./errors/customErrors.js');
+// Import error handlers
+const { errorHandler, routeNotFoundHandler } = require('./middleware/errorHandler.js');
 
-// Auth middleware
-const { authenticateUser } = require('./middleware/auth.js');
+// Import Routes
+const authRoutes = require('./routes/authRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
+const filmRoutes = require('./routes/filmRoutes.js');
+const watchlistRoutes = require('./routes/watchlistRoutes.js');
 
-// Controllers
-const authController = require('./controllers/auth-controller.js');
-const userController = require('./controllers/user-controller.js');
-const tmdbController = require('./controllers/tmdb-controller.js');
-const watchlistController = require('./controllers/watchlist-controller.js');
-const dashboardController = require('./controllers/dashboard-controller.js');
-
-// Settings
+// Cors Settings
 const corsSettings = {
     origin: process.env.FRONT_END_URL,
     credentials: true,
 };
 
+// Rate limit settings
 const rateLimitSettings = {
     windowMs: 2000,
     limit: 2,
     message: 'Rate limit exceeded',
 };
-
-// Server setup
-const app = express();
-app.use(cors(corsSettings));
-//app.use(rateLimit(rateLimitSettings));
-app.use(express.json());
-app.use(cookieParser());
 
 // Connect to database
 mongoose.connect(process.env.MONGO_URL)
@@ -48,45 +38,24 @@ mongoose.connect(process.env.MONGO_URL)
         process.exit(1);
     });
 
-// --- AUTH ROUTES --- //
-app.get('/auth/me', authenticateUser, authController.authMe); // check if user is authenticated for frontend
-app.post('/auth/register', authController.registerUser);
-app.post('/auth/login', authController.login);
-app.post('/auth/logout', authController.logout);
+// Server setup
+const app = express();
+app.use(cors(corsSettings));
+//app.use(rateLimit(rateLimitSettings));
+app.use(express.json());
+app.use(cookieParser());
 
-// --- USER ROUTES --- //
-app.get('/user/dashboard', authenticateUser, dashboardController.getDashboard);
-app.get('/user/profile', authenticateUser, userController.getUserProfile);
+// Routes
+app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
+app.use('/film', filmRoutes);
+app.use('/watchlist', watchlistRoutes);
 
-// --- FILM ROUTES --- //
-app.get('/film/search', authenticateUser, tmdbController.findFilmsByTitle);
-app.get('/film/:tmdbId', authenticateUser, tmdbController.getFilmByTmdbId);
+// Route not found handler
+app.use(routeNotFoundHandler);
 
-// --- WATCHLIST ROUTES --- //
-app.get('/watchlist', authenticateUser, watchlistController.getWatchlist);
-app.post('/watchlist/:tmdbid', authenticateUser, watchlistController.addFilmToWatchlist);
-app.delete('/watchlist/:tmdbid', authenticateUser, watchlistController.removeFilmFromWatchlist);
-app.get('/watchlist/check/:tmdbid', authenticateUser, watchlistController.filmInWatchlist);
-
-// -- ERROR HANDLING MIDDLEWARE -- //
-app.use((err, req, res, next) => {
-    console.error(err);
-
-    if (err instanceof NotFoundError) {
-        return res.status(404).json({ message: err.message });
-    }
-
-    if (err instanceof ConflictError) {
-        return res.status(409).json({ message: err.message });
-    }
-
-    if (err instanceof NotAuthenticatedError) {
-        return res.status(401).json({ message: err.message });
-    }
-    
-    // fallback for unexpected errors
-    return res.status(500).json({ message: 'Server error' });
-});
+// Error handler
+app.use(errorHandler);
 
 // Server startup
 const server = app.listen(process.env.PORT || 3000, '0.0.0.0', () => {

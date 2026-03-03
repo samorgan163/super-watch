@@ -11,7 +11,7 @@ exports.getFilmByTmdbId = async (req, res, next) => {
     }
     catch (err) {
         if (err.code === 'TMDB_NOT_FOUND') {
-            throw new NotFoundError('Film not found on TMDb');
+            return next(new NotFoundError('Film not found on TMDb'));
         }
         next(err);
     }
@@ -31,7 +31,8 @@ exports.findFilmsByTitle = async (req, res, next) => {
 
 exports.getCurrentlyPopularFilms = async (req, res, next) => {
     const { page } = req.query;
-    try {        const results = await tmdbService.getCurrentlyPopularFilms(page);
+    try {        
+        const results = await tmdbService.getCurrentlyPopularFilms(page);
         return res.status(200).json(results);
     }
     catch (err) {
