@@ -94,7 +94,7 @@ function _handleError(error) {
 
         if (status === 429) {
             handleRateLimited();
-            return new ServiceUnavailableError('TMDb limit exceeded. Please try again later.');
+            return new ServiceUnavailableError('TMDb limit exceeded. Please try again later.', { cause: error});
         }
 
         if (status === 401 || status === 403) {
@@ -106,7 +106,7 @@ function _handleError(error) {
                 tmdbCode === 45
             ) {
                 blockRequests();
-                return new ServiceUnavailableError('TMDb api key issue');
+                return new ServiceUnavailableError('TMDb api key issue', { cause: error});
             }
         }
 
@@ -114,11 +114,55 @@ function _handleError(error) {
             return new NotFoundError('TMDB not found');
         }
 
-        return new ServiceUnavailableError(`TMDB error, code: ${tmdbCode}`);        
+        return new ServiceUnavailableError(`TMDB error, code: ${tmdbCode}`, { cause: error});        
     }
     
-    return new ServiceUnavailableError('Unknown TMDB error');
+    return new ServiceUnavailableError('Unknown TMDB error', { cause: error});
 };
+
+function extractWatchProviders(watchProviders) {
+    // get streaming availablility in UK
+    const watchProvidersGB = [
+        ...(watchProviders?.GB?.flatrate ?? []),
+        ...(watchProviders?.GB?.ads ?? []),
+    ];
+
+    if (watchProvidersGB.length < 1) {
+        return [];
+    }
+
+    const streamingSet = new Set();
+
+    // filter from given services
+    watchProvidersGB.forEach(service => {
+        const providerName = providers.get(service.provider_id);
+        if (providerName) {
+            streamingSet.add(providerName); // duplicates automatically ignored
+        }
+    });
+    
+    return Array.from(streamingSet);
+}
+
+function extractDirectors(crew = []) {
+    return crew
+        .filter(person => person.job === 'Director')
+        .map(person => ({
+            id: person.id,
+            name: person.name,
+        }))
+}
+
+function extractCast(cast = [], quantity = cast.length) {
+    return cast
+        .slice(0, Math.max(0, quantity))
+        .map(person => ({
+            id: person.id,
+            name: person.name,
+            role: person.character,
+            poster: person.profile_path,
+        }))
+}
 
 exports.getFilmById = async (tmdbId) => {
     try {
@@ -139,52 +183,19 @@ exports.getFilmById = async (tmdbId) => {
             tmdbid: filmDetails.id, // better to get the response id?
             title: filmDetails.title,
             genres: filmDetails.genres.map(g => g.name),
-            director: filmDetails.credits.crew
-                        .filter(person => person.job === 'Director')
-                        .map(person => ({
-                            id: person.id,
-                            name: person.name,
-                        })),
+            director: extractDirectors(filmDetails.credits.crew),
             release_date: filmDetails.release_date,
             trailer: null,
-            poster: `https://image.tmdb.org/t/p/w400${filmDetails.poster_path}`,
-            banner: `https://image.tmdb.org/t/p/w1280${filmDetails.backdrop_path}`,
+            poster: filmDetails.poster_path,
+            banner: filmDetails.backdrop_path,
             ratings: [],
-            streaming: [],
             cinema: [],
             super_like: false,
             runtime: filmDetails.runtime,
             overview: filmDetails.overview,
-            top_cast: filmDetails.credits.cast
-                        .slice(0, 10)
-                        .map(person => ({
-                            id: person.id,
-                            name: person.name,
-                            role: person.character,
-                            poster: `https://image.tmdb.org/t/p/w400${person.profile_path}`
-                        })),
-            logo: filmDetails.images?.logos?.[0]?.file_path 
-                        ? `https://image.tmdb.org/t/p/w500${filmDetails.images?.logos?.[0]?.file_path}`
-                        : null,
-        }
-
-        // filter streaming providers
-        const watchProviders = filmDetails["watch/providers"];
-        //const watchProvidersGB = watchProviders?.results?.GB?.flatrate;
-        const watchProvidersGB = [
-            ...(watchProviders?.results?.GB?.flatrate ?? []),
-            ...(watchProviders?.results?.GB?.ads ?? []),
-        ];
-        // check if any providers for film
-        if (Array.isArray(watchProvidersGB) && watchProvidersGB.length > 0) {
-            const streamingSet = new Set(film.streaming); // start with existing items, if any
-            watchProvidersGB.forEach(service => {
-                const providerName = providers.get(service.provider_id);
-                if (providerName) {
-                    streamingSet.add(providerName); // duplicates automatically ignored
-                }
-            });
-            film.streaming = Array.from(streamingSet);
+            top_cast: extractCast(filmDetails.credits.cast, 10),
+            logo: filmDetails.images?.logos?.[0]?.file_path || null,
+            streaming: extractWatchProviders(filmDetails['watch/providers'].results),
         }
 
         return film
@@ -220,23 +231,7 @@ exports.getStreamingProvidersById = async (tmdbId) => {
             url: `/movie/${tmdbId}/watch/providers`,
         });
 
-        // get GB streaming subscription and free with ads
-        const watchProvidersGB = [
-            ...(response.data?.results?.GB?.flatrate ?? []),
-            ...(response.data?.results?.GB?.ads ?? []),
-        ];
-        // check if any providers for film
-        if (Array.isArray(watchProvidersGB) && watchProvidersGB.length > 0) {
-            const streamingSet = new Set();
-            watchProvidersGB.forEach(service => {
-                const providerName = providers.get(service.provider_id);
-                if (providerName) {
-                    streamingSet.add(providerName); // duplicates automatically ignored
-                }
-            });
-            return Array.from(streamingSet);
-        }
-        return [];
+        return extractWatchProviders(response.data.results);
     }
     catch (error) {
         throw _handleError(error);
@@ -296,12 +291,12 @@ exports.getCurrentlyPopularFilms = async (pageNum) => {
             popularFilms.push({
                 tmdbid: film.id,
                 title: film.title,
-                poster: film.poster_path ? `https://image.tmdb.org/t/p/w400${film.poster_path}` : null,
+                poster: film.poster_path || null,
                 streaming: [], // to be filled in later with separate requests
             });
         });
 
-        response.data.results = popularFilms; // overwrite results with simplified objects
+        response.data.results = popularFilms; // overwrite results with simplified object
 
         return response.data;
     }

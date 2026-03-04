@@ -29,7 +29,7 @@ export default function Dashboard() {
                         <FilmCard
                             tmdbID={film.tmdbid}
                             title={film.title}
-                            poster={film.poster}
+                            posterPath={film.poster}
                             streaming={film.streaming}
                         />
                     )}
@@ -44,7 +44,7 @@ export default function Dashboard() {
                         <FilmCard
                             tmdbID={film.tmdbid}
                             title={film.title}
-                            poster={film.poster}
+                            posterPath={film.poster}
                             streaming={film.streaming}
                         />
                     )}

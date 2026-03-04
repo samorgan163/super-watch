@@ -1,8 +1,11 @@
 import styles from './MediaTitle.module.css';
 
-export default function MediaTitle({ title, logo }) {
+export default function MediaTitle({ title = 'Unknown', logo }) {
     
     const cleanedTitle = title || 'Unknown';
+
+    const logoBaseURL = 'https://image.tmdb.org/t/p/w500';
+    const logoSRC = `${logoBaseURL}${logo}`;
 
     const logoAltText = title ? `${title} logo` : 'Film logo';
 
@@ -11,7 +14,7 @@ export default function MediaTitle({ title, logo }) {
             {logo ? (
                 <>
                 <div className={styles.logoWrapper}>
-                    <img loading='lazy' src={logo} alt={logoAltText} />
+                    <img loading='lazy' src={logoSRC} alt={logoAltText} />
                 </div>
 
                 <h1 className={`${styles.title} text-l font-bold text-color-primary`}>{cleanedTitle}</h1>

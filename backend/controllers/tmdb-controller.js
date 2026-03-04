@@ -10,9 +10,6 @@ exports.getFilmByTmdbId = async (req, res, next) => {
         return res.status(200).json(film);
     }
     catch (err) {
-        if (err.code === 'TMDB_NOT_FOUND') {
-            return next(new NotFoundError('Film not found on TMDb'));
-        }
         next(err);
     }
 };

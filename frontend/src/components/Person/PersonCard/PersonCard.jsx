@@ -1,7 +1,8 @@
 import styles from './PersonCard.module.css';
 import MediaCard from '../../Media/MediaCard/MediaCard';
+import MediaPoster from '../../Media/MediaPoster/MediaPoster';
 
-export default function PersonCard({ tmdbID, name, role, poster }) {
+export default function PersonCard({ tmdbID, name, role, posterPath }) {
 
     // do not currently have a person page
     const url = '#';
@@ -10,15 +11,19 @@ export default function PersonCard({ tmdbID, name, role, poster }) {
 
     const cleanedRole = role || 'Unknown';
 
-    /* use when you change backend
-    const posterPrefixURL = 'https://image.tmdb.org/t/p/w400';
-    const posterSRC = poster ? `${posterPrefixURL}${poster}` : null;
-    */
+    const tmdbProfileImageRes = 'w185';
 
     return (
         <MediaCard
             toURL={url}
-            imageSRC={poster}
+            image={
+                <MediaPoster 
+                    imagePath={posterPath}
+                    imageRes={tmdbProfileImageRes}
+                    title={name}
+                    hoverEffect={true}
+                />
+            }
             title={cleanedName}
             subText={cleanedRole}
         />

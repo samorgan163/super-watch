@@ -1,7 +1,7 @@
 import FullsreenMediaLayout from "../../layouts/FullscreenMediaLayout/FullScreenMediaLayout";
 
 import FilmOverlay from "../../components/Film/FilmOverlay/FilmOverlay";
-import Trailer from "../../components/Film/Trailer/Trailer";
+import FilmTrailer from "../../components/Film/FilmTrailer/FilmTrailer";
 import MediaScrollRow from "../../components/Media/MediaScrollRow/MediaScrollRow";
 import PersonCard from "../../components/Person/PersonCard/PersonCard";
 
@@ -28,7 +28,7 @@ export default function Film2() {
 
     return (
         <FullsreenMediaLayout 
-            media={<Trailer trailerImageURL={data?.banner} />}
+            media={<FilmTrailer trailerImageURL={data?.banner} />}
             mediaOverlay={
                 <FilmOverlay 
                     tmdbID={data?.tmdbid}
@@ -53,7 +53,7 @@ export default function Film2() {
                         tmdbID={person.id}
                         name={person.name}
                         role={person.role}
-                        poster={person.poster}
+                        posterPath={person.poster}
                     />
                 )}
             />

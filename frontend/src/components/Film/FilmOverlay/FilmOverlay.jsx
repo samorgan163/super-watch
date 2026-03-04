@@ -22,11 +22,13 @@ export default function FilmOverlay({
     runtime,
 }) {
 
+    const tmdbPosterImageRes = 'w342';
+
     return (
         <div className={styles.wrapper}>
             
             <div className={styles.poster}>
-                <MediaPoster imageSRC={poster} title={title}/>
+                <MediaPoster imagePath={poster} imageRes={tmdbPosterImageRes} title={title}/>
             </div>
 
             <div className={styles.meta}>

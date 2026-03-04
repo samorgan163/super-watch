@@ -2,13 +2,9 @@ import { Link } from "react-router-dom";
 
 import styles from './MediaCard.module.css';
 
-import NoPosterImage from '../../../assets/fallbacks/no-poster-image.jpg';
-
-import MediaPoster from "../MediaPoster/MediaPoster";
-
 export default function MediaCard({ 
     toURL = '#', 
-    imageSRC = null, 
+    image = null, 
     title = '', 
     subText = '', 
     serviceOverlay = null, 
@@ -24,7 +20,7 @@ export default function MediaCard({
                             {serviceOverlay}
                         </div>
                     )}
-                    <MediaPoster imageSRC={imageSRC} title={title} hoverEffect/>
+                    {image}
                 </div>
             </Link>
             

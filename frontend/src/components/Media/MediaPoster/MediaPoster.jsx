@@ -2,9 +2,18 @@ import styles from './MediaPoster.module.css';
 
 import NoPosterImage from '../../../assets/fallbacks/no-poster-image.jpg';
 
-export default function MediaPoster({ imageSRC, title, hoverEffect = false }) {
+export default function MediaPoster({ 
+    imagePath = '', 
+    imageRes = 'w400', 
+    title = '', 
+    hoverEffect = false 
+}) {
 
-    const src = imageSRC || NoPosterImage;
+    const tmdbMediaBaseURL = 'https://image.tmdb.org/t/p/';
+
+    const src = imagePath 
+        ? `${tmdbMediaBaseURL}${imageRes}${imagePath}` 
+        : NoPosterImage;
 
     const altText = title ? `${title} poster image` : 'Poster image';
 

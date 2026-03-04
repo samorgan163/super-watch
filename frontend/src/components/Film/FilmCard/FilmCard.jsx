@@ -1,8 +1,9 @@
 import styles from './FilmCard.module.css';
 import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
 import MediaCard from '../../Media/MediaCard/MediaCard';
+import MediaPoster from '../../Media/MediaPoster/MediaPoster';
 
-export default function FilmCard({ tmdbID, title, poster, streaming }) {
+export default function FilmCard({ tmdbID, title, posterPath, streaming }) {
 
     const url = tmdbID ? `/film/${tmdbID}` : '/404';
 
@@ -10,16 +11,19 @@ export default function FilmCard({ tmdbID, title, poster, streaming }) {
 
     const primaryService = streaming?.[0] || null;
 
-    /* use when you change backend
-    const posterPrefixURL = 'https://image.tmdb.org/t/p/w400';
-    const posterSRC = poster ? `${posterPrefixURL}${poster}` : null;
-    */
+    const tmdbPosterImageRes = 'w342';
 
     return (
-
         <MediaCard 
             toURL={url}
-            imageSRC={poster}
+            image={
+                <MediaPoster 
+                    imagePath={posterPath}
+                    imageRes={tmdbPosterImageRes}
+                    title={title}
+                    hoverEffect={true}
+                />
+            }
             title={cleanedTitle}
             serviceOverlay={
                 primaryService && (
@@ -30,7 +34,6 @@ export default function FilmCard({ tmdbID, title, poster, streaming }) {
                 )
             }
         />
-
-    );
+    )
 
 }
