@@ -1,5 +1,5 @@
 const watchlistService = require('../services/watchlistService.js');
-const tmdbService = require('../services/tmdbService.js');
+const tmdbService = require('../services/tmdb/tmdbService.js');
 
 exports.getDashboard = async (req, res, next) => {
     const userID = req.user.id;

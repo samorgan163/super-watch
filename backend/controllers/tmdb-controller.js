@@ -1,4 +1,4 @@
-const tmdbService = require('../services/tmdbService');
+const tmdbService = require('../services/tmdb/tmdbService');
 
 const { NotFoundError } = require('../errors/customErrors');
 

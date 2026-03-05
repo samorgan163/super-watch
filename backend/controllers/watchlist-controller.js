@@ -1,6 +1,6 @@
 const Film = require('../models/film.js');
 const User = require('../models/user.js');
-const tmdbService = require('../services/tmdbService.js');
+const tmdbService = require('../services/tmdb/tmdbService.js');
 const watchlistService = require('../services/watchlistService.js');
 
 const { NotFoundError, ConflictError } = require('../errors/customErrors.js');
