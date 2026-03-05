@@ -25,3 +25,10 @@ export class ServiceUnavailableError extends Error {
         this.name = 'ServiceUnavailableError';
     }
 }
+
+export class ValidationError extends Error {
+    constructor(message, options) {
+        super(message, options);
+        this.name = 'ValidationError';
+    }
+}

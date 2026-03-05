@@ -1,9 +1,8 @@
+const { ServiceUnavailableError } = require('../../errors/customErrors');
 const TmdbClient = require('./client');
 const { extractCast, extractDirectors, extractWatchProviders } = require('./mappers');
 
-const apiKey = process.env.TMDB_API_KEY;
-
-const tmdbClient = new TmdbClient(apiKey);
+const tmdbClient = new TmdbClient(process.env.TMDB_API_KEY);
 
 exports.getFilmById = async (tmdbId) => {
         const response = await tmdbClient.request({
@@ -19,22 +18,22 @@ exports.getFilmById = async (tmdbId) => {
 
         // create film object
         const film = {
-            tmdbid: filmDetails.id,
-            title: filmDetails.title,
-            genres: filmDetails.genres.map(g => g.name),
+            tmdbid: filmDetails.id ?? null,
+            title: filmDetails.title ?? null,
+            genres: filmDetails.genres?.map(g => g.name) || [],
             director: extractDirectors(filmDetails.credits.crew),
-            release_date: filmDetails.release_date,
+            release_date: filmDetails.release_date ?? null,
             trailer: null,
-            poster: filmDetails.poster_path,
-            banner: filmDetails.backdrop_path,
+            poster: filmDetails.poster_path ?? null,
+            banner: filmDetails.backdrop_path ?? null,
             ratings: [],
             cinema: [],
             super_like: false,
-            runtime: filmDetails.runtime,
-            overview: filmDetails.overview,
+            runtime: filmDetails.runtime ?? null,
+            overview: filmDetails.overview ?? null,
             top_cast: extractCast(filmDetails.credits.cast, 10),
-            logo: filmDetails.images?.logos?.[0]?.file_path || null,
-            streaming: extractWatchProviders(filmDetails['watch/providers'].results),
+            logo: filmDetails.images?.logos?.[0]?.file_path ?? null,
+            streaming: extractWatchProviders(filmDetails['watch/providers']?.results),
         }
 
         return film

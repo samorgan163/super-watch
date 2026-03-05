@@ -1,12 +1,11 @@
 const tmdbService = require('../services/tmdb/tmdbService');
-
-const { NotFoundError } = require('../errors/customErrors');
+import { validationResult } from 'express-validator';
 
 // get film by tmdb id
 exports.getFilmByTmdbId = async (req, res, next) => {
-    const tmdbId = req.params.tmdbId;
+    const tmdbID = req.params.tmdbId;
     try {
-        const film = await tmdbService.getFilmById(tmdbId);
+        const film = await tmdbService.getFilmById(tmdbID);
         return res.status(200).json(film);
     }
     catch (err) {
