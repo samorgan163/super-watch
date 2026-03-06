@@ -7,15 +7,15 @@ exports.authenticateUser = (req, res, next) => {
     const token = req.cookies.accessToken;
     
     if (!token) {
-        throw new NotAuthenticatedError('No access token provided.');
+        return next(new NotAuthenticatedError('No access token provided.'));
     }
 
     try {
         const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        req.user = { id: payload.userId };
+        req.user = { id: payload.userID };
         next();
     }
-    catch (err) {
-        throw new NotAuthenticatedError('Invalid access token.');
+    catch (error) {
+        return next(new NotAuthenticatedError('Invalid access token.'));
     }
 }

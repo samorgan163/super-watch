@@ -1,5 +1,4 @@
 const tmdbService = require('../services/tmdb/tmdbService');
-import { validationResult } from 'express-validator';
 
 // get film by tmdb id
 exports.getFilmByTmdbId = async (req, res, next) => {

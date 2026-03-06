@@ -1,17 +1,20 @@
 const User = require('../models/user.js');
+const { NotFoundError } = require('../errors/customErrors.js');
 
 // get user profile
-exports.getUserProfile = async (req, res) => {
+exports.getUserProfile = async (req, res, next) => {
+    const userID = req.user.id;
+
     try {
-        const username = await User.findById(req.user.id).select('username -_id').lean();
+        const username = await User.findById(userID).select('username -_id').lean();
 
         if (!username) {
-            return res.status(404).json({ message: 'User not found' });
+            return next(new NotFoundError('User not found'));
         }
 
         return res.status(200).json(username);
     }
     catch (error) {
-        return res.status(500).json({ message: 'Server error' });
+        next(error);
     }
 };
