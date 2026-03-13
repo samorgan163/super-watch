@@ -1,14 +1,15 @@
-const { NotFoundError, 
-        ConflictError, 
-        NotAuthenticatedError, 
-        ServiceUnavailableError 
-    } = require('../errors/customErrors');
+import { 
+    NotFoundError, 
+    ConflictError, 
+    NotAuthenticatedError, 
+    ServiceUnavailableError 
+} from '../errors/customErrors.js';
 
-exports.routeNotFoundHandler = (req, res, next) => {
+export function routeNotFoundHandler(req, res, next) {
     next(new NotFoundError(`Route not found: ${req.originalUrl}`));
 }
 
-exports.errorHandler = (err, req, res, next) => {
+export function errorHandler(err, req, res, next) {
     console.error(err);
     
     if (err instanceof NotFoundError) {

@@ -10,7 +10,7 @@ const STREAMING_PROVIDERS = new Map([
     [103, "C4"],
 ]);
 
-exports.extractDirectors = (crew = []) => {
+export function extractDirectors(crew = []) {
     return crew
         .filter(person => person.job === 'Director')
         .map(person => ({
@@ -19,7 +19,7 @@ exports.extractDirectors = (crew = []) => {
         }));
 }
 
-exports.extractCast = (cast = [], quantity = cast.length) => {
+export function extractCast(cast = [], quantity = cast.length) {
     return cast
         .slice(0, Math.max(0, quantity))
         .map(person => ({
@@ -30,7 +30,7 @@ exports.extractCast = (cast = [], quantity = cast.length) => {
         }));
 }
 
-exports.extractWatchProviders = (watchProviders) => {
+export function extractWatchProviders(watchProviders) {
     // get streaming availablility in UK
     const watchProvidersGB = [
         ...(watchProviders?.GB?.flatrate ?? []),

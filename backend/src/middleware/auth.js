@@ -1,8 +1,7 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import { NotAuthenticatedError } from '../errors/customErrors.js';
 
-const { NotAuthenticatedError } = require('../errors/customErrors.js');
-
-exports.authenticateUser = (req, res, next) => {
+export function authenticateUser(req, res, next) {
     // get access token 
     const token = req.cookies.accessToken;
     

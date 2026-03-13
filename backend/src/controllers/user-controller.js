@@ -1,8 +1,8 @@
-const User = require('../models/user.js');
-const { NotFoundError } = require('../errors/customErrors.js');
+import User from '../models/user.js';
+import { NotFoundError } from '../errors/customErrors.js';
 
 // get user profile
-exports.getUserProfile = async (req, res, next) => {
+export async function getUserProfile(req, res, next) {
     const userID = req.user.id;
 
     try {

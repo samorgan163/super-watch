@@ -1,7 +1,7 @@
-const User = require('../models/user.js');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { NotAuthenticatedError, ConflictError } = require('../errors/customErrors.js');
+import User from '../models/user.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { NotAuthenticatedError, ConflictError } from '../errors/customErrors.js';
 
 function generateToken(user, secret, expires) {
     if (!secret) throw new Error('JWT secret missing');
@@ -11,7 +11,7 @@ function generateToken(user, secret, expires) {
     )
 }
 
-exports.registerUser = async (username, password) => {
+export async function registerUser(username, password) {
     // Check if user already exists
     const existingUser = await User.findOne({ username: username });
     
@@ -28,7 +28,7 @@ exports.registerUser = async (username, password) => {
     });
 }
 
-exports.loginUser = async (username, password) => {
+export async function loginUser(username, password) {
     // find user by username
     const user = await User.findOne({ username: username });
     if (!user) throw new NotAuthenticatedError('Username invalid');

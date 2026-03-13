@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const filmSchema = new Schema({
     tmdbid: { type: Number, required: true, unique: true, index: true },
@@ -10,6 +10,6 @@ const filmSchema = new Schema({
     
 }, { timestamps: false });
 
-const Film = mongoose.model('Film', filmSchema);
+const Film = model('Film', filmSchema);
 
-module.exports = Film;
+export default Film;

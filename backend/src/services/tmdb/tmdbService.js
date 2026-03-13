@@ -1,10 +1,13 @@
-const { ServiceUnavailableError } = require('../../errors/customErrors');
-const TmdbClient = require('./client');
-const { extractCast, extractDirectors, extractWatchProviders } = require('./mappers');
+import TmdbClient from './client.js';
+import { 
+    extractCast, 
+    extractDirectors, 
+    extractWatchProviders 
+} from './mappers.js';
 
 const tmdbClient = new TmdbClient(process.env.TMDB_API_KEY);
 
-exports.getFilmById = async (tmdbId) => {
+export async function getFilmById(tmdbId) {
         const response = await tmdbClient.request({
             method: 'get',
             url: `/movie/${tmdbId}`,    
@@ -39,7 +42,7 @@ exports.getFilmById = async (tmdbId) => {
         return film
 };
 
-exports.searchForFilm = async (searchString, page) => {
+export async function searchForFilm(searchString, page) {
         const response = await tmdbClient.request({
             method: 'get',
             url: `/search/movie`,
@@ -54,7 +57,7 @@ exports.searchForFilm = async (searchString, page) => {
 
 };
 
-exports.getCurrentlyPopularFilms = async (pageNum) => {
+export async function getCurrentlyPopularFilms(pageNum) {
         const response = await tmdbClient.request({
             method: 'get',
             url: `/movie/popular`,

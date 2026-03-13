@@ -1,7 +1,7 @@
-const axios = require('axios');
-const rateLimit = require('axios-rate-limit');
+import axios from 'axios';
+import rateLimit from 'axios-rate-limit';
 
-const { ServiceUnavailableError, NotFoundError } = require('../../errors/customErrors');
+import { ServiceUnavailableError, NotFoundError } from '../../errors/customErrors.js';
 
 class TmdbClient  {
     constructor(apiKey) {
@@ -107,4 +107,4 @@ class TmdbClient  {
 
 }
 
-module.exports = TmdbClient;
+export default TmdbClient;

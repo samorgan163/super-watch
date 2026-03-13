@@ -1,13 +1,13 @@
-const User = require('../models/user.js');
-const Film = require('../models/film.js');
-const tmdbService = require('../services/tmdb/tmdbService.js');
+import User from '../models/user.js';
+import Film from '../models/film.js';
 
-const { NotFoundError, ConflictError } = require('../errors/customErrors.js');
+import { getFilmById } from './tmdb/tmdbService.js';
+import { NotAuthenticatedError, ConflictError } from '../errors/customErrors.js';
 
 // once database grows, this can be negated by calling 'getFilmById' directly.
 // only storing a subset of data locally to reduce db size, for now.
 async function createFilmObject(tmdbID) {
-    const tmdbRes = await tmdbService.getFilmById(tmdbID);
+    const tmdbRes = await getFilmById(tmdbID);
 
     const newFilm = {
         tmdbid: tmdbRes.tmdbid,
@@ -20,7 +20,7 @@ async function createFilmObject(tmdbID) {
     return newFilm;
 }
 
-exports.addFilmToWatchlist = async (userID, tmdbID) => {
+export async function addFilmToWatchlist(userID, tmdbID) {
     // find or create film for local collection
     // this uses upsert to avoid duplicates
     // the checking for film and insertion if not found is done in one db call, making it atomic
@@ -46,7 +46,7 @@ exports.addFilmToWatchlist = async (userID, tmdbID) => {
     }
 }
 
-exports.removeFilmFromWatchlist = async (userID, tmdbID) => {
+export async function removeFilmFromWatchlist(userID, tmdbID) {
     // find the film from local database, to get the internal _id
     const film = await Film.findOne({ tmdbid: tmdbID }).select('_id');
     if (!film) {
@@ -68,7 +68,7 @@ exports.removeFilmFromWatchlist = async (userID, tmdbID) => {
     }
 }
 
-exports.checkIfFilmInWatchlist = async (userID, tmdbID) => {
+export async function checkIfFilmInWatchlist(userID, tmdbID) {
     const film = await Film.findOne({ tmdbid: tmdbID }).select('_id');
         
     if (!film) {
@@ -83,7 +83,7 @@ exports.checkIfFilmInWatchlist = async (userID, tmdbID) => {
     return Boolean(exists);
 }
 
-exports.getFilmsStreamingInWatchlist = async (userID) => {
+export async function getFilmsStreamingInWatchlist(userID) {
     const user = await User.findById(userID)
         .populate({ 
             path: 'watchlist.film',
@@ -101,7 +101,7 @@ exports.getFilmsStreamingInWatchlist = async (userID) => {
         .map(item => item.film); //filter out null films (ie not streaming) 
 }
 
-exports.getFilmsUnavailableInWatchlist = async (userID) => {
+export async function getFilmsUnavailableInWatchlist(userID) {
     const user = await User.findById(userID)
         .populate({
             path: 'watchlist.film',
