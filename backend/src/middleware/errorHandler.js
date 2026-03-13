@@ -2,8 +2,13 @@ import {
     NotFoundError, 
     ConflictError, 
     NotAuthenticatedError, 
-    ServiceUnavailableError 
+    ServiceUnavailableError,
+    RateLimitExceededError,
 } from '../errors/customErrors.js';
+
+export function rateLimitExceededHandler(req, res, next) {
+    next(new RateLimitExceededError('Rate limit exceeded'));
+}
 
 export function routeNotFoundHandler(req, res, next) {
     next(new NotFoundError(`Route not found: ${req.originalUrl}`));
@@ -22,6 +27,10 @@ export function errorHandler(err, req, res, next) {
 
     if (err instanceof NotAuthenticatedError) {
         return res.status(401).json({ message: err.message });
+    }
+
+    if (err instanceof RateLimitExceededError) {
+        return res.status(429).json({ message: err.message });
     }
 
     if (err instanceof ServiceUnavailableError) {

@@ -32,3 +32,10 @@ export class ValidationError extends Error {
         this.name = 'ValidationError';
     }
 }
+
+export class RateLimitExceededError extends Error {
+    constructor(message, options) {
+        super(message, options);
+        this.name = 'RateLimitExceededError';
+    }
+}

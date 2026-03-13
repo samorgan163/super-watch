@@ -5,9 +5,14 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 
 // Import error handlers
-import { errorHandler, routeNotFoundHandler } from './middleware/errorHandler.js';
+import { 
+    errorHandler, 
+    routeNotFoundHandler,
+    rateLimitExceededHandler
+ } from './middleware/errorHandler.js';
 
 // Import Routes
 import authRoutes from './routes/authRoutes.js';
@@ -23,15 +28,19 @@ const corsSettings = {
 
 // Rate limit settings
 const rateLimitSettings = {
-    windowMs: 2000,
-    limit: 2,
-    message: 'Rate limit exceeded',
+    windowMs: parseInt(process.env.REQUESTS_PERIOD_MS),
+    limit: parseInt(process.env.MAX_REQUESTS),
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: rateLimitExceededHandler,
 };
 
 // Server setup
 const app = express();
+app.disable('x-powered-by'); // Hide Express signature
+app.use(helmet());
 app.use(cors(corsSettings));
-//app.use(rateLimit(rateLimitSettings));
+app.use(rateLimit(rateLimitSettings));
 app.use(express.json());
 app.use(cookieParser());
 
