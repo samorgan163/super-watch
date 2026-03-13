@@ -1,25 +1,30 @@
 import axios from 'axios';
 import rateLimit from 'axios-rate-limit';
-
-import { ServiceUnavailableError, NotFoundError } from '../../errors/customErrors.js';
+import { 
+    ServiceUnavailableError, 
+    NotFoundError 
+} from '../../errors/customErrors.js';
 
 class TmdbClient  {
-    constructor(apiKey) {
+    constructor({
+        apiKey,
+        maxRequests = 10,
+        maxRequestsTimePeriodMs = 10000,
+        responseTimeoutMs = 5000,
+    }) {
         if (!apiKey) {
             throw new Error('TMDB api key missing');
         }
 
         this.tmdbBaseURL = 'https://api.themoviedb.org/3';
-        this.responseTimeoutMs = 5000;
+        this.responseTimeoutMs = responseTimeoutMs;
         this.apiKey = apiKey;
 
-        this.maxRequests = 10;
-        this.maxRequestsTimePeriodMs = 1000;
+        this.maxRequests = maxRequests;
+        this.maxRequestsTimePeriodMs = maxRequestsTimePeriodMs;
 
-        // block all request on init if no api key provided
+        // flag to block all requests if there is an issue with tmdb api key or access
         this.isBlocked = false;
-        this.isRateLimited = false;
-        this.rateLimitCoolDownMs = 5000;
 
         // Base request
         const axiosInstance = axios.create({
@@ -45,10 +50,6 @@ class TmdbClient  {
             throw new ServiceUnavailableError('TMDb api key issue');
         }
 
-        if (this.isRateLimited) {
-            throw new ServiceUnavailableError('TMDB rate limit exceeded');
-        }
-
         try {
             const response = await this.client.request(config);
             return response;
@@ -58,6 +59,7 @@ class TmdbClient  {
         }
     }
 
+    // TMDB error codes
     // https://developer.themoviedb.org/docs/errors
     _handleError(error) {
         // if request timed out
@@ -76,12 +78,6 @@ class TmdbClient  {
         const tmdbMessage = error?.response?.data?.status_message;
 
         if (status === 429) {
-            if (!this.isRateLimited) {
-                this.isRateLimited = true;
-                setTimeout(() => {
-                    this.isRateLimited = false;
-                }, this.rateLimitCoolDownMs);
-            }
             return new ServiceUnavailableError('TMDb limit exceeded. Please try again later.', { cause: error});
         }
 

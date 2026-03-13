@@ -5,7 +5,12 @@ import {
     extractWatchProviders 
 } from './mappers.js';
 
-const tmdbClient = new TmdbClient(process.env.TMDB_API_KEY);
+const tmdbClient = new TmdbClient({ 
+    apiKey: process.env.TMDB_API_KEY,
+    maxRequests: parseInt(process.env.TMDB_MAX_REQUESTS),
+    maxRequestsTimePeriodMs: parseInt(process.env.TMDB_REQUEST_PERIOD_MS),
+    responseTimeoutMs: parseInt(process.env.TMDB_TIMEOUT_MS),
+});
 
 export async function getFilmById(tmdbId) {
         const response = await tmdbClient.request({
