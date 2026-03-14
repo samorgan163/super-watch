@@ -45,10 +45,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
-app.use('/film', filmRoutes);
-app.use('/watchlist', watchlistRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/film', filmRoutes);
+app.use('/api/watchlist', watchlistRoutes);
 
 // Route not found handler
 app.use(routeNotFoundHandler);
