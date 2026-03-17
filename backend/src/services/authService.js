@@ -14,9 +14,8 @@ function generateToken(user, secret, expires) {
 export async function registerUser(username, password) {
     // Check if user already exists
     const existingUser = await User.findOne({ username: username });
-    
     if (existingUser) {
-        return next(new ConflictError('Username already taken'));
+        throw new ConflictError('Username already taken');
     }
 
     // Hash password
@@ -31,11 +30,11 @@ export async function registerUser(username, password) {
 export async function loginUser(username, password) {
     // find user by username
     const user = await User.findOne({ username: username });
-    if (!user) throw new NotAuthenticatedError('Username invalid');
+    if (!user) throw new NotAuthenticatedError('Username or password invalid');
 
     // compare password with stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) throw new NotAuthenticatedError('Password invalid');
+    if (!passwordMatch) throw new NotAuthenticatedError('Username or password invalid');
 
     // generate access token
     const accessToken = generateToken(user, process.env.ACCESS_TOKEN_SECRET, '15m');

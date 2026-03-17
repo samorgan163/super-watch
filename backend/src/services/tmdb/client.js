@@ -78,7 +78,7 @@ class TmdbClient  {
         const tmdbMessage = error?.response?.data?.status_message;
 
         if (status === 429) {
-            return new ServiceUnavailableError('TMDb limit exceeded. Please try again later.', { cause: error});
+            return new ServiceUnavailableError('TMDb limit exceeded. Please try again later.', { cause: error });
         }
 
         if (status === 401 || status === 403) {
@@ -90,15 +90,15 @@ class TmdbClient  {
                 tmdbCode === 45
             ) {
                 this.isBlocked = true;
-                return new ServiceUnavailableError('TMDb api key issue', { cause: error});
+                return new ServiceUnavailableError('TMDb api key issue', { cause: error });
             }
         }
 
         if (status === 404) {
-            return new NotFoundError('TMDB not found');
+            return new NotFoundError('TMDB not found', { cause: error });
         }
 
-        return new ServiceUnavailableError(`TMDB error, code: ${tmdbCode}`, { cause: error});        
+        return new ServiceUnavailableError('TMDb error', { cause: error });        
     }
 
 }

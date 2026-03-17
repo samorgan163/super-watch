@@ -1,9 +1,7 @@
 import { 
     NotFoundError, 
-    ConflictError, 
-    NotAuthenticatedError, 
-    ServiceUnavailableError,
     RateLimitExceededError,
+    AppError,
 } from '../errors/customErrors.js';
 
 export function rateLimitExceededHandler(req, res, next) {
@@ -17,24 +15,14 @@ export function routeNotFoundHandler(req, res, next) {
 export function errorHandler(err, req, res, next) {
     console.error(err);
     
-    if (err instanceof NotFoundError) {
-        return res.status(404).json({ message: err.message });
-    }
-
-    if (err instanceof ConflictError) {
-        return res.status(409).json({ message: err.message });
-    }
-
-    if (err instanceof NotAuthenticatedError) {
-        return res.status(401).json({ message: err.message });
-    }
-
-    if (err instanceof RateLimitExceededError) {
-        return res.status(429).json({ message: err.message });
-    }
-
-    if (err instanceof ServiceUnavailableError) {
-        return res.status(503).json({ message: err.message });
+    if (err instanceof AppError) {
+        return res
+            .status(err.statusCode)
+            .json({
+                success: false,
+                message: err.message,
+                errors: err.errors,
+            });
     }
     
     // fallback for unexpected errors

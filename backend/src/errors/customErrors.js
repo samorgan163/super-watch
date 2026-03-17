@@ -1,41 +1,45 @@
-export class NotFoundError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'NotFoundError';
+export class AppError extends Error {
+    constructor(message, { statusCode = 500, errors = [], cause = null } = {}) {
+        super(message);
+        this.name = this.constructor.name;
+        this.statusCode = statusCode;
+        this.errors = errors;
+        this.cause = cause;
     }
 }
 
-export class ConflictError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'ConflictError';
+export class ValidationError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 422, ...options });
     }
 }
 
-export class NotAuthenticatedError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'NotAuthenticatedError';
+export class ConflictError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 409, ...options });
     }
 }
 
-export class ServiceUnavailableError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'ServiceUnavailableError';
+export class NotFoundError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 404, ...options });
     }
 }
 
-export class ValidationError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'ValidationError';
+export class NotAuthenticatedError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 401, ...options });
     }
 }
 
-export class RateLimitExceededError extends Error {
-    constructor(message, options) {
-        super(message, options);
-        this.name = 'RateLimitExceededError';
+export class ServiceUnavailableError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 503, ...options });
+    }
+}
+
+export class RateLimitExceededError extends AppError {
+    constructor(message, options = {}) {
+        super(message, { statusCode: 429, ...options });
     }
 }

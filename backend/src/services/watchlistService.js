@@ -2,7 +2,11 @@ import User from '../models/user.js';
 import Film from '../models/film.js';
 
 import { getFilmById } from './tmdb/tmdbService.js';
-import { NotAuthenticatedError, ConflictError } from '../errors/customErrors.js';
+import { 
+    NotAuthenticatedError, 
+    ConflictError,
+    NotFoundError
+} from '../errors/customErrors.js';
 
 // once database grows, this can be negated by calling 'getFilmById' directly.
 // only storing a subset of data locally to reduce db size, for now.
