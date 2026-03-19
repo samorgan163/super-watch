@@ -4,14 +4,13 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import helmet from 'helmet';
 
 // Import error handlers
 import { 
     errorHandler, 
     routeNotFoundHandler,
     rateLimitExceededHandler
- } from './middleware/errorHandler.js';
+} from './middleware/errorHandler.js';
 
 // Import Routes
 import authRoutes from './routes/authRoutes.js';
@@ -36,11 +35,12 @@ const rateLimitSettings = {
 
 // Server setup
 const app = express();
+
 app.disable('x-powered-by'); // Hide Express signature
-app.use(helmet());
 app.use(cors(corsSettings));
 app.use(rateLimit(rateLimitSettings));
-app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // Routes

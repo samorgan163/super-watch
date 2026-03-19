@@ -16,7 +16,7 @@ import {
  */
 export async function addFilmToWatchlist(req, res, next) {
     const userID = req.user.id;
-    const tmdbID = req.params.tmdbid;
+    const tmdbID = req.params.tmdbId;
 
     try {
         await addFilmToWatchlistService(userID, tmdbID);
@@ -37,7 +37,7 @@ export async function addFilmToWatchlist(req, res, next) {
  */
 export async function removeFilmFromWatchlist(req, res, next) {
     const userID = req.user.id;
-    const tmdbID = req.params.tmdbid;
+    const tmdbID = req.params.tmdbId;
     
     try {
         await removeFilmFromWatchlistService(userID, tmdbID);
@@ -53,7 +53,7 @@ export async function removeFilmFromWatchlist(req, res, next) {
 // TODO: I dont think this is a good implementation
 export async function filmInWatchlist(req, res, next) {
     const userID = req.user.id;
-    const tmdbID = parseInt(req.params.tmdbid, 10);
+    const tmdbID = parseInt(req.params.tmdbId, 10);
     
     try {
         const exists = await checkIfFilmInWatchlistService(userID, tmdbID);

@@ -15,7 +15,10 @@ export async function registerUser(username, password) {
     // Check if user already exists
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
-        throw new ConflictError('Username already taken');
+        throw new ConflictError(
+            'Username already taken', 
+            { errors: [{ field: 'username', message: 'Username already taken' }] }
+        );
     }
 
     // Hash password

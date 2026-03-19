@@ -8,11 +8,13 @@ import {
     removeFilmFromWatchlist, 
     filmInWatchlist 
 } from '../controllers/watchlist-controller.js';
+import { tmdbIdRules } from '../validators/filmValidator.js';
+import { validateTmdbId } from '../middleware/validate.js';
 
 // Routes
 router.get('/', authenticateUser, getWatchlist);
-router.post('/:tmdbid', authenticateUser, addFilmToWatchlist);
-router.delete('/:tmdbid', authenticateUser, removeFilmFromWatchlist);
-router.get('/check/:tmdbid', authenticateUser, filmInWatchlist);
+router.post('/:tmdbId', authenticateUser, tmdbIdRules, validateTmdbId,  addFilmToWatchlist);
+router.delete('/:tmdbId', authenticateUser, tmdbIdRules, validateTmdbId, removeFilmFromWatchlist);
+router.get('/check/:tmdbId', authenticateUser, tmdbIdRules, validateTmdbId, filmInWatchlist);
 
 export default router;

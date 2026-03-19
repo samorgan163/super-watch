@@ -52,7 +52,7 @@ export async function searchForFilm(searchString, page) {
             method: 'get',
             url: `/search/movie`,
             params: {
-                query: searchString,
+                query: encodeURIComponent(searchString),
                 page: page || 1, // default to page 1 if not provided
             }
         });
