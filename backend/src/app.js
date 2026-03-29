@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
+import cron from 'node-cron';
 
 // Import error handlers
 import { 
@@ -17,6 +18,9 @@ import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import filmRoutes from './routes/film.routes.js';
 import watchlistRoutes from './routes/watchlist.routes.js';
+
+// Import cron jobs
+import { watchlistUpdater } from './jobs/watchlistUpdater.js';
 
 // Cors Settings
 const corsSettings = {
@@ -42,6 +46,11 @@ app.use(rateLimit(rateLimitSettings));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
+
+// cron jobs
+cron.schedule('50 17 * * *', () => {
+    watchlistUpdater();
+});
 
 // Routes
 app.use('/api/auth', authRoutes);

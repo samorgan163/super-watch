@@ -86,3 +86,12 @@ export async function getCurrentlyPopularFilms(pageNum) {
 
         return response.data;
 };
+
+export async function getStreamingProviders(tmdbId) {
+    const response = await tmdbClient.request({
+        method: 'get',
+        url: `/movie/${tmdbId}/watch/providers`,
+    });
+
+    return extractWatchProviders(response.data.results);
+}
