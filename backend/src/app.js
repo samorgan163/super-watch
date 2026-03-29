@@ -10,13 +10,13 @@ import {
     errorHandler, 
     routeNotFoundHandler,
     rateLimitExceededHandler
-} from './middleware/errorHandler.js';
+} from './middleware/error.middleware.js';
 
 // Import Routes
-import authRoutes from './routes/authRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import filmRoutes from './routes/filmRoutes.js';
-import watchlistRoutes from './routes/watchlistRoutes.js';
+import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
+import filmRoutes from './routes/film.routes.js';
+import watchlistRoutes from './routes/watchlist.routes.js';
 
 // Cors Settings
 const corsSettings = {

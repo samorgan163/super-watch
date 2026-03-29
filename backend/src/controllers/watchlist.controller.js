@@ -4,7 +4,7 @@ import {
     checkIfFilmInWatchlist as checkIfFilmInWatchlistService,
     getFilmsStreamingInWatchlist as getFilmsStreamingInWatchlistService,
     getFilmsUnavailableInWatchlist as getFilmsUnavailableInWatchlistService    
-} from '../services/watchlistService.js';
+} from '../services/watchlist.service.js';
 
 /**
  * Adds a film to the user's watchlist.

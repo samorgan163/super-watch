@@ -1,4 +1,4 @@
-import { loginUser, registerUser as registerUserService, } from '../services/authService.js';
+import { loginUser, registerUser as registerUserService, } from '../services/auth.service.js';
 
 // frontend can use this to verify auth status
 export function authMe(req, res) {

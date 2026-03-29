@@ -2,7 +2,7 @@ import {
     getFilmById, 
     searchForFilm, 
     getCurrentlyPopularFilms as getCurrentlyPopularFilmsService
-} from '../services/tmdb/tmdbService.js';
+} from '../services/tmdb/tmdb.service.js';
 
 // get film by tmdb id
 export async function getFilmByTmdbId(req, res, next) {

@@ -1,7 +1,7 @@
-import User from '../models/user.js';
-import Film from '../models/film.js';
+import User from '../models/user.model.js';
+import Film from '../models/film.model.js';
 
-import { getFilmById } from './tmdb/tmdbService.js';
+import { getFilmById } from './tmdb/tmdb.service.js';
 import { 
     NotAuthenticatedError, 
     ConflictError,

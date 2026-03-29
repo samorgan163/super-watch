@@ -1,5 +1,5 @@
-import { getFilmsStreamingInWatchlist } from '../services/watchlistService.js';
-import { getCurrentlyPopularFilms } from '../services/tmdb/tmdbService.js';
+import { getFilmsStreamingInWatchlist } from '../services/watchlist.service.js';
+import { getCurrentlyPopularFilms } from '../services/tmdb/tmdb.service.js';
 
 export async function getDashboard(req, res, next) {
     const userID = req.user.id;

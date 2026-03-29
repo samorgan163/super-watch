@@ -1,9 +1,9 @@
-import TmdbClient from './client.js';
+import TmdbClient from './tmdb.client.js';
 import { 
     extractCast, 
     extractDirectors, 
     extractWatchProviders 
-} from './mappers.js';
+} from './tmdb.mapper.js';
 
 const tmdbClient = new TmdbClient({ 
     apiKey: process.env.TMDB_API_KEY,
