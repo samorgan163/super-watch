@@ -4,20 +4,26 @@ import PageLoading from "../../components/UI/PageLoading/PageLoading";
 import FilmCard from "../../components/Film/FilmCard/FilmCard";
 import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
-import { useState, useEffect } from "react";
-
 import { getWatchlist } from "../../api/watchlist";
-import { useFetch } from "../../hooks/useFetch";
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMe } from "../../hooks/useMe";
 
 export default function Watchlist() {
 
-    const { loading, error, data, retry } = useFetch(
-        () => getWatchlist(), []
-    );
+    const { data: user } = useMe();
+    const userId = user?.user_id;
 
-    if (loading) return <PageLoading />;
+    const { isLoading, isError, data, error, refetch } = useQuery({
+            queryKey: ['watchlist', userId],
+            queryFn: () => getWatchlist(),
+            retry: false,
+            staleTime: 1000 * 60 * 5,
+            enabled: !!userId,
+        });
 
-    if (error) return <PageRetry retryAction={retry} />;
+    if (isLoading) return <PageLoading />;
+
+    if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
         <>

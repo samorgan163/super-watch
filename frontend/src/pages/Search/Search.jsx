@@ -4,42 +4,55 @@ import SearchNavbar from '../../components/Search/SearchNavbar/SearchNavbar';
 import SearchResults from '../../components/Search/SearchResults/SearchResults';
 
 import { useSearch } from '../../hooks/useSearch';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Search() {
+
+    // get query from search params for back navigation
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get('q') || '';
     
-    const [inputValue, setInputValue] = useState('');
-    const [debouncedQuery, setDebouncedQuery] = useState('');
+    const [inputValue, setInputValue] = useState(query);
 
-    const { results, loading, hasNextPage, loaderRef } = useSearch(debouncedQuery);
+    const { 
+        data, 
+        isLoading, 
+        isFetchingNextPage, 
+        hasNextPage, 
+        loaderRef 
+    } = useSearch(query);
 
-    // debounce query
+    // sync input from search params for back navigation
+    useEffect(() => setInputValue(query), [query]); 
+
+    // debounce to wait for user to finish typing
     useEffect(() => {
+        const trimmed = inputValue.trim();
 
-        if (inputValue.trim() === '') {
-            setDebouncedQuery('');
-            return;
-        }
+        // using replace to only save the last search
+        // gives app feel on mobile
+        if (!trimmed) return setSearchParams({}, { replace: true });
 
-        const userTypingDelay = setTimeout(() => {
-            setDebouncedQuery(inputValue.trim());
-        }, 500); // delay to ensure user has stopped typing
-        
-        return () => clearTimeout(userTypingDelay);
+        const userTypeDelay = setTimeout(() => {
+            setSearchParams({ q: trimmed }, { replace: true });
+        }, 500);
+
+        return () => clearTimeout(userTypeDelay);
     }, [inputValue]);
-
 
     return (
         <>
             <section className='section-with-px section-with-mb'>
-                <SearchNavbar onInputChange={setInputValue} />
+                <SearchNavbar onChange={setInputValue} inputValue={inputValue}/>
             </section>
             <section className='section-with-px section-with-mb'>
-                {debouncedQuery && 
+                {inputValue && 
                     <SearchResults 
-                        results={results}
-                        loading={loading}
-                        hasMore={hasNextPage}
+                        results={data}
+                        isInitialLoading={isLoading}
+                        isFetchingNextPage={isFetchingNextPage}
                         loaderRef={loaderRef}
+                        hasNextPage={hasNextPage}
                     />
                 }
             </section>

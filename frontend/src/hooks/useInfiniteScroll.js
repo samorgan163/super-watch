@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const intersectThreshold = 0.5;
 
-export function useInfiniteScroll(enabled, ref, callBack) {
-    
+export function useInfiniteScroll(enabled, loaderRef, callBack) {
+
     // Observe ref
     useEffect(() => {
         // stop if disabled
         if (!enabled) return;
 
         // stop if no ref
-        const element = ref.current;
+        const element = loaderRef.current;
         if (!element) return;
 
         const observer = new IntersectionObserver(
@@ -34,6 +34,6 @@ export function useInfiniteScroll(enabled, ref, callBack) {
             observer.disconnect();
         };
 
-    }, [enabled, ref, callBack]);
+    }, [enabled, loaderRef, callBack]);
 
 }

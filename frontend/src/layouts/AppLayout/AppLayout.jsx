@@ -3,12 +3,12 @@ import BottomNavbar from '../../components/Nav/BottomNavbar/BottomNavbar';
 import Navbar from '../../components/Nav/Navbar/Navbar';
 
 import styles from './AppLayout.module.css';
+import { Outlet } from 'react-router-dom';
 
-function AppLayout({ title, children, fullHeight = false }) {
+export default function AppLayout({ title, fullHeight = false }) {
 
 	// TODO: change this to detect where touch devices and decide nav bar from there
 	const isMobileLayout = window.matchMedia('(max-width: 768px)').matches;
-	console.log(isMobileLayout);
 
     return (
 		<>
@@ -19,7 +19,7 @@ function AppLayout({ title, children, fullHeight = false }) {
 						${fullHeight ? '' : styles.mobilePaddingTop} 
 						${styles.mobilePaddingBottom}
 					`}>
-						{children}
+						<Outlet />
 					</main>
 					<BottomNavbar />
 				</>
@@ -29,12 +29,10 @@ function AppLayout({ title, children, fullHeight = false }) {
 					<main className={`
 						${fullHeight ? '' : styles.desktopPaddingTop}
 					`}>
-						{children}
+						<Outlet />
 					</main>
 				</>
 			)}
 		</>
   	);
 }
-
-export default AppLayout;

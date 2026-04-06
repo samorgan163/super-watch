@@ -1,13 +1,16 @@
 // ProtectedRoute.js
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { Navigate, Outlet } from 'react-router-dom';
+import { useMe } from '../hooks/useMe';
+import PageLoading from './UI/PageLoading/PageLoading';
 
-export default function ProtectedRoute({ children }) {
-    const { user, loading } = useAuth();
+export default function ProtectedRoute() {
+    const { data: user, isLoading, isError } = useMe();
 
-    if (loading) return <p>Loading...</p>;
+    if (isLoading) return <PageLoading />
 
-    if (!user) return <Navigate to="/login" replace />;
+    if (isError || !user) {
+        return <Navigate to="/login" replace />;
+    }
 
-    return children;
+    return <Outlet />;
 }

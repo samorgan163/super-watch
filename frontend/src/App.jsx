@@ -15,11 +15,17 @@ export default function App() {
 	return (
         <Routes>
             <Route path="/login" element={<Login /> } />
-            <Route path="/" element={<ProtectedRoute><AppLayout title='Dashboard'><Dashboard /></AppLayout></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><AppLayout><UserProfile /></AppLayout></ProtectedRoute>} />
-            <Route path="/film/:tmdbID" element={<ProtectedRoute><AppLayout fullHeight><Film /></AppLayout></ProtectedRoute>} />
-            <Route path='/search' element={<ProtectedRoute><AppLayout><Search /></AppLayout></ProtectedRoute>} />
-            <Route path='/watchlist' element={<ProtectedRoute><AppLayout title='Watchlist'><Watchlist /></AppLayout></ProtectedRoute>} />
+            <Route element={<ProtectedRoute />}>
+                <Route element={<AppLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path='/profile' element={<UserProfile />} />
+                    <Route path='/search' element={<Search />} />
+                    <Route path='/watchlist' element={<Watchlist />} />
+                </Route>
+                <Route element={<AppLayout fullHeight />}>
+                    <Route path='/film/:tmdbID' element={<Film />} />
+                </Route>
+            </Route>
         </Routes>
 	)
 }

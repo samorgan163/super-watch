@@ -1,29 +1,29 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 import styles from './Login.module.css';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { login } from '../../api/auth';
  
-function Login() {
+export default function Login() {
+
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
 
-    const { handleLogin } = useAuth();
-    const navigate = useNavigate();
+    const loginMutation = useMutation({
+        mutationFn: ({ username, password }) => login(username, password),
+        onSuccess: (userData) => {
+            queryClient.setQueryData(['me'], userData);
+            navigate('/'); // navigate to dashboard
+        }
+    })
 
-    async function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setError(null);
-
-        try {
-            await handleLogin(username, password);
-            navigate('/');
-        }
-        catch (error) {
-            setError(error.message);
-        }
+        loginMutation.mutateAsync({ username, password });
     }
 
     return (
@@ -53,12 +53,10 @@ function Login() {
                         Login
                     </button>
 
-                    {error && <p>{error}</p>}
+                    {loginMutation.isError && <p>Error loggin in</p>}
                 </form>
             </div>
         </div>
     );
 
 }
-
-export default Login;

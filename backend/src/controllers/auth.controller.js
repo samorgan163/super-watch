@@ -21,11 +21,10 @@ export async function registerUser(req, res, next) {
 
 // User login
 export async function login(req, res, next) {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     try {
-        const { accessToken } = await loginUser(username, password);
+        const { accessToken, user } = await loginUser(username, password);
     
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
@@ -34,7 +33,7 @@ export async function login(req, res, next) {
             maxAge: 15 * 60 * 1000
         });
 
-        return res.status(200).json({ message: 'Login successful.' });        
+        return res.status(200).json({ user_id: user._id });        
     }
     catch (error) {
         next(error);

@@ -13,18 +13,23 @@ import { useFetch } from "../../hooks/useFetch";
 
 import { getFilm } from "../../api/film";
 
-export default function Film2() {
+import { useQuery } from '@tanstack/react-query';
+
+export default function Film() {
 
     // get tmdbID from route params
     const { tmdbID } = useParams();
 
-    const { loading, error, data, retry } = useFetch(
-        () => getFilm(tmdbID), [tmdbID]
-    );
+    const { isPending, isError, data, error, refetch } = useQuery({
+        queryKey: ['film', tmdbID],
+        queryFn: () => getFilm(tmdbID),
+        retry: false,
+        staleTime: 1000 * 60 * 60, // data unlikely to change often 
+    });
 
-    if (loading) return <PageLoading />;
+    if (isPending) return <PageLoading />;
     
-    if (error) return <PageRetry retryAction={retry} />;
+    if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
         <FullsreenMediaLayout 

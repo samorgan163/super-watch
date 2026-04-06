@@ -1,5 +1,4 @@
 import styles from './MediaPoster.module.css';
-
 import NoPosterImage from '../../../assets/fallbacks/no-poster-image.jpg';
 
 export default function MediaPoster({ 
@@ -19,11 +18,7 @@ export default function MediaPoster({
 
     return (
         <div className={`${styles.wrapper} ${hoverEffect ? styles.hoverable : ''}`}>
-            <img 
-                loading='lazy' 
-                src={src} 
-                alt={altText} 
-            />
+            <img loading='lazy' src={src} alt={altText} />
         </div>
     );
 

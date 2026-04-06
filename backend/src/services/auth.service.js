@@ -32,7 +32,7 @@ export async function registerUser(username, password) {
 
 export async function loginUser(username, password) {
     // find user by username
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ username: username }).lean();
     if (!user) throw new NotAuthenticatedError('Username or password invalid');
 
     // compare password with stored hashed password
@@ -42,5 +42,5 @@ export async function loginUser(username, password) {
     // generate access token
     const accessToken = generateToken(user, process.env.ACCESS_TOKEN_SECRET, '15m');
 
-    return { accessToken };
+    return { accessToken, user };
 } 

@@ -5,18 +5,29 @@ import PageRetry from "../../components/UI/PageRetry/PageRetry";
 import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
 import FilmCard from '../../components/Film/FilmCard/FilmCard';
 
-import { useFetch } from "../../hooks/useFetch";
 import { getDashboard } from "../../api/user";
+import { useQuery } from '@tanstack/react-query';
+
+import { useMe } from "../../hooks/useMe";
 
 export default function Dashboard() {
 
-    const { loading, error, data, retry } = useFetch(
-        () => getDashboard(), []
-    );
+    // get user
+    const { data: user } = useMe();
+    const userId = user?.user_id;
 
-    if (loading) return <PageLoading />;
+    // get dashboard data
+    const { isLoading, isError, data, error, refetch } = useQuery({
+        queryKey: ['dashboard', userId],
+        queryFn: () => getDashboard(),
+        retry: false,
+        staleTime: 1000 * 60 * 5,
+        enabled: !!userId,
+    });
 
-    if (error) return <PageRetry retryAction={retry} />;
+    if (isLoading) return <PageLoading />;
+
+    if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
         <>

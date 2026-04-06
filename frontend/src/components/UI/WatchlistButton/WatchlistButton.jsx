@@ -4,7 +4,13 @@ import { useWatchlist } from '../../../hooks/useWatchlist';
 
 export default function WatchlistButton({ tmdbId }) {
 
-    const { inWatchlist, loading, toggleWatchlist } = useWatchlist(tmdbId);
+    const { 
+        inWatchlist, 
+        isInitialLoading,
+        isInitialError,
+        isMutationLoading, 
+        toggleWatchlist 
+    } = useWatchlist(tmdbId);
 
     return (
         <button 
@@ -14,7 +20,7 @@ export default function WatchlistButton({ tmdbId }) {
                 button
                 button-circle
             `}
-            disabled={loading}
+            disabled={isInitialLoading || isMutationLoading || isInitialError}
             onClick={toggleWatchlist}
         >
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

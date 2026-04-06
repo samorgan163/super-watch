@@ -1,62 +1,73 @@
-// hooks/useLike.js
-import { useState, useEffect } from "react";
-
 import { checkWatchlist, removeFromWatchlist, addToWatchlist } from "../api/watchlist";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMe } from "./useMe";
 
 export function useWatchlist(tmdbId) {
 
-    const [inWatchlist, setInWatchlist] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const { data: user } = useMe();
+    const userId = user?.user_id;
 
-    useEffect(() => {
-        const checkIfInWatchlist = async () => {
-            setLoading(true);
-            try {
-                const result = await checkWatchlist(tmdbId);
-                setInWatchlist(result.in_watchlist);
-            } catch {
-                console.log('Network Error');
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-        checkIfInWatchlist();
-    }, [tmdbId]);
+    const queryClient = useQueryClient();
 
-    const toggleWatchlist = async () => {
-        if (loading) return;
-        
-        // if in watchlist, remove from watchlist
-        if (inWatchlist) {
-            setLoading(true);
-            setInWatchlist(false); // optimistic update UI
-            try {
-                await removeFromWatchlist(tmdbId);
+    const inWatchlistQueryKey = ['watchlist-check', userId, tmdbId];
+
+    const { isPending: isInitialLoading, 
+        isError: isInitialError,
+        data, 
+        error, 
+        refetch, 
+    } = useQuery({
+        queryKey: inWatchlistQueryKey,
+        queryFn: () => checkWatchlist(tmdbId),
+        enabled: !!userId && !!tmdbId,
+        staleTime: 1000 * 60 * 5,
+    });
+
+    const inWatchlist = data?.in_watchlist || false;
+
+    const { 
+        mutate: toggleWatchlist, 
+        isPending: isMutationLoading 
+    } = useMutation({
+        mutationFn: () => {
+            return inWatchlist
+                ? removeFromWatchlist(tmdbId)
+                : addToWatchlist(tmdbId);
+        },
+        onMutate: async () => {
+            // cancel outgoing, not to overwrite optimistic update
+            await queryClient.cancelQueries({ queryKey: inWatchlistQueryKey });
+
+            // copy prev state
+            const prevState = queryClient.getQueryData(inWatchlistQueryKey);
+            const newState = !prevState?.in_watchlist;
+
+            // optimistically update to new state,
+            queryClient.setQueryData( inWatchlistQueryKey, { 
+                in_watchlist: newState 
+            });
+
+            return { prevState };
+        },
+        onError: (err, variables, context) => {
+            // rollback to prev state
+            if (context?.prevState) {
+                queryClient.setQueryData(inWatchlistQueryKey, context.prevState);
             }
-            catch {
-                setInWatchlist(true); // revert UI change on failure
-                // TODO: display error to user?
-            }
-            finally {
-                setLoading(false);
-            }
+        },
+        onSettled: () => {
+            // refetch cache for pages effected by watchlist updates
+            queryClient.invalidateQueries({ queryKey: inWatchlistQueryKey });
+            queryClient.invalidateQueries({ queryKey: ['dashboard', user?.user_id] });
+            queryClient.invalidateQueries({ queryKey: ['watchlist', user?.user_id] });
         }
-        // if not in watchlist, add to watchlist
-        else {
-            setLoading(true);
-            setInWatchlist(true); // optimistic update UI
-            try {
-                await addToWatchlist(tmdbId);
-            }
-            catch (error) {
-                setInWatchlist(false); // revert UI change on failure
-            }
-            finally {
-                setLoading(false);
-            }
-        }
+    });
+
+    return { 
+        inWatchlist, 
+        isInitialLoading, 
+        isInitialError,
+        isMutationLoading, 
+        toggleWatchlist 
     };
-
-    return { inWatchlist, loading, toggleWatchlist };
 }

@@ -3,9 +3,16 @@ import FilmCardWithDetails from '../../Film/FilmCardWithDetails/FilmCardWithDeta
 
 import { BounceLoader } from "react-spinners";
 
-export default function SearchResults({ results, loading, hasMore, loaderRef }) {
+export default function SearchResults({ 
+    results, 
+    isInitialLoading, 
+    isFetchingNextPage, 
+    loaderRef,
+    hasNextPage
+}) {
 
-    if (loading && results.length === 0) {
+    // initial page loading
+    if (isInitialLoading || !results) {
         return (
            <div className={styles.loadingWrapperNew}>
                 <BounceLoader
@@ -17,8 +24,12 @@ export default function SearchResults({ results, loading, hasMore, loaderRef }) 
             </div>
         );
     }
+
+    // flatted results into array
+    const resultsArray = results.pages.flatMap(page => page.results);
     
-    if (!loading && results.length === 0) {
+    // no results from search
+    if (resultsArray.length === 0) {
         return (
             <div className={styles.noFilmsWrapper}>
                 <p>Nothing to see here :&#40;</p>
@@ -27,10 +38,11 @@ export default function SearchResults({ results, loading, hasMore, loaderRef }) 
     }
 
     return (
-        
         <div id="search-results-wrapper" className={styles.SearchResultsWrapper}>
-            {results.map((film) => (
+            
+            {resultsArray.map((film) => (
                 <FilmCardWithDetails 
+                    key={film.id}
                     tmdbID={film.id}
                     title={film.title}
                     poster={film.poster_path}
@@ -39,19 +51,22 @@ export default function SearchResults({ results, loading, hasMore, loaderRef }) 
                 />
             ))}
 
-            {hasMore && 
+            {hasNextPage && (
                 <div 
                     className={styles.loadingWrapperNew}
                     ref={loaderRef}    
                 >
-                    <BounceLoader
-                        color={'#1657c7ff'}
-                        //loading={loading}
-                        size={30}
-                        aria-label="Loading Spinner"
-                    />
+                    {isFetchingNextPage && (
+                        <BounceLoader
+                            color={'#1657c7ff'}
+                            //loading={loading}
+                            size={30}
+                            aria-label="Loading Spinner"
+                        />
+                    )}
                 </div>
-            }
+            )}
+
         </div>
     );
 }
