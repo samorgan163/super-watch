@@ -9,25 +9,17 @@ import PageLoading from "../../components/UI/PageLoading/PageLoading";
 import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
 import { useParams } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
 
-import { getFilm } from "../../api/film";
-
-import { useQuery } from '@tanstack/react-query';
+import { useFilmPage } from "../../features/film/hooks";
 
 export default function Film() {
 
     // get tmdbID from route params
     const { tmdbID } = useParams();
 
-    const { isPending, isError, data, error, refetch } = useQuery({
-        queryKey: ['film', tmdbID],
-        queryFn: () => getFilm(tmdbID),
-        retry: false,
-        staleTime: 1000 * 60 * 60, // data unlikely to change often 
-    });
+    const { data, isLoading, isError, refetch } = useFilmPage(tmdbID);
 
-    if (isPending) return <PageLoading />;
+    if (isLoading) return <PageLoading />;
     
     if (isError) return <PageRetry retryAction={refetch} />;
 

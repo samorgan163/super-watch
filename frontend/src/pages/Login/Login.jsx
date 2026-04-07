@@ -1,29 +1,17 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import styles from './Login.module.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { login } from '../../api/auth';
+
+import { useState } from 'react';
+import { useLogin } from '../../features/auth/hooks';
  
 export default function Login() {
-
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    const loginMutation = useMutation({
-        mutationFn: ({ username, password }) => login(username, password),
-        onSuccess: (userData) => {
-            queryClient.setQueryData(['me'], userData);
-            navigate('/'); // navigate to dashboard
-        }
-    })
+    const loginMutation = useLogin();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        loginMutation.mutateAsync({ username, password });
+        loginMutation.mutate({ username, password });
+        setPassword('');
     }
 
     return (
@@ -32,6 +20,7 @@ export default function Login() {
                 <h2>Login</h2>
                 <form className={styles.loginForm} onSubmit={handleSubmit}>
                     <input
+                        required
                         className='form-input-text'
                         placeholder="Username"
                         value={username}
@@ -39,6 +28,7 @@ export default function Login() {
                     />
 
                     <input
+                        required
                         className='form-input-text'
                         type="password"
                         placeholder="Password"
@@ -49,11 +39,12 @@ export default function Login() {
                     <button 
                         type="submit"
                         className='button button-hover text-md text-color-primary'
+                        disabled={loginMutation.isPending}
                     >
                         Login
                     </button>
 
-                    {loginMutation.isError && <p>Error loggin in</p>}
+                    {loginMutation.isError && <p>Error logging in</p>}
                 </form>
             </div>
         </div>

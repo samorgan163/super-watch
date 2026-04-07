@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from './ProtectedRoute';
 
-import AppLayout from "./layouts/AppLayout/AppLayout";
+import AppLayout from '../layouts/AppLayout/AppLayout';
 
-import Login from "./pages/Login/Login";
-import Dashboard from './pages/Dashboard/Dashboard';
-import UserProfile from "./pages/UserProfile/UserProfile";
-import Search from "./pages/Search/Search";
-import Watchlist from "./pages/Watchlist/Watchlist";
-import Film from './pages/Film/Film';
+import Login from '../pages/Login/Login';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import UserProfile from '../pages/UserProfile/UserProfile';
+import Search from '../features/search/pages/Search';
+import Watchlist from '../features/watchlist/pages/Watchlist/Watchlist';
+import Film from '../pages/Film/Film';
 
-export default function App() {
-	return (
+export default function Router() {
+    return (
         <Routes>
             <Route path="/login" element={<Login /> } />
             <Route element={<ProtectedRoute />}>
@@ -27,5 +27,5 @@ export default function App() {
                 </Route>
             </Route>
         </Routes>
-	)
+    );
 }

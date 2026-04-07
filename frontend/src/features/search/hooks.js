@@ -1,11 +1,15 @@
-import { searchFilms } from "../api/film";
-import { useInfiniteScroll } from "./useInfiniteScroll";
+import { searchFilms } from './api';
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { useCallback, useRef } from "react";
+import { useCallback, useRef } from 'react';
+
+import { searchKeys } from './queries';
 
 export function useSearch(query) {
 
     const loaderRef = useRef(null);
+
+    const searchQueryKey = searchKeys.list(query);
 
     const {
         data,
@@ -14,7 +18,7 @@ export function useSearch(query) {
         fetchNextPage,
         hasNextPage,
     } = useInfiniteQuery({
-        queryKey: ['search', query],
+        queryKey: searchQueryKey,
         staleTime: 1000 * 60 * 5,
         queryFn: ({ pageParam = 1 }) => searchFilms(query, pageParam),
         enabled: !!query,

@@ -1,39 +1,16 @@
-import { useNavigate } from "react-router-dom";
-
 import styles from "./UserProfile.module.css";
 import PageLoading from '../../components/UI/PageLoading/PageLoading';
 import PageRetry from '../../components/UI/PageRetry/PageRetry';
 
-import { getProfile } from "../../api/user";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { logout } from "../../api/auth";
-import { useMe } from "../../hooks/useMe";
+import { useLogout } from '../../features/auth/hooks';
+import { useUserPage } from '../../features/user/hooks';
 
 export default function UserProfile() {
 
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
-
-    const { data: user } = useMe();
-    const userId = user?.user_id;
+    const logoutMutation = useLogout();
 
     // get user profile
-    const { isLoading, isError, data, error, refetch } = useQuery({
-        queryKey: ['profile', userId],
-        queryFn: () => getProfile(),
-        retry: false,
-        staleTime: 1000 * 60 * 5,
-        enabled: !!userId,
-    });
-
-    // logout mutation
-    const logoutMutation = useMutation({
-        mutationFn: () => logout(),
-        onSuccess: () => {
-            queryClient.removeQueries(['me']);
-            navigate('/login');
-        }
-    });
+    const { isLoading, isError, data, error, refetch } = useUserPage();
 
     const handleLogout = () => logoutMutation.mutate();
 
@@ -49,6 +26,7 @@ export default function UserProfile() {
             <button 
                 onClick={handleLogout}
                 className="button button-hover text-md"
+                disabled={logoutMutation.isLoading}
             >
                 Logout
             </button>

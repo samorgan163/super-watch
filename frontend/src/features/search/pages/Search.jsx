@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import SearchNavbar from '../../components/Search/SearchNavbar/SearchNavbar';
-import SearchResults from '../../components/Search/SearchResults/SearchResults';
+import SearchNavbar from '../components/SearchNavbar/SearchNavbar';
+import SearchResults from '../components/SearchResults/SearchResults';
 
-import { useSearch } from '../../hooks/useSearch';
+import { useSearch } from '../hooks';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Search() {

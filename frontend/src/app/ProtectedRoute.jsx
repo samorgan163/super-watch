@@ -1,7 +1,7 @@
 // ProtectedRoute.js
 import { Navigate, Outlet } from 'react-router-dom';
-import { useMe } from '../hooks/useMe';
-import PageLoading from './UI/PageLoading/PageLoading';
+import { useMe } from '../features/auth/hooks';
+import PageLoading from '../components/UI/PageLoading/PageLoading';
 
 export default function ProtectedRoute() {
     const { data: user, isLoading, isError } = useMe();

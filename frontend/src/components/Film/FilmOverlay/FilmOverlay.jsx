@@ -4,7 +4,7 @@ import MediaOverview from '../../Media/MediaOverview/MediaOverview';
 import MediaActions from '../../Media/MediaActions/MediaActions';
 import MediaPoster from '../../Media/MediaPoster/MediaPoster';
 import Streaming from '../Streaming/Streaming';
-import WatchlistButton from '../../UI/WatchlistButton/WatchlistButton';
+import WatchlistButton from '../../../features/watchlist/components/WatchlistButton/WatchlistButton';
 import MediaTitle from '../../Media/MediaTitle/MediaTitle';
 import MediaReleaseInfo from '../../Media/MediaReleaseInfo/MediaReleaseInfo';
 import FilmDirector from '../FilmDirector/FilmDirector';
