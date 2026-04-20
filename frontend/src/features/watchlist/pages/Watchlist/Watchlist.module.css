@@ -1,3 +1,5 @@
-.pageWrapper {
-    padding: 0 var(--desktop-padding);
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
 }

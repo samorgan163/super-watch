@@ -1,9 +1,8 @@
 import FullsreenMediaLayout from "../../layouts/FullscreenMediaLayout/FullScreenMediaLayout";
 
-import FilmOverlay from "../../components/Film/FilmOverlay/FilmOverlay";
 import FilmTrailer from "../../components/Film/FilmTrailer/FilmTrailer";
 import MediaScrollRow from "../../components/Media/MediaScrollRow/MediaScrollRow";
-import PersonCard from "../../components/Person/PersonCard/PersonCard";
+import PersonCard from "../../components/Cards/PersonCard/PersonCard";
 
 import PageLoading from "../../components/UI/PageLoading/PageLoading";
 import PageRetry from "../../components/UI/PageRetry/PageRetry";
@@ -11,6 +10,7 @@ import PageRetry from "../../components/UI/PageRetry/PageRetry";
 import { useParams } from "react-router-dom";
 
 import { useFilmPage } from "../../features/film/hooks";
+import FilmMetaDataOverlay from "../../components/Film/FilmMetaDataOverlay/FilmMetaDataOverlay";
 
 export default function Film() {
 
@@ -20,39 +20,58 @@ export default function Film() {
     const { data, isLoading, isError, refetch } = useFilmPage(tmdbID);
 
     if (isLoading) return <PageLoading />;
-    
     if (isError) return <PageRetry retryAction={refetch} />;
+
+    const film = data ?? {};
+    const {
+        title,
+        poster,
+        overview,
+        release_date,
+        age_rating,
+        runtime,
+        director,
+        top_cast,
+        logo,
+        streaming,
+        tmdbid,
+    } = film;
+
+    const overlayMobile = (
+        <FilmMetaDataOverlay 
+            title={title}
+            logoPath={logo}
+            posterPath={poster}
+            overview={overview}
+            releaseDate={release_date}
+            ageRating={age_rating}
+            runtime={runtime}
+            directors={director}
+            streaming={streaming}
+            tmdbID={tmdbid}
+        />
+    );
+
+    const renderCastItem = (person) => (
+        <PersonCard
+            tmdbID={person.id}
+            name={person.name}
+            role={person.role}
+            posterPath={person.poster}
+        />
+    );
+
 
     return (
         <FullsreenMediaLayout 
             media={<FilmTrailer trailerImageURL={data?.banner} />}
-            mediaOverlay={
-                <FilmOverlay 
-                    tmdbID={data?.tmdbid}
-                    title={data?.title}
-                    poster={data?.poster}
-                    logo={data?.logo}
-                    director={data?.director}
-                    overview={data?.overview}
-                    streaming={data?.streaming}
-                    releaseDate={data?.release_date}
-                    ageRating={data?.age}
-                    runtime={data?.runtime}
-                />
-            }
+            mediaOverlay={overlayMobile}
         >
             <MediaScrollRow 
                 title='Top Cast'
-                items={data.top_cast}
+                items={top_cast}
                 getKey={(person) => person.id}
-                renderItem={(person) => (
-                    <PersonCard
-                        tmdbID={person.id}
-                        name={person.name}
-                        role={person.role}
-                        posterPath={person.poster}
-                    />
-                )}
+                renderItem={renderCastItem}
             />
         </FullsreenMediaLayout>
     );

@@ -1,0 +1,23 @@
+.toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    list-style: none;
+}
+
+/* sits at bottom on mobile */
+@media (max-width: 767px) {
+    .toolbar {
+        position: fixed;
+        bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom) + 12px);
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
+}
+
+@media (min-width: 768px) {
+    .toolbar {
+        justify-content: flex-start;
+    }
+}

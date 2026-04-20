@@ -1,7 +1,7 @@
 import styles from "./Watchlist.module.css";
 import MediaGrid from '../../../../components/Media/MediaGrid/MediaGrid';
 import PageLoading from "../../../../components/UI/PageLoading/PageLoading";
-import FilmCard from "../../../../components/Film/FilmCard/FilmCard";
+import FilmCard from '../../../../components/Cards/FilmCard/FilmCard';
 import PageRetry from "../../../../components/UI/PageRetry/PageRetry";
 
 import { useWatchlistPage } from "../../hooks";
@@ -15,8 +15,8 @@ export default function Watchlist() {
     if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
-        <>
-            <section className="section-with-mb section-with-px">
+        <div className={styles.container}>
+            <section>
                 <MediaGrid 
                     title='Currently Streaming'
                     items={data.streaming}
@@ -31,7 +31,7 @@ export default function Watchlist() {
                     )}
                 />
             </section>
-            <section className="section-with-mb section-with-px">
+            <section>
                 <MediaGrid 
                     title='Not Available'
                     fadeOpacity={true}
@@ -47,6 +47,6 @@ export default function Watchlist() {
                     )}
                 />
             </section>
-        </>
+        </div>
     );
 }

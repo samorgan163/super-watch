@@ -4,6 +4,7 @@
 
 .containerWrapper h2 {
     padding-left: var(--padding-side);
+    margin-bottom: var(--space-m);
 }
 
 /* 

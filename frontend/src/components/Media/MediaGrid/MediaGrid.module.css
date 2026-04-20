@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.filmsGridWrapper h2 {
+    margin-bottom: var(--space-m);
+}
+
 .filmsGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

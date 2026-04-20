@@ -17,12 +17,14 @@ export default function Router() {
             <Route path="/login" element={<Login /> } />
             <Route element={<ProtectedRoute />}>
                 <Route element={<AppLayout />}>
-                    <Route index element={<Dashboard />} />
                     <Route path='/profile' element={<UserProfile />} />
                     <Route path='/search' element={<Search />} />
                     <Route path='/watchlist' element={<Watchlist />} />
                 </Route>
-                <Route element={<AppLayout fullHeight />}>
+                <Route element={<AppLayout fullWidth />}>
+                    <Route index element={<Dashboard />} />
+                </Route>
+                <Route element={<AppLayout fullHeight fullWidth />}>
                     <Route path='/film/:tmdbID' element={<Film />} />
                 </Route>
             </Route>

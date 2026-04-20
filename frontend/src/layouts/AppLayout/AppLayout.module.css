@@ -1,10 +1,20 @@
-.mobilePaddingTop {
-    padding-top: var(--section-spacing);
-}
-.mobilePaddingBottom {
-    padding-bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom));
+main {
+    padding: var(--padding-side);
+    padding-bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom) + var(--padding-side));
 }
 
-.desktopPaddingTop {
-    padding-top: calc(var(--desktop-nav-height) + var(--section-spacing));
+main[data-full-width='true'] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+main[data-full-height='true'] {
+    padding-top: 0;
+}
+
+@media (min-width: 768px) {
+    main {
+        padding-top: calc(var(--desktop-nav-height) + 32px); /* TODO: magic number */
+        padding-bottom: var(--padding-side);
+    }
 }

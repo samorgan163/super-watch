@@ -2,11 +2,12 @@ import styles from './MediaOverview.module.css';
 
 export default function MediaOverview({ overview }) {
 
-    if (!overview) return null;
+    const fallbackOverview = 'No overview available.';
+    const cleanedOverview = overview.trim() || fallbackOverview;
 
     return (
-        <p className='text-md font-regular text-color-primary'>
-            {overview}
+        <p>
+            {cleanedOverview}
         </p>
     );
 

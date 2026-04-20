@@ -2,8 +2,9 @@ import styles from "./Dashboard.module.css";
 import PageLoading from "../../components/UI/PageLoading/PageLoading";
 import PageRetry from "../../components/UI/PageRetry/PageRetry";
 
-import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
-import FilmCard from '../../components/Film/FilmCard/FilmCard';
+//import MediaScrollRow from '../../components/Media/MediaScrollRow/MediaScrollRow';
+import FilmCard from '@/components/Cards/FilmCard/FilmCard';
+import MediaScrollRow from "@/components/Media/MediaScrollRow/MediaScrollRow";
 
 import { useDashboardPage } from "../../features/dashboard/hooks";
 
@@ -16,8 +17,8 @@ export default function Dashboard() {
     if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
-        <>
-            <section className="section-with-mb">
+        <div className={styles.container}>
+            <section>
                 <MediaScrollRow 
                     title='Streaming From Your Watchlist'
                     items={data.streaming_watchlist}
@@ -32,7 +33,7 @@ export default function Dashboard() {
                     )}
                 />
             </section>
-            <section className="section-with-mb">
+            <section>
                 <MediaScrollRow 
                     title='Popular Films'
                     items={data.popular_films.results}
@@ -47,6 +48,6 @@ export default function Dashboard() {
                     )}
                 />
             </section>
-        </>
+        </div>
     );
 }

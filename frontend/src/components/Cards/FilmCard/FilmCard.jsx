@@ -1,7 +1,7 @@
-import styles from './FilmCard.module.css';
 import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
-import MediaCard from '../../Media/MediaCard/MediaCard';
-import MediaPoster from '../../Media/MediaPoster/MediaPoster';
+import MediaCard from '../MediaCard/MediaCard';
+
+import FilmPoster from '../../Posters/FilmPoster/FilmPoster';
 
 export default function FilmCard({ tmdbID, title, posterPath, streaming }) {
 
@@ -9,18 +9,15 @@ export default function FilmCard({ tmdbID, title, posterPath, streaming }) {
 
     const cleanedTitle = title || 'Unknown';
 
-    const primaryService = streaming?.[0] || null;
-
-    const tmdbPosterImageRes = 'w342';
-
+    const primaryService = streaming?.[0];
+    
     return (
         <MediaCard 
             toURL={url}
-            image={
-                <MediaPoster 
-                    imagePath={posterPath}
-                    imageRes={tmdbPosterImageRes}
-                    title={title}
+            poster={
+                <FilmPoster
+                    posterPath={posterPath}
+                    title={cleanedTitle}
                     hoverEffect={true}
                 />
             }

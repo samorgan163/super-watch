@@ -1,6 +1,6 @@
 import styles from './PersonCard.module.css';
-import MediaCard from '../../Media/MediaCard/MediaCard';
-import MediaPoster from '../../Media/MediaPoster/MediaPoster';
+import MediaCard from '../MediaCard/MediaCard';
+import PersonPoster from '../../Posters/PersonPoster/PersonPoster';
 
 export default function PersonCard({ tmdbID, name, role, posterPath }) {
 
@@ -11,16 +11,13 @@ export default function PersonCard({ tmdbID, name, role, posterPath }) {
 
     const cleanedRole = role || 'Unknown';
 
-    const tmdbProfileImageRes = 'w185';
-
     return (
         <MediaCard
             toURL={url}
-            image={
-                <MediaPoster 
-                    imagePath={posterPath}
-                    imageRes={tmdbProfileImageRes}
-                    title={name}
+            poster={
+                <PersonPoster
+                    profilePath={posterPath}
+                    name={cleanedName}
                     hoverEffect={true}
                 />
             }

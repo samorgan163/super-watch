@@ -42,10 +42,10 @@ export default function Search() {
 
     return (
         <>
-            <section className='section-with-px section-with-mb'>
+            <section>
                 <SearchNavbar onChange={setInputValue} inputValue={inputValue}/>
             </section>
-            <section className='section-with-px section-with-mb'>
+            <section>
                 {inputValue && 
                     <SearchResults 
                         results={data}

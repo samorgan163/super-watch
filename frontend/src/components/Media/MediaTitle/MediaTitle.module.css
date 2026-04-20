@@ -3,7 +3,6 @@
 }
 
 .logoWrapper {
-    width: 100%;
     display: none;
 }
 
@@ -17,13 +16,11 @@
 }
 
 @media (min-width: 768px) {
-    .wrapper {
-        margin-bottom: var(--grid-item-gap);
-    }
-    .logoWrapper {
+    /* Show logo on large screens if available */
+    .wrapper[data-has-logo='true'] .logoWrapper {
         display: block;
     }
-    .title {
+    .wrapper[data-has-logo='true'] .title {
         display: none;
     }
 }
