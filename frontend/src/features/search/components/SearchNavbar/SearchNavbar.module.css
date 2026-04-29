@@ -1,43 +1,9 @@
-.searchBarForm {
-    width: 100%;
-    position: relative;
-}
-
-.iconContainer {
-    height: 100%;
-    width: 4rem;
-
-    position: absolute;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.searchIcon {
-    left: 0;
-    top: 0;
-}
-
-.searchIcon svg {
-    display: block;
-    fill: white;
-    width: 1.2rem;
-    height: 1.2rem;
-}
-
-.clearIcon {
-    right: 0;
-    top: 0;
-
+.iconButton {
     background: none;
     border: none;
+    padding: 0;
     cursor: pointer;
-}
-
-.clearIcon svg {
-    display: block;
-    fill: white;
-    width: 1.2rem;
-    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

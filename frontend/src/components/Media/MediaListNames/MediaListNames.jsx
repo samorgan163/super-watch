@@ -1,18 +1,26 @@
 import styles from './MediaListNames.module.css';
 
-export default function MediaListNames({ names = [] }) {
+const numberOfPeopleToDisplay = 3;
 
-    if (!Array.isArray(names)) throw Error('Names must be an array');
+export default function MediaListNames({ people = [] }) {
 
-    const formattedNames = names
-        ? names.map(item => item.name).join(', ')
-        : 'Unknown';
+    if (!Array.isArray(people)) throw Error('Names must be an array');
+
+    const formattedPeople = people.slice(0, numberOfPeopleToDisplay);
+
+    if (formattedPeople.length === 0) return null;
 
     return (
         <div className={styles.wrapper}>
-            <p className='text-meta'>
-                {formattedNames}
-            </p>
+            <span>From</span>
+            <ul className={styles.peopleList}>
+                {formattedPeople.map((person, index) => (
+                    <li key={person.id}>
+                        {person.name}
+                        {index < formattedPeople.length - 1 ? ',' : ''}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 

@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from './FilmCardWithDetails.module.css';
 
+import FilmPoster from '../../Posters/FilmPoster/FilmPoster';
+
 export default function FilmCardWithDetails({ tmdbID, title, poster, releaseDate, director }) {
+
+    const cleanedTitle = title || 'Unknown';
+    const formattedRelease = releaseDate?.slice(0, 4) || 'Unknown';
+    // TODO: Add director
 
     return (
         <Link 
@@ -11,23 +17,11 @@ export default function FilmCardWithDetails({ tmdbID, title, poster, releaseDate
             className={styles.film}
         >
             <div className={styles.filmPosterWrapper}>
-                {poster 
-                    ? 
-                    <img loading="lazy" src={`https://image.tmdb.org/t/p/w400${poster}`} alt="" />
-                    :
-                    <img loading="lazy" src="./src/assets/icons/no-film-image.jpg" alt="" />
-                }
+                <FilmPoster title={title} posterPath={poster} />
             </div>
             <div className={styles.filmMetadataWrapper}>
-                <h2 className='font-bold text-md text-color-primary'>
-                    {title ?? 'Unknown'}
-                </h2>
-                <p className='font-regular text-s text-color-primary'>
-                    {releaseDate.slice(0,4) ?? 'Unknown'}
-                </p>
-                <p className='font-regular text-s text-color-primary'>
-                    {director}
-                </p>
+                <h2 className={styles.title}>{cleanedTitle}</h2>
+                <p className={styles.release}>{formattedRelease}</p>
             </div>
         </Link>
     );

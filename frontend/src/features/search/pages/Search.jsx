@@ -1,3 +1,5 @@
+import styles from './Search.module.css';
+
 import { useEffect, useState } from 'react';
 
 import SearchNavbar from '../components/SearchNavbar/SearchNavbar';
@@ -41,7 +43,7 @@ export default function Search() {
     }, [inputValue]);
 
     return (
-        <>
+        <div className={styles.container}>
             <section>
                 <SearchNavbar onChange={setInputValue} inputValue={inputValue}/>
             </section>
@@ -56,6 +58,6 @@ export default function Search() {
                     />
                 }
             </section>
-        </>
+        </div>
     );
 }

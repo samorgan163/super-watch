@@ -6,7 +6,7 @@ export default function MediaOverview({ overview }) {
     const cleanedOverview = overview.trim() || fallbackOverview;
 
     return (
-        <p>
+        <p className={styles.text}>
             {cleanedOverview}
         </p>
     );

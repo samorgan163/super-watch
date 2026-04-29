@@ -6,3 +6,17 @@
     margin: 0;
     padding: 0;
 }
+
+.text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+    .text {
+        font-size: var(--font-size-l);
+        font-weight: var(--font-weight-bold);
+    }
+}

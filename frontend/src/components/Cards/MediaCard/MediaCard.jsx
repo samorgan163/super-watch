@@ -24,8 +24,8 @@ export default function MediaCard({
                     </div>
                 </div>
                 <div className={styles.metaDataWrapper}>
-                    {title && <h3 className="text-color-primary">{title}</h3>}
-                    {subText && <p className="text-color-primary-80">{subText}</p>}
+                    {title && <h3 className={styles.title}>{title}</h3>}
+                    {subText && <p className={styles.subText}>{subText}</p>}
                 </div>
             </Link>
         </article>

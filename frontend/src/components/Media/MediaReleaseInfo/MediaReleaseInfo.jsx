@@ -19,7 +19,7 @@ export default function MediaReleaseInfo({ releaseDate, ageRating, runtime }) {
                 <li 
                     key={item.label} 
                     aria-label={`${item.label}: ${item.value}`}
-                    className='text-meta'
+                    className={styles.text}
                 >
                     {item.value}
                 </li>

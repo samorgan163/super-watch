@@ -8,6 +8,8 @@ export default function Button({
     onClick,
     disabled = false,
     loading,
+    variant = 'primary',
+    ...props
 }) {
 
     const content = iconOnly ? (
@@ -19,15 +21,19 @@ export default function Button({
         </>
     );
 
+    const variantClass = styles[variant];
+
     return (
         <Component
             className={`
                 ${styles.button}
+                ${variantClass}
                 ${iconOnly && styles.iconOnly}
                 ${Component !== 'button' ? styles.nonInteractive : ''}
             `}
             onClick={onClick}
             disabled={disabled || loading}
+            {...props}
         >
             {content}
         </Component>

@@ -6,6 +6,7 @@ import { TMDB_MEDIA_BASE_URL, TMDB_POSTER_SIZES } from '../../../lib/constants';
 export default function FilmPoster({ 
     posterPath,
     title,
+    border = true,
 }) {
 
     const src = posterPath 
@@ -27,7 +28,10 @@ export default function FilmPoster({
 
     return (
         <img 
-            className={styles.poster}
+            className={`
+                ${styles.poster}
+                ${border && styles.border}
+            `}
             loading='lazy'
             src={src}
             srcSet={srcSet}

@@ -2,8 +2,19 @@
     width: 100%;
 }
 
-.filmsGridWrapper h2 {
+/* Title */
+.title {
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+
     margin-bottom: var(--space-m);
+}
+@media (min-width: 768px) {
+    .title {
+        font-size: var(--font-size-xl);
+    }
 }
 
 .filmsGrid {

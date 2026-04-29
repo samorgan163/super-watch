@@ -2,6 +2,10 @@ import styles from './Login.module.css';
 
 import { useState } from 'react';
 import { useLogin } from '../../features/auth/hooks';
+
+import Input from '../../components/UI/Input/Input';
+import Button from '@/components/UI/Button/Button';
+import AuthNav from '../../features/auth/components/AuthNav/AuthNav';
  
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -15,38 +19,39 @@ export default function Login() {
     }
 
     return (
-        <div className={styles.loginContainer}>
+        <div className={styles.pageWrapper}>
+            <AuthNav />
             <div className={styles.loginWrapper}>
-                <h2>Login</h2>
+                <h1 className={styles.title}>Enter your info to sign in</h1>
                 <form className={styles.loginForm} onSubmit={handleSubmit}>
-                    <input
+                    <Input
                         required
-                        className='form-input-text'
                         placeholder="Username"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
 
-                    <input
+                    <Input 
                         required
-                        className='form-input-text'
-                        type="password"
-                        placeholder="Password"
+                        type='password'
+                        placeholder='Password'
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
 
-                    <button 
-                        type="submit"
-                        className='button button-hover text-md text-color-primary'
+                    <Button
+                        type='submit'
                         disabled={loginMutation.isPending}
+                        variant='secondary'
                     >
-                        Login
-                    </button>
+                        Continue
+                    </Button>
 
                     {loginMutation.isError && <p>Error logging in</p>}
                 </form>
+                <p>Try the demo version</p>
             </div>
+            
         </div>
     );
 

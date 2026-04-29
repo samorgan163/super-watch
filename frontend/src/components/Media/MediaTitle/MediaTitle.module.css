@@ -13,6 +13,10 @@
 
 .title {
     display: block;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
 }
 
 @media (min-width: 768px) {

@@ -38,12 +38,9 @@ export default function FilmMetaDataOverlay({
                         ageRating={ageRating}
                         runtime={runtime}
                     />
-                    <div className={styles.directorWrapper}>
-                        <span>From</span>
-                        <MediaListNames
-                            names={directors}
-                        />
-                    </div>
+                    <MediaListNames
+                        people={directors}
+                    />
                 </div>
                 <FilmToolbar tmdbId={tmdbID} service={streaming?.[0]} />
             </div>

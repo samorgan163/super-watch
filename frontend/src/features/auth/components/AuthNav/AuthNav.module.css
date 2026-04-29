@@ -1,0 +1,25 @@
+.nav {
+    width: 100%;
+    height: var(--desktop-nav-height);
+
+    padding: 0 var(--padding-side);
+
+    display: flex;
+    justify-content: center;
+
+    /*background-color: var(--color-bg);*/
+    border-bottom: 1px solid var(--color-border);
+
+}
+
+.nav ul {
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    list-style: none;
+}

@@ -5,8 +5,8 @@
 
 .serviceOverlayWrapper {
     position: absolute;
-    left: 12px; /* TODO: magic numbers */
-    bottom: 12px;
+    left: var(--space-s);
+    bottom: var(--space-s);
     z-index: 10;
 }
 
@@ -26,4 +26,27 @@
 
 .visualsWrapper:hover .posterWrapper::after {
     border-color: var(--color-border-hover);
+}
+
+.title {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+}
+
+.subText {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: var(--font-size-l);
+    }
+    .subText {
+        font-size: var(--font-size-l);
+    }
 }

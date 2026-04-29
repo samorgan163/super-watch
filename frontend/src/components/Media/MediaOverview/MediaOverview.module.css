@@ -1,0 +1,12 @@
+.text {
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+    .text {
+        font-size: 20px;
+    }
+}
