@@ -1,4 +1,6 @@
-import { loginUser, registerUser as registerUserService, } from '../services/auth.service.js';
+//import { loginUser, registerUser as registerUserService, } from '../services/auth.service.js';
+
+import * as authService from '../services/auth.service.js';
 
 // frontend can use this to verify auth status
 export function authMe(req, res) {
@@ -6,12 +8,11 @@ export function authMe(req, res) {
 }
 
 // Register new user
-export async function registerUser(req, res, next) {
-    const username = req.body.username;
-    const password = req.body.password;
+export async function register(req, res, next) {
+    const { username, password } = req.body;
 
     try {
-        await registerUserService(username, password);
+        await authService.registerUser(username, password);
         res.status(201).json({ message: 'User created' });
     } 
     catch (error) {
@@ -24,7 +25,7 @@ export async function login(req, res, next) {
     const { username, password } = req.body;
 
     try {
-        const { accessToken, user } = await loginUser(username, password);
+        const { accessToken, userId } = await authService.loginUser(username, password);
     
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
@@ -33,7 +34,7 @@ export async function login(req, res, next) {
             maxAge: 15 * 60 * 1000
         });
 
-        return res.status(200).json({ user_id: user._id });        
+        return res.status(200).json({ user_id: userId });        
     }
     catch (error) {
         next(error);

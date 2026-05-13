@@ -3,13 +3,13 @@ import MediaCard from '../MediaCard/MediaCard';
 
 import FilmPoster from '../../Posters/FilmPoster/FilmPoster';
 
-export default function FilmCard({ tmdbID, title, posterPath, streaming }) {
+export default function FilmCard({ tmdbID, title, posterPath, providers }) {
 
     const url = tmdbID ? `/film/${tmdbID}` : '/404';
 
     const cleanedTitle = title || 'Unknown';
 
-    const primaryService = streaming?.[0];
+    const hasProviders = providers?.length > 0;
     
     return (
         <MediaCard 
@@ -23,9 +23,10 @@ export default function FilmCard({ tmdbID, title, posterPath, streaming }) {
             }
             title={cleanedTitle}
             serviceOverlay={
-                primaryService && (
+                hasProviders && (
                     <ServiceIcon 
-                        service={primaryService}
+                        name={providers[0].provider_name}
+                        logoPath={providers[0].logo_path}
                         size={'var(--icon-size-s)'} 
                     />
                 )

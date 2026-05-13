@@ -25,30 +25,31 @@ export default function Film() {
     const film = data ?? {};
     const {
         title,
-        poster,
+        poster_path,
         overview,
         release_date,
         age_rating,
         runtime,
-        director,
+        directors,
         top_cast,
         logo,
-        streaming,
-        tmdbid,
+        providers,
+        id,
+        backdrop_path,
     } = film;
 
     const overlayMobile = (
         <FilmMetaDataOverlay 
             title={title}
             logoPath={logo}
-            posterPath={poster}
+            posterPath={poster_path}
             overview={overview}
             releaseDate={release_date}
             ageRating={age_rating}
             runtime={runtime}
-            directors={director}
-            streaming={streaming}
-            tmdbID={tmdbid}
+            directors={directors}
+            providers={providers}
+            tmdbID={id}
         />
     );
 
@@ -64,7 +65,7 @@ export default function Film() {
 
     return (
         <FullsreenMediaLayout 
-            media={<FilmTrailer trailerImageURL={data?.banner} />}
+            media={<FilmTrailer trailerImageURL={backdrop_path} />}
             mediaOverlay={overlayMobile}
         >
             <MediaScrollRow 

@@ -8,11 +8,8 @@ export function authenticateUser(req, res, next) {
         return next(new NotAuthenticatedError('Unauthorised.'));
     }
 
-    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
-    if (!ACCESS_TOKEN_SECRET) throw new Error('JWT secret missing');
-
     try {
-        const payload = jwt.verify(token, ACCESS_TOKEN_SECRET);
+        const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
         req.user = { id: payload.userID };
         next();

@@ -18,31 +18,15 @@ export default function Watchlist() {
         <div className={styles.container}>
             <section>
                 <MediaGrid 
-                    title='Currently Streaming'
-                    items={data.streaming}
-                    getKey={(film) => film.tmdbid}
+                    title='Watchlist'
+                    items={data}
+                    getKey={(film) => film.id}
                     renderItem={(film) => (
                         <FilmCard
-                            tmdbID={film.tmdbid}
+                            tmdbID={film.id}
                             title={film.title}
-                            posterPath={film.poster}
-                            streaming={film.streaming}
-                        />
-                    )}
-                />
-            </section>
-            <section>
-                <MediaGrid 
-                    title='Not Available'
-                    fadeOpacity={true}
-                    items={data.unavailable}
-                    getKey={(film) => film.tmdbid}
-                    renderItem={(film) => (
-                        <FilmCard
-                            tmdbID={film.tmdbid}
-                            title={film.title}
-                            posterPath={film.poster}
-                            streaming={film.streaming}
+                            posterPath={film.poster_path}
+                            providers={film.providers}
                         />
                     )}
                 />

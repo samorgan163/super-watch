@@ -20,7 +20,8 @@ import filmRoutes from './routes/film.routes.js';
 import watchlistRoutes from './routes/watchlist.routes.js';
 
 // Import cron jobs
-import { watchlistUpdater } from './jobs/watchlistUpdater.js';
+//import { watchlistUpdater } from './jobs/watchlistUpdater.js';
+import { updateProviders } from './jobs/updateProviders.job.js';
 
 // Cors Settings
 const corsSettings = {
@@ -48,8 +49,9 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // cron jobs
-cron.schedule('50 17 * * *', () => {
-    watchlistUpdater();
+cron.schedule('05 23 * * *', () => {
+    //watchlistUpdater();
+    updateProviders();
 });
 
 // Routes

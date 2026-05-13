@@ -21,7 +21,7 @@ export default function FilmMetaDataOverlay({
     ageRating,
     runtime,
     directors,
-    streaming,
+    providers,
     tmdbID,
 }) {
 
@@ -42,7 +42,10 @@ export default function FilmMetaDataOverlay({
                         people={directors}
                     />
                 </div>
-                <FilmToolbar tmdbId={tmdbID} service={streaming?.[0]} />
+                <FilmToolbar 
+                    tmdbId={tmdbID}
+                    providers={providers}
+                />
             </div>
             <div className={styles.overviewContainer}>
                 <MediaOverview overview={overview} />

@@ -1,15 +1,29 @@
-import mongoose from 'mongoose';
-import { Schema, model } from 'mongoose';
+import db from '../config/db.js';
 
-const filmSchema = new Schema({
-    tmdbid: { type: Number, required: true, unique: true, index: true },
-    title: { type: String },
-    release_date: { type: Date },
-    poster: { type: String }, // poster image URL
-    streaming: [{ type: String }], // array of streaming platform names
-    
-}, { timestamps: false });
+// adds new user to database, returns the new users id
+export async function insert(
+    {
+        id, 
+        title,
+        poster_path, 
+        release_date
+    },
+    connection = db
+) {
+    const [result] = await connection.query(`
+        INSERT INTO films (id, title, poster_path, release_date)
+        VALUES (?, ?, ?, ?)
+    `, [id, title, poster_path, release_date]);
 
-const Film = model('Film', filmSchema);
+    return result.insertId;
+}
 
-export default Film;
+export async function exists(id, connection = db) {
+    const [result] = await connection.query(`
+        SELECT 1
+        FROM films
+        WHERE id = ?
+    `, [id]);
+
+    return result.length > 0;
+}

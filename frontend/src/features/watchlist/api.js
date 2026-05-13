@@ -7,7 +7,7 @@ export const getWatchlist = () => {
 };
 
 export const checkWatchlist = (tmdbID) => {
-    return apiFetch(`/watchlist/check/${encodeURIComponent(tmdbID)}`, {
+    return apiFetch(`/watchlist/${encodeURIComponent(tmdbID)}/status`, {
         method: 'GET',
     });
 };

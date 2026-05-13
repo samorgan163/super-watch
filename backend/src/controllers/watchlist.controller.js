@@ -1,10 +1,4 @@
-import { 
-    addFilmToWatchlist as addFilmToWatchlistService, 
-    removeFilmFromWatchlist as removeFilmFromWatchlistService,
-    checkIfFilmInWatchlist as checkIfFilmInWatchlistService,
-    getFilmsStreamingInWatchlist as getFilmsStreamingInWatchlistService,
-    getFilmsUnavailableInWatchlist as getFilmsUnavailableInWatchlistService    
-} from '../services/watchlist.service.js';
+import * as watchlistService from '../services/watchlist.service.js';
 
 /**
  * Adds a film to the user's watchlist.
@@ -15,12 +9,12 @@ import {
  * @returns 
  */
 export async function addFilmToWatchlist(req, res, next) {
-    const userID = req.user.id;
-    const tmdbID = req.params.tmdbId;
+    const userId = req.user.id;
+    const tmdbId = req.params.tmdbId;
 
     try {
-        await addFilmToWatchlistService(userID, tmdbID);
-        return res.status(200).json({ message: 'Film added to watchlist' });
+        await watchlistService.addFilmToWatchlist(userId, tmdbId);
+        return res.status(201).json({ message: 'Film added to watchlist' });
     }
     catch (err) {
         next(err);
@@ -36,11 +30,11 @@ export async function addFilmToWatchlist(req, res, next) {
  * @returns 
  */
 export async function removeFilmFromWatchlist(req, res, next) {
-    const userID = req.user.id;
-    const tmdbID = req.params.tmdbId;
+    const userId = req.user.id;
+    const tmdbId = req.params.tmdbId;
     
     try {
-        await removeFilmFromWatchlistService(userID, tmdbID);
+        await watchlistService.removeFilmFromWatchlist(userId, tmdbId);
         return res.status(200).json({ message: 'Film removed from watchlist' });
     }
     catch (error) {
@@ -51,12 +45,12 @@ export async function removeFilmFromWatchlist(req, res, next) {
 // return boolean whether a film is in the user's watchlist
 // frontend can indicate to the user
 // TODO: I dont think this is a good implementation
-export async function filmInWatchlist(req, res, next) {
+export async function isFilmInWatchlist(req, res, next) {
     const userID = req.user.id;
     const tmdbID = parseInt(req.params.tmdbId, 10);
     
     try {
-        const exists = await checkIfFilmInWatchlistService(userID, tmdbID);
+        const exists = await watchlistService.isFilmInWatchlist(userID, tmdbID);
         return res.status(200).json({ in_watchlist: exists });
     }
     catch (error) {
@@ -72,15 +66,11 @@ export async function filmInWatchlist(req, res, next) {
  * @returns 
  */
 export async function getWatchlist(req, res, next) {
-    const userID = req.user.id
+    const userId = req.user.id
     try {
-        const filmsStreaming = await getFilmsStreamingInWatchlistService(userID);
-        const filmsUnavailable = await getFilmsUnavailableInWatchlistService(userID);
+        const watchlist = await watchlistService.getAllWatchlistFilms(userId);
 
-        return res.status(200).json({ 
-            streaming: filmsStreaming, 
-            unavailable: filmsUnavailable 
-        });
+        return res.status(200).json(watchlist);
     }
     catch (error) {
         next(error);

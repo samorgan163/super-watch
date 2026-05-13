@@ -22,13 +22,13 @@ export default function Dashboard() {
                 <MediaScrollRow 
                     title='Streaming From Your Watchlist'
                     items={data.streaming_watchlist}
-                    getKey={(film) => film.tmdbid}
+                    getKey={(film) => film.id}
                     renderItem={(film) => (
                         <FilmCard
-                            tmdbID={film.tmdbid}
+                            tmdbID={film.id}
                             title={film.title}
-                            posterPath={film.poster}
-                            streaming={film.streaming}
+                            posterPath={film.poster_path}
+                            providers={film.providers}
                         />
                     )}
                 />

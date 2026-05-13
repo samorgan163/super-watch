@@ -1,32 +1,43 @@
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+import db from '../config/db.js';
 
-const userSchema = new Schema({
-	username: { type: String, required: true, unique: true },
-	password: { type: String, required: true },
+// returns bool whether user exists
+export async function exists(username, connection = db) {
+	const [rows] = await connection.query(`
+		SELECT 1
+		FROM users
+		WHERE username = ?
+	`, [username]);
 
-	watchlist: [
-		{
-			film: {
-				type: Schema.Types.ObjectId,
-				ref: 'Film',
-				required: true,
-		},
-			addedAt: {
-				type: Date,
-				default: Date.now,
-			},
-		}
-	]
+	return rows.length > 0;
+}
 
-});
+// get user by username
+export async function getAuthUserByUsername(username, connection = db) {
+    const [rows] = await connection.query(`
+		SELECT id, username, password_hash
+		FROM users
+		WHERE username = ?
+	`, [username]);
 
-// prevent duplicate film entries in watchlist, per user
-userSchema.index(
-	{ _id: 1, 'watchlist.film': 1 },
-	{ unique: true }
-);
+    return rows[0];
+}
 
-const User = model('User', userSchema);
+export async function getProfileUserById(id, connection = db) {
+	const [rows] = await connection.query(`
+		SELECT username
+		FROM users
+		WHERE id = ?
+	`, [id]);
 
-export default User;
+	return rows[0];
+}
+
+// adds new user to database, returns the new users id
+export async function insertUser({ username, passwordHash }, connection = db) {
+	const [result] = await connection.query(`
+		INSERT INTO users (username, password_hash)
+		VALUES (? , ?)
+	`, [username, passwordHash]);
+
+	return result.insertId;
+}

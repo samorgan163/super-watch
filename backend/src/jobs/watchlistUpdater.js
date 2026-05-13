@@ -1,3 +1,4 @@
+/*
 import Film from '../models/film.model.js';
 import { getStreamingProviders } from '../services/tmdb/tmdb.service.js';
 
@@ -42,3 +43,4 @@ function arraysEqual(a, b) {
     const setA = new Set(a);
     return b.every(x => setA.has(x));
 }
+*/

@@ -1,3 +1,6 @@
+import * as providersModel from '../../models/provider.model.js';
+
+/* old */
 const STREAMING_PROVIDERS = new Map([
     [8, "NETFLIX"],
     [1796, "NETFLIX"],
@@ -30,26 +33,14 @@ export function extractCast(cast = [], quantity = cast.length) {
         }));
 }
 
+// get streaming availablility in GB
+// Docs only say flatrate, buy, rent
+// but I have confirmed these from api responses:
+// free, rent, buy, flatrate, ads
 export function extractWatchProviders(watchProviders) {
-    // get streaming availablility in UK
-    const watchProvidersGB = [
+    return [
         ...(watchProviders?.GB?.flatrate ?? []),
         ...(watchProviders?.GB?.ads ?? []),
+        ...(watchProviders?.GB?.free ?? [])
     ];
-
-    if (watchProvidersGB.length < 1) {
-        return [];
-    }
-
-    const streamingSet = new Set();
-
-    // filter from given services
-    watchProvidersGB.forEach(service => {
-        const providerName = STREAMING_PROVIDERS.get(service.provider_id);
-        if (providerName) {
-            streamingSet.add(providerName); // duplicates automatically ignored
-        }
-    });
-    
-    return Array.from(streamingSet);
 }

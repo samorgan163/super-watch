@@ -4,13 +4,24 @@ import Button from '../../UI/Button/Button';
 import ServiceIcon from '../../UI/ServiceIcon/ServiceIcon';
 import WatchlistButton from '../../../features/watchlist/components/WatchlistButton/WatchlistButton';
 
-export default function FilmToolbar({ tmdbId, service }) {
+export default function FilmToolbar({ tmdbId, providers }) { 
 
-    const serviceDisplay = service 
+    const serviceDisplay = providers?.length > 0
         ?
-        <Button as='div' icon={<ServiceIcon service={service} size={30} />}>Streaming Now</Button>
+            <Button 
+                as='div' 
+                icon={
+                    <ServiceIcon 
+                        name={providers[0].provider_name}
+                        logoPath={providers[0].logo_path}
+                        size={30} 
+                    />  
+                }
+            >
+                {providers[0].provider_name}
+            </Button>
         :
-        <Button as='div'>Currently Unavailable</Button>
+            <Button as='div'>Currently Unavailable</Button>
 
     return (
         <ul className={styles.toolbar}>
