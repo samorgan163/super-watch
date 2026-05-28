@@ -2,9 +2,16 @@
 	/* Layout */
     --desktop-nav-height: 4.2rem;
     --mobile-nav-bottom-height: 60px;
+    --mobile-nav-top-height: 3.8rem;
     --padding-side: clamp(20px, 3vw, 60px);
     --grid-item-gap: 1rem;
 	--card-border-radius: 8px;
+
+    /* Navigation */
+    --navbar-height: 0px; /* calculated by active navbar */
+
+    --pwa-top-nav-space: var(--space-s);
+    --desktop-top-nav-space: var(--space-s);
 
     --control-height: 3.4rem;
     --control-border-radius: 4px;

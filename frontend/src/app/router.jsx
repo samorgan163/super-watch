@@ -5,7 +5,7 @@ import ProtectedRoute from './ProtectedRoute';
 import AppLayout from '../layouts/AppLayout/AppLayout';
 
 import Login from '../pages/Login/Login';
-import Dashboard from '../pages/Dashboard/Dashboard';
+import Dashboard from '../features/dashboard/pages/Dashboard';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import Search from '../features/search/pages/Search';
 import Watchlist from '../features/watchlist/pages/Watchlist/Watchlist';
@@ -17,14 +17,10 @@ export default function Router() {
             <Route path="/login" element={<Login /> } />
             <Route element={<ProtectedRoute />}>
                 <Route element={<AppLayout />}>
-                    <Route path='/profile' element={<UserProfile />} />
-                    <Route path='/search' element={<Search />} />
-                    <Route path='/watchlist' element={<Watchlist />} />
-                </Route>
-                <Route element={<AppLayout fullWidth />}>
                     <Route index element={<Dashboard />} />
-                </Route>
-                <Route element={<AppLayout fullHeight fullWidth />}>
+                    <Route path='/profile' element={<UserProfile />} />
+                    <Route path='/watchlist' element={<Watchlist />} />
+                    <Route path='/search' element={<Search />} />
                     <Route path='/film/:tmdbID' element={<Film />} />
                 </Route>
             </Route>

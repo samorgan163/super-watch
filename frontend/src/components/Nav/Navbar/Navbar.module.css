@@ -1,15 +1,29 @@
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--desktop-top-nav-space);
+
+    padding:
+        var(--desktop-top-nav-space)
+        var(--padding-side)
+        var(--desktop-top-nav-space);
+    
+    z-index: 100;
+
+    transition: background-color 0.5s, border-bottom 0.5s, backdrop-filter 0.5s;
+}
+
+.content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 var(--padding-side);
-    position: fixed;
-    width: 100%;
-    height: var(--desktop-nav-height);
-    z-index: 100;
-
-    transition: background-color 0.5s, border-bottom 0.5s, backdrop-filter 0.5s;
 }
 
 .navbarFullOpacity {
@@ -86,6 +100,7 @@
     height: 60%;
 }
 
+/* Profile Link */
 .profileLink {
     display: block;
     width: 2.5rem;

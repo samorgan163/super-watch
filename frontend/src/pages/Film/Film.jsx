@@ -1,4 +1,5 @@
 import FullsreenMediaLayout from "../../layouts/FullscreenMediaLayout/FullScreenMediaLayout";
+import PageLayout from "../../layouts/PageLayout/PageLayout";
 
 import FilmTrailer from "../../components/Film/FilmTrailer/FilmTrailer";
 import MediaScrollRow from "../../components/Media/MediaScrollRow/MediaScrollRow";
@@ -64,17 +65,19 @@ export default function Film() {
 
 
     return (
-        <FullsreenMediaLayout 
-            media={<FilmTrailer trailerImageURL={backdrop_path} />}
-            mediaOverlay={overlayMobile}
-        >
-            <MediaScrollRow 
-                title='Top Cast'
-                items={top_cast}
-                getKey={(person) => person.id}
-                renderItem={renderCastItem}
-            />
-        </FullsreenMediaLayout>
+        <PageLayout fullWidth fullHeight>
+            <FullsreenMediaLayout 
+                media={<FilmTrailer trailerImageURL={backdrop_path} />}
+                mediaOverlay={overlayMobile}
+            >
+                <MediaScrollRow 
+                    title='Top Cast'
+                    items={top_cast}
+                    getKey={(person) => person.id}
+                    renderItem={renderCastItem}
+                />
+            </FullsreenMediaLayout>
+        </PageLayout>
     );
 
 }

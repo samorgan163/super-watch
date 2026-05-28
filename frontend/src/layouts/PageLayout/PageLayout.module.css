@@ -1,0 +1,15 @@
+.page {
+    padding: 
+        var(--navbar-height)
+        var(--padding-side)
+        var(--padding-side);
+}
+
+.fullWidth {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.fullHeight {
+    padding-top: 0;
+}

@@ -8,6 +8,9 @@ import SearchResults from '../components/SearchResults/SearchResults';
 import { useSearch } from '../hooks';
 import { useSearchParams } from 'react-router-dom';
 
+import { useNavbarSlot } from '../../../components/Nav/NavbarSlotContext';
+import PageLayout from '../../../layouts/PageLayout/PageLayout';
+
 export default function Search() {
 
     // get query from search params for back navigation
@@ -15,6 +18,20 @@ export default function Search() {
     const query = searchParams.get('q') || '';
     
     const [inputValue, setInputValue] = useState(query);
+
+    // inject search bar to navbar
+    const { setSlot } = useNavbarSlot();
+
+    useEffect(() => {
+        setSlot(
+            <SearchNavbar
+                inputValue={inputValue}
+                onChange={setInputValue}
+            />
+        );
+        
+        return () => setSlot(null);
+    }, [inputValue]);
 
     const { 
         data, 
@@ -43,21 +60,16 @@ export default function Search() {
     }, [inputValue]);
 
     return (
-        <div className={styles.container}>
-            <section>
-                <SearchNavbar onChange={setInputValue} inputValue={inputValue}/>
-            </section>
-            <section>
-                {inputValue && 
-                    <SearchResults 
-                        results={data}
-                        isInitialLoading={isLoading}
-                        isFetchingNextPage={isFetchingNextPage}
-                        loaderRef={loaderRef}
-                        hasNextPage={hasNextPage}
-                    />
-                }
-            </section>
-        </div>
+        <PageLayout>
+            {inputValue && 
+                <SearchResults 
+                    results={data}
+                    isInitialLoading={isLoading}
+                    isFetchingNextPage={isFetchingNextPage}
+                    loaderRef={loaderRef}
+                    hasNextPage={hasNextPage}
+                />
+            }
+        </PageLayout>
     );
 }

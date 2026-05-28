@@ -4,10 +4,15 @@ import Input from '../../../../components/UI/Input/Input';
 import { IoClose } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function SearchNavbar({ onChange, inputValue }) {
-    
+
+    useEffect(() => {
+        console.log('SearchNavbar mounted');
+        return () => console.log('SearchNavbar unmounted');
+    }, []);
+
     const searchBarRef = useRef(null);
 
     const handleChange = (e) => onChange(e.target.value);

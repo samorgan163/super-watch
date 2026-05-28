@@ -5,26 +5,28 @@ import Navbar from '../../components/Nav/Navbar/Navbar';
 import styles from './AppLayout.module.css';
 import { Outlet } from 'react-router-dom';
 
-export default function AppLayout({ title, fullHeight = false, fullWidth = false }) {
+import { NavbarSlotProvider } from '../../components/Nav/NavbarSlotContext';
+
+export default function AppLayout() {
 
 	// TODO: change this to detect where touch devices and decide nav bar from there
 	const isMobileLayout = window.matchMedia('(max-width: 768px)').matches;
 
 	return (
-		<>
-			{isMobileLayout ? null : <Navbar />}
-
-			<main 
-				className={isMobileLayout ? styles.mobile : styles.desktop}
-				data-full-height={fullHeight}
-				data-full-width={fullWidth}
-			>
-				<Outlet />
-			</main>
-
+		/* Provider to pass additional content to navbar */
+		<NavbarSlotProvider>
+			
+			{isMobileLayout 
+				? 
+				<TopNavbar title={'Home'} />
+				: 
+				<Navbar />
+			}
+			
+			<Outlet />
+			
 			{isMobileLayout && <BottomNavbar />}
-
-		</>
+		</NavbarSlotProvider>
 	);
 	
 }

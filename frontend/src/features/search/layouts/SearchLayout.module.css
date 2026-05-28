@@ -1,16 +1,13 @@
 .main {
     padding: var(--padding-side);
     padding-bottom: calc(var(--mobile-nav-bottom-height) + env(safe-area-inset-bottom) + var(--padding-side));
-    padding-top: calc(var(--pwa-top-nav-height) );
-}
-
-.main[data-full-width='true'] {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.main[data-full-height='true'] {
-    padding-top: 0;
+    padding-top: calc(
+        var(--mobile-nav-top-height) + 
+        env(safe-area-inset-top) + 
+        var(--control-height) +
+        var(--space-m) +
+        var(--padding-side)
+    );
 }
 
 @media (min-width: 768px) {

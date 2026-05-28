@@ -4,6 +4,8 @@ import PageLoading from "../../../../components/UI/PageLoading/PageLoading";
 import FilmCard from '../../../../components/Cards/FilmCard/FilmCard';
 import PageRetry from "../../../../components/UI/PageRetry/PageRetry";
 
+import PageLayout from "../../../../layouts/PageLayout/PageLayout";
+
 import { useWatchlistPage } from "../../hooks";
 
 export default function Watchlist() {
@@ -15,7 +17,7 @@ export default function Watchlist() {
     if (isError) return <PageRetry retryAction={refetch} />;
 
     return (
-        <div className={styles.container}>
+        <PageLayout>
             <section>
                 <MediaGrid 
                     title='Watchlist'
@@ -31,6 +33,6 @@ export default function Watchlist() {
                     )}
                 />
             </section>
-        </div>
+        </PageLayout>
     );
 }

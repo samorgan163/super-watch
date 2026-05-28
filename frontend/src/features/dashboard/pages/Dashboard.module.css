@@ -1,0 +1,46 @@
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.billboardWrapper {
+    width: 100%;
+    padding: 0 calc(var(--padding-side) * 1);
+}
+
+.billboard {
+    width: 100%;
+    aspect-ratio: 2/3;
+}
+
+@media (min-width: 500px) {
+    .billboard {
+        aspect-ratio: 1/1;
+    }
+}
+
+@media (min-width: 600px) {
+    .billboard {
+        aspect-ratio: 4/3;
+    }
+}
+
+@media (min-width: 768px) {
+    .billboard {
+        aspect-ratio: 5/3;
+    }
+}
+
+@media (min-width: 960px) {
+    .billboard {
+        aspect-ratio: 16/6;
+    }
+}
+
+.scrollRow {
+    width: 100%;
+    height: 250px;
+    background-color: rgb(119, 119, 119);
+}
