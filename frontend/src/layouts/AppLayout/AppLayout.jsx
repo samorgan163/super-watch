@@ -7,24 +7,20 @@ import { Outlet } from 'react-router-dom';
 
 import { NavbarSlotProvider } from '../../components/Nav/NavbarSlotContext';
 
+import { usePwa } from '../../context/PwaContext';
+
 export default function AppLayout() {
 
-	// TODO: change this to detect where touch devices and decide nav bar from there
-	const isMobileLayout = window.matchMedia('(max-width: 768px)').matches;
+	const isMobileLayout = usePwa();
 
 	return (
 		/* Provider to pass additional content to navbar */
 		<NavbarSlotProvider>
-			
 			{isMobileLayout 
-				? 
-				<TopNavbar title={'Home'} />
-				: 
-				<Navbar />
+				? <TopNavbar title={'Home'} />
+				: <Navbar />
 			}
-			
 			<Outlet />
-			
 			{isMobileLayout && <BottomNavbar />}
 		</NavbarSlotProvider>
 	);
